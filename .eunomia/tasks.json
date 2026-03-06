@@ -1,0 +1,180 @@
+{
+  "project_name": "mini-calculator",
+  "tasks": [
+    {
+      "task_id": "SETUP-001",
+      "task_type": "infrastructure",
+      "recommended_model": "haiku",
+      "title": "Initialize React Calculator Project",
+      "description": "Scaffold a new React project using Vite with TypeScript template. Install dependencies including React, React-DOM, and testing libraries (Vitest, @testing-library/react). Set up basic project structure with src/components directory. Configure Vite and ensure the dev server runs.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "React project scaffolded with Vite",
+        "Dependencies installed",
+        "Project structure created with src/components directory",
+        "Dev server can start successfully"
+      ],
+      "filename": "package.json",
+      "language": "json"
+    },
+    {
+      "task_id": "REQ-001",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Implement Display Component",
+      "description": "Create a Display component that shows the calculator's current input and results. The component should accept a value prop and render it in a styled display area. Include proper TypeScript types for props. Style the display with a clean, readable design that shows numbers right-aligned.",
+      "dependencies": ["SETUP-001"],
+      "acceptance_criteria": [
+        "Display component created with TypeScript",
+        "Component accepts value prop and renders it",
+        "Display is styled and right-aligned",
+        "Component is exported for use in Calculator"
+      ],
+      "filename": "src/components/Display.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "REQ-002",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Implement Button Component",
+      "description": "Create a reusable Button component for calculator digits (0-9), operations (+, -, ×, ÷), decimal point, equals (=), and clear (C). The component should accept label and onClick props. Include proper TypeScript types. Style buttons with clear visual feedback (hover, active states). Use CSS Grid or Flexbox for button layout in the calculator.",
+      "dependencies": ["SETUP-001"],
+      "acceptance_criteria": [
+        "Button component created with TypeScript",
+        "Component accepts label and onClick props",
+        "Buttons are styled with hover/active states",
+        "Component is reusable for all button types",
+        "Component is exported for use in Calculator"
+      ],
+      "filename": "src/components/Button.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "REQ-003",
+      "task_type": "feature",
+      "recommended_model": "opus",
+      "title": "Implement Calculator Component with Arithmetic Logic",
+      "description": "Create the main Calculator component that integrates Display and Button components. Implement state management using React hooks (useState) to track current value, previous value, and selected operation. Implement arithmetic logic for addition, subtraction, multiplication, and division. Handle edge cases: division by zero (display 'Error'), decimal point input, consecutive operations, and clear functionality. Create a responsive button grid layout with digits (0-9), operations (+, -, ×, ÷), decimal (.), equals (=), and clear (C). Update App.tsx to render the Calculator component.",
+      "dependencies": ["SETUP-001", "REQ-001", "REQ-002"],
+      "acceptance_criteria": [
+        "Calculator component integrates Display and Button",
+        "State management handles current value, previous value, and operation",
+        "All arithmetic operations work correctly",
+        "Division by zero shows 'Error'",
+        "Decimal point input supported",
+        "Clear button resets calculator",
+        "Responsive button grid layout implemented",
+        "App.tsx renders Calculator component",
+        "Calculator is fully functional in the browser"
+      ],
+      "filename": "src/components/Calculator.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "REQ-001-TEST",
+      "task_type": "test_writing",
+      "recommended_model": "sonnet",
+      "title": "Write Tests for Display Component",
+      "description": "Write unit tests for the Display component using Vitest and @testing-library/react. Test that the component renders correctly, accepts and displays the value prop, and handles different input types (numbers, strings, 'Error'). Ensure tests cover edge cases like empty values and long numbers.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "Test file created for Display component",
+        "Tests verify component renders",
+        "Tests verify value prop is displayed correctly",
+        "Tests cover edge cases (empty, long numbers, 'Error')",
+        "All tests are runnable with Vitest"
+      ],
+      "filename": "src/components/Display.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "REQ-002-TEST",
+      "task_type": "test_writing",
+      "recommended_model": "sonnet",
+      "title": "Write Tests for Button Component",
+      "description": "Write unit tests for the Button component using Vitest and @testing-library/react. Test that the component renders with the correct label, onClick handler is called when clicked, and different button types (digits, operations, special) render correctly. Test accessibility and keyboard interaction if applicable.",
+      "dependencies": ["REQ-002"],
+      "acceptance_criteria": [
+        "Test file created for Button component",
+        "Tests verify button renders with label",
+        "Tests verify onClick handler is triggered",
+        "Tests cover different button types",
+        "All tests are runnable with Vitest"
+      ],
+      "filename": "src/components/Button.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "REQ-003-TEST",
+      "task_type": "test_writing",
+      "recommended_model": "opus",
+      "title": "Write Tests for Calculator Logic",
+      "description": "Write comprehensive integration and unit tests for the Calculator component using Vitest and @testing-library/react. Test all arithmetic operations (addition, subtraction, multiplication, division) with various inputs. Test error handling (division by zero). Test edge cases: consecutive operations, decimal point handling, clearing the calculator, long number sequences, and operation chaining. Simulate user interactions (clicking buttons) and verify display updates correctly.",
+      "dependencies": ["REQ-003"],
+      "acceptance_criteria": [
+        "Test file created for Calculator component",
+        "Tests verify all arithmetic operations work correctly",
+        "Tests verify division by zero displays 'Error'",
+        "Tests verify clear functionality",
+        "Tests verify decimal point handling",
+        "Tests verify operation chaining",
+        "Tests simulate realistic user interactions",
+        "All tests are runnable with Vitest",
+        "Test coverage is comprehensive"
+      ],
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Validate Calculator Test Suite",
+      "description": "Run the complete test suite for all calculator components (Display, Button, Calculator) using Vitest. Verify all tests pass. Report any failures with details. Ensure test coverage meets acceptance criteria.",
+      "dependencies": ["REQ-001-TEST", "REQ-002-TEST", "REQ-003-TEST"],
+      "acceptance_criteria": [
+        "All tests run successfully",
+        "No test failures",
+        "Test output is captured and reviewed",
+        "Any failures are reported with details"
+      ],
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "VERIFY-001",
+      "task_type": "verification",
+      "recommended_model": "haiku",
+      "title": "Runtime Browser Verification",
+      "description": "Start the Vite dev server and launch the calculator application in a browser using Playwright. Take a screenshot of the calculator UI. Verify that: the calculator renders correctly, all buttons are visible and properly laid out, the display shows '0' initially, clicking number buttons updates the display, performing a simple calculation (e.g., 2 + 3 = 5) works correctly, and the clear button resets the display. Save screenshot to screenshots/ directory.",
+      "dependencies": ["QA-001"],
+      "acceptance_criteria": [
+        "Dev server starts successfully",
+        "Calculator UI renders in browser",
+        "Screenshot captured showing calculator layout",
+        "Basic calculation verified (2 + 3 = 5)",
+        "UI is responsive and buttons are clickable",
+        "No runtime errors in browser console"
+      ],
+      "filename": "src/components/Calculator.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "COMMIT-001",
+      "task_type": "commit",
+      "recommended_model": "haiku",
+      "title": "Commit Calculator Application",
+      "description": "Create a git commit with all calculator components (Display, Button, Calculator), tests, configuration files, and project setup. Use a clear commit message: 'feat: implement mini calculator with React'. Ensure all files are staged and committed properly.",
+      "dependencies": ["VERIFY-001"],
+      "acceptance_criteria": [
+        "All calculator files committed",
+        "Commit message is clear and descriptive",
+        "No uncommitted changes remain",
+        "Git history is clean"
+      ],
+      "filename": "src/components/Calculator.tsx",
+      "language": "typescript"
+    }
+  ]
+}
