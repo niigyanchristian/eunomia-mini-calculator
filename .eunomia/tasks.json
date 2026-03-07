@@ -3,34 +3,38 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "bugfix",
+      "task_type": "modify",
       "recommended_model": "sonnet",
-      "title": "Audit and Fix All Failing Tests",
-      "description": "Run the full test suite using `npm test` to identify all failing tests. Read each failing test file and investigate the root cause of failures. Fix issues such as: incorrect imports, outdated test assertions, missing mocks, improper async handling, or incorrect component props. Test files to audit: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Also check vite.config.ts and src/test/setup.ts for any test configuration issues. Ensure all tests pass locally by running the full suite before completing this task.",
+      "title": "Implement Mobile Responsive Design for Calculator",
+      "description": "Review and update CSS files to ensure the calculator is fully responsive on mobile devices.\n\nFiles to modify:\n- src/App.css\n- src/components/Calculator.css\n- src/components/Button.css\n- src/components/Display.css\n\nImplementation steps:\n1. Read all existing CSS files to understand current styles\n2. Add media queries for mobile breakpoints (max-width: 768px for tablets, max-width: 480px for phones)\n3. Ensure calculator container scales appropriately on small screens\n4. Make buttons touch-friendly with minimum 44px tap targets\n5. Adjust spacing, padding, and margins for mobile viewports\n6. Fix any overflow issues with viewport-based units where appropriate\n7. Test responsive behavior by starting dev server and taking screenshots at mobile viewport sizes (375x667 iPhone, 414x896 iPhone Plus)\n8. Save screenshots to .eunomia/screenshots/developer/ directory\n9. Review and update component tests if any component interfaces changed (unlikely for CSS-only changes)\n\nAcceptance criteria are defined below.",
       "dependencies": [],
       "acceptance_criteria": [
-        "All test files execute without errors",
-        "No skipped or failing tests in the suite",
-        "Test suite completes successfully with 100% pass rate",
-        "All test files follow consistent patterns and conventions"
+        "All CSS files include appropriate media queries for mobile devices",
+        "Calculator layout adapts correctly to screen widths below 768px",
+        "All buttons meet minimum 44px touch target size on mobile",
+        "No horizontal overflow on mobile viewports",
+        "Text remains readable at all screen sizes",
+        "Screenshots show proper responsive behavior at 375px and 414px widths",
+        "All existing tests continue to pass"
       ],
-      "filename": "src/App.test.tsx",
-      "language": "typescript"
+      "filename": "src/components/Calculator.css",
+      "language": "css"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Validate Complete Test Suite Passes",
-      "description": "Run the complete test suite using `npm test` and verify all tests pass without failures or errors. Confirm that all test files execute successfully: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Check test output for any warnings or issues that need attention.",
+      "title": "Validate Mobile Responsive Design",
+      "description": "Validate that the calculator is fully responsive on mobile devices.\n\nValidation steps:\n1. Run the full test suite using `npm test` to ensure no regressions\n2. Start the dev server using `npm run dev`\n3. Use Playwright to take screenshots at multiple mobile viewport sizes:\n   - 375x667 (iPhone SE)\n   - 414x896 (iPhone 11 Pro Max)\n   - 360x640 (Android)\n4. Save screenshots to .eunomia/screenshots/qa/ directory\n5. Visually inspect screenshots for:\n   - Proper layout on small screens\n   - Touch-friendly button sizes\n   - No overflow or clipping\n   - Readable text at all sizes\n   - Appropriate spacing and margins\n6. Stop the dev server\n7. Report any issues found\n\nAcceptance criteria are defined below.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "All tests pass with zero failures",
-        "Zero test errors reported",
-        "Complete test suite runs successfully",
-        "No skipped tests unless intentionally marked"
+        "All tests pass without failures",
+        "Screenshots show proper responsive layout at all tested viewport sizes",
+        "No visual overflow or clipping issues detected",
+        "All interactive elements are touch-friendly (44px minimum)",
+        "Layout remains centered and properly aligned on mobile screens"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
     }
   ]
