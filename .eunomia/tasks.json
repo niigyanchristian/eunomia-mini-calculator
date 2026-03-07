@@ -5,15 +5,32 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run All Tests and Verify Pass Status",
-      "description": "Run the complete test suite using vitest to ensure all tests pass. Execute: npx vitest run\n\nTest files to validate:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nVerify that all test suites execute successfully with no failures.",
+      "title": "Run All Tests and Identify Failures",
+      "description": "Run the complete test suite using `npx vitest run` to identify all failing tests. Report which tests are failing and what the error messages are. Test files include: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx",
       "dependencies": [],
-      "acceptance_criteria": [
-        "All test suites run without errors",
-        "All test cases pass",
-        "No test failures or errors reported",
-        "vitest exit code is 0"
-      ],
+      "acceptance_criteria": ["Complete test suite executed", "All test failures documented with error messages"],
+      "filename": "src/App.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "REQ-001",
+      "task_type": "bugfix",
+      "recommended_model": "sonnet",
+      "title": "Fix Failing Tests",
+      "description": "Based on the test failures identified in QA-001, fix all failing tests. This may involve:\n- Fixing test assertions that don't match actual behavior\n- Fixing component code if tests reveal bugs\n- Updating test setup if configuration is incorrect\n- Ensuring all imports and mocks are correct\n\nRead the following test files and corresponding component files:\n- src/App.test.tsx and src/App.tsx\n- src/components/Button.test.tsx and src/components/Button.tsx\n- src/components/Display.test.tsx and src/components/Display.tsx\n- src/components/Calculator.test.tsx and src/components/Calculator.tsx\n- src/test/setup.ts (test configuration)\n\nFix all issues so that tests accurately validate the code and all tests pass.",
+      "dependencies": ["QA-001"],
+      "acceptance_criteria": ["All test failures from QA-001 are resolved", "Code changes maintain existing functionality", "Test assertions correctly validate component behavior"],
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-002",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Verify All Tests Pass",
+      "description": "Run the complete test suite using `npx vitest run` to verify all tests now pass after fixes from REQ-001. Confirm zero test failures.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": ["All tests pass with zero failures", "Test suite completes successfully"],
       "filename": "src/App.test.tsx",
       "language": "typescript"
     }
