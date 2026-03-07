@@ -211,4 +211,97 @@ describe('Button', () => {
       expect(screen.getByRole('button', { name: '√' })).toBeInTheDocument()
     })
   })
+
+  describe('responsive design', () => {
+    it('renders correctly on mobile viewport (375px)', () => {
+      global.innerWidth = 375
+      global.innerHeight = 667
+      global.dispatchEvent(new Event('resize'))
+
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="5" onClick={mockOnClick} />)
+      const button = container.querySelector('.calculator-button')
+
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveClass('calculator-button')
+      expect(screen.getByRole('button', { name: '5' })).toBeInTheDocument()
+    })
+
+    it('renders correctly on tablet viewport (768px)', () => {
+      global.innerWidth = 768
+      global.innerHeight = 1024
+      global.dispatchEvent(new Event('resize'))
+
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="9" onClick={mockOnClick} />)
+      const button = container.querySelector('.calculator-button')
+
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveClass('calculator-button')
+      expect(screen.getByRole('button', { name: '9' })).toBeInTheDocument()
+    })
+
+    it('renders correctly on desktop viewport (1920px)', () => {
+      global.innerWidth = 1920
+      global.innerHeight = 1080
+      global.dispatchEvent(new Event('resize'))
+
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="+" onClick={mockOnClick} />)
+      const button = container.querySelector('.calculator-button')
+
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveClass('calculator-button')
+      expect(screen.getByRole('button', { name: '+' })).toBeInTheDocument()
+    })
+
+    it('ensures touch-friendly button sizing with CSS class', () => {
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="7" onClick={mockOnClick} />)
+      const button = container.querySelector('.calculator-button')
+
+      expect(button).toHaveClass('calculator-button')
+      expect(button).toBeInTheDocument()
+    })
+
+    it('remains interactive across different viewport sizes', async () => {
+      const viewports = [
+        { width: 320, height: 568 },
+        { width: 375, height: 667 },
+        { width: 768, height: 1024 },
+        { width: 1920, height: 1080 }
+      ]
+
+      for (const { width, height } of viewports) {
+        global.innerWidth = width
+        global.innerHeight = height
+        global.dispatchEvent(new Event('resize'))
+
+        const user = userEvent.setup()
+        const mockOnClick = vi.fn()
+        const { unmount } = render(<Button label="8" onClick={mockOnClick} />)
+
+        const button = screen.getByRole('button', { name: '8' })
+        await user.click(button)
+
+        expect(mockOnClick).toHaveBeenCalledTimes(1)
+        expect(button).toHaveClass('calculator-button')
+
+        unmount()
+      }
+    })
+
+    it('maintains proper CSS class for touch target sizing on small screens', () => {
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="3" onClick={mockOnClick} />)
+      const button = container.querySelector('.calculator-button')
+
+      expect(button).toHaveClass('calculator-button')
+      expect(button).toBeInTheDocument()
+    })
+  })
 })

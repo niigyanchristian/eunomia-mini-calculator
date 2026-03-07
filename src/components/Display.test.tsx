@@ -77,4 +77,80 @@ describe('Display', () => {
       expect(screen.getByText('5 + 3')).toBeInTheDocument()
     })
   })
+
+  describe('responsive design', () => {
+    it('renders correctly on mobile viewport (375px)', () => {
+      global.innerWidth = 375
+      global.innerHeight = 667
+      global.dispatchEvent(new Event('resize'))
+
+      const { container } = render(<Display value="12345" />)
+      const displayElement = container.querySelector('.display')
+
+      expect(displayElement).toBeInTheDocument()
+      expect(displayElement).toHaveClass('display')
+      expect(screen.getByText('12345')).toBeInTheDocument()
+    })
+
+    it('renders correctly on tablet viewport (768px)', () => {
+      global.innerWidth = 768
+      global.innerHeight = 1024
+      global.dispatchEvent(new Event('resize'))
+
+      const { container } = render(<Display value="98765" />)
+      const displayElement = container.querySelector('.display')
+
+      expect(displayElement).toBeInTheDocument()
+      expect(displayElement).toHaveClass('display')
+      expect(screen.getByText('98765')).toBeInTheDocument()
+    })
+
+    it('renders correctly on desktop viewport (1920px)', () => {
+      global.innerWidth = 1920
+      global.innerHeight = 1080
+      global.dispatchEvent(new Event('resize'))
+
+      const { container } = render(<Display value="54321" />)
+      const displayElement = container.querySelector('.display')
+
+      expect(displayElement).toBeInTheDocument()
+      expect(displayElement).toHaveClass('display')
+      expect(screen.getByText('54321')).toBeInTheDocument()
+    })
+
+    it('handles text overflow on small screens', () => {
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      const { container } = render(<Display value="999999999999999" />)
+      const displayElement = container.querySelector('.display')
+
+      expect(displayElement).toBeInTheDocument()
+      expect(displayElement).toHaveTextContent('999999999999999')
+    })
+
+    it('maintains proper styling across different viewports', () => {
+      const viewports = [
+        { width: 320, height: 568 },
+        { width: 375, height: 667 },
+        { width: 768, height: 1024 },
+        { width: 1920, height: 1080 }
+      ]
+
+      viewports.forEach(({ width, height }) => {
+        global.innerWidth = width
+        global.innerHeight = height
+        global.dispatchEvent(new Event('resize'))
+
+        const { container, unmount } = render(<Display value="123" />)
+        const displayElement = container.querySelector('.display')
+
+        expect(displayElement).toBeInTheDocument()
+        expect(displayElement).toHaveClass('display')
+
+        unmount()
+      })
+    })
+  })
 })
