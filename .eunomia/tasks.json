@@ -5,16 +5,16 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "sonnet",
-      "title": "Final Mobile Responsive Design Review and Fix",
-      "description": "Perform a comprehensive review of mobile responsive design and fix any remaining issues:\n\n1. Read and review all responsive CSS files:\n   - src/components/Calculator.css\n   - src/components/Button.css\n   - src/components/Display.css\n\n2. Review and run existing tests:\n   - src/components/Calculator.test.tsx\n   - src/components/Button.test.tsx\n   - src/components/Display.test.tsx\n   - Execute: npm test\n\n3. Test responsive behavior by taking screenshots on multiple viewports:\n   - Mobile: 375x667 (iPhone SE)\n   - Mobile: 414x896 (iPhone XR)\n   - Tablet: 768x1024 (iPad)\n   - Desktop: 1920x1080\n\n4. Fix any issues found with:\n   - Touch target sizes (minimum 44x44px for mobile)\n   - Text readability on small screens\n   - Layout overflow or clipping on small screens\n   - Button spacing and sizing\n   - Display text overflow or truncation\n   - Calculator container sizing on mobile\n\n5. Update or add tests to cover responsive behavior and ensure test suite passes\n\n6. Take screenshots using Playwright to verify fixes work across all viewport sizes\n\n7. Save screenshots to .eunomia/screenshots/developer/",
+      "title": "Verify and Fix Mobile Responsive Design",
+      "description": "Review the existing mobile responsive implementation and verify it works correctly across all device sizes:\n\n1. Read and review the responsive CSS files:\n   - src/components/Calculator.css (breakpoints: desktop 769px+, tablet 481-768px, mobile 320-480px, extra small <320px)\n   - src/components/Button.css (touch targets, WCAG compliance)\n   - src/components/Display.css (font scaling, overflow handling)\n\n2. Review the existing visual test script:\n   - playwright-visual-test.js (tests mobile 375x667, tablet 768x1024, desktop 1920x1080)\n\n3. Start the dev server and run the visual tests:\n   - npm run dev (note the actual port from output)\n   - node playwright-visual-test.js\n\n4. Review the generated screenshots in .eunomia/screenshots/qa/ to verify:\n   - Calculator fits properly in viewport without horizontal scroll\n   - Buttons maintain 44px minimum touch targets\n   - Text is readable at all sizes\n   - Spacing and layout are appropriate\n\n5. If any issues are found, fix the relevant CSS files\n\n6. Ensure tests in src/components/Calculator.test.tsx cover responsive behavior (add tests if missing)\n\n7. Stop the dev server when done\n\nAcceptance: All viewports display correctly, no layout issues, screenshots verify proper responsive behavior, tests pass.",
       "dependencies": [],
       "acceptance_criteria": [
-        "Calculator renders correctly on mobile devices (375px-414px width)",
-        "All interactive elements meet touch-friendly size requirements (44x44px minimum)",
-        "Text is readable and properly sized on all screen sizes",
-        "Layout adapts properly to tablet (768px) and desktop (1920px) sizes",
-        "All unit tests in the test suite pass",
-        "Screenshots confirm proper rendering on all tested viewports"
+        "Calculator displays correctly on mobile (375x667), tablet (768x1024), and desktop (1920x1080)",
+        "No horizontal scrolling on any viewport size",
+        "Buttons maintain 44px minimum touch targets per WCAG 2.1",
+        "Text is readable at all breakpoints",
+        "Visual tests run successfully and generate screenshots",
+        "Unit tests cover responsive behavior"
       ],
       "filename": "src/components/Calculator.css",
       "language": "css"
@@ -23,17 +23,19 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Validate Mobile Responsive Design",
-      "description": "Validate that the calculator is fully responsive on mobile devices:\n\n1. Run the complete test suite:\n   - Execute: npm test\n   - Verify all tests pass, especially responsive tests in:\n     * src/components/Calculator.test.tsx\n     * src/components/Button.test.tsx\n     * src/components/Display.test.tsx\n\n2. Review screenshots in .eunomia/screenshots/developer/ to confirm:\n   - Mobile layouts (375px, 414px widths) display correctly\n   - Tablet layout (768px) displays correctly\n   - Desktop layout (1920px) displays correctly\n   - All elements are properly sized and spaced\n   - Text is readable on all viewports\n   - No layout overflow or clipping issues\n\n3. Verify responsive design criteria:\n   - Touch targets are at least 44x44px on mobile\n   - Calculator fits within viewport without horizontal scroll\n   - Buttons and display scale appropriately\n\n4. If any issues are found, document them clearly with specific failures",
+      "title": "Validate Complete Responsive Design",
+      "description": "Run comprehensive validation of the responsive design implementation:\n\n1. Run the unit test suite:\n   - Execute: npm test\n   - Verify all tests pass, especially Calculator.test.tsx responsive tests\n\n2. Start the dev server:\n   - Execute: npm run dev\n   - Note the actual port from the output (likely 5173)\n\n3. Run the visual regression tests:\n   - Execute: node playwright-visual-test.js\n   - Verify it successfully captures screenshots for mobile, tablet, and desktop viewports\n\n4. Review the generated screenshots in .eunomia/screenshots/qa/:\n   - calculator-mobile-375x667.png\n   - calculator-tablet-768x1024.png\n   - calculator-desktop-1920x1080.png\n   - Visually verify: proper layout, no overflow, readable text, appropriate spacing\n\n5. Test additional mobile viewports using the .eunomia/screenshot-mobile.js script if it exists\n\n6. Stop the dev server\n\n7. Report any issues found or confirm all validations passed\n\nAcceptance: All tests pass, visual tests complete successfully, screenshots show proper responsive layout on all device sizes.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "All unit tests pass with no failures",
-        "Screenshots confirm proper responsive behavior across all viewports",
-        "No layout issues on mobile (375px-414px), tablet (768px), or desktop (1920px) viewports",
-        "All touch targets meet minimum size requirements"
+        "All unit tests pass (npm test)",
+        "Visual tests complete without errors",
+        "Screenshots generated for all viewports",
+        "Visual inspection confirms proper responsive layout",
+        "Calculator is functional on all tested device sizes",
+        "No horizontal scrolling or layout issues detected"
       ],
-      "filename": "src/components/Calculator.test.tsx",
-      "language": "typescript"
+      "filename": "playwright-visual-test.js",
+      "language": "javascript"
     }
   ]
 }
