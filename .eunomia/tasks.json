@@ -2,35 +2,35 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
+      "task_id": "AUDIT-001",
+      "task_type": "refactor",
+      "recommended_model": "sonnet",
+      "title": "Audit Codebase for Dead Code",
+      "description": "Perform a comprehensive dead code analysis across the entire codebase:\n\n1. Check all TypeScript/TSX files for:\n   - Unused imports\n   - Unused variables and functions\n   - Unused type definitions and interfaces\n   - Unreachable code paths\n\n2. Check all CSS files for:\n   - Unused CSS classes\n   - Unused CSS custom properties (CSS variables)\n   - Duplicate or redundant styles\n\n3. Check all test files for:\n   - Unused test helpers\n   - Unused imports\n   - Commented-out tests\n\n4. Review configuration files:\n   - Unused dependencies in package.json\n   - Unused TypeScript compiler options\n   - Unused ESLint rules\n\n5. Use TypeScript compiler with `noUnusedLocals` and `noUnusedParameters` to identify unused code\n\n6. If dead code is found, remove it. If none is found, document that the codebase is clean.\n\n7. Run all tests after any removals to ensure nothing breaks.\n\nFiles to audit:\n- src/App.tsx\n- src/main.tsx\n- src/components/Calculator.tsx\n- src/components/Button.tsx\n- src/components/Display.tsx\n- src/App.css\n- src/components/Calculator.css\n- src/components/Button.css\n- src/components/Display.css\n- All test files (*.test.tsx)\n- package.json\n- tsconfig.json\n- .eslintrc.json",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "All source files analyzed for unused code",
+        "Any dead code identified is removed",
+        "All tests pass after cleanup",
+        "TypeScript compiles without unused variable warnings",
+        "Documentation of findings (clean or list of removals)"
+      ],
+      "filename": "src/App.tsx",
+      "language": "typescript"
+    },
+    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run All Tests and Identify Failures",
-      "description": "Run the complete test suite using `npx vitest run` to identify all failing tests. Report which tests are failing and what the error messages are. Test files include: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx",
-      "dependencies": [],
-      "acceptance_criteria": ["Complete test suite executed", "All test failures documented with error messages"],
-      "filename": "src/App.test.tsx",
-      "language": "typescript"
-    },
-    {
-      "task_id": "REQ-001",
-      "task_type": "bugfix",
-      "recommended_model": "sonnet",
-      "title": "Fix Failing Tests",
-      "description": "Based on the test failures identified in QA-001, fix all failing tests. This may involve:\n- Fixing test assertions that don't match actual behavior\n- Fixing component code if tests reveal bugs\n- Updating test setup if configuration is incorrect\n- Ensuring all imports and mocks are correct\n\nRead the following test files and corresponding component files:\n- src/App.test.tsx and src/App.tsx\n- src/components/Button.test.tsx and src/components/Button.tsx\n- src/components/Display.test.tsx and src/components/Display.tsx\n- src/components/Calculator.test.tsx and src/components/Calculator.tsx\n- src/test/setup.ts (test configuration)\n\nFix all issues so that tests accurately validate the code and all tests pass.",
-      "dependencies": ["QA-001"],
-      "acceptance_criteria": ["All test failures from QA-001 are resolved", "Code changes maintain existing functionality", "Test assertions correctly validate component behavior"],
-      "filename": "src/components/Calculator.test.tsx",
-      "language": "typescript"
-    },
-    {
-      "task_id": "QA-002",
-      "task_type": "qa_validation",
-      "recommended_model": "haiku",
-      "title": "Verify All Tests Pass",
-      "description": "Run the complete test suite using `npx vitest run` to verify all tests now pass after fixes from REQ-001. Confirm zero test failures.",
-      "dependencies": ["REQ-001"],
-      "acceptance_criteria": ["All tests pass with zero failures", "Test suite completes successfully"],
+      "title": "Validate Dead Code Removal",
+      "description": "Run the complete test suite to verify that no functionality was broken during dead code removal:\n\n1. Run `npx vitest run` to execute all tests\n2. Verify all tests pass (0 failures)\n3. Check that the application still builds successfully with `npm run build`\n4. Confirm TypeScript compilation has no errors\n\nIf all validations pass, the dead code audit is complete.",
+      "dependencies": ["AUDIT-001"],
+      "acceptance_criteria": [
+        "All tests pass",
+        "Build completes successfully",
+        "No TypeScript compilation errors",
+        "Application functionality intact"
+      ],
       "filename": "src/App.test.tsx",
       "language": "typescript"
     }
