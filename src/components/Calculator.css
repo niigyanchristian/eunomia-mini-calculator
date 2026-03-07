@@ -42,3 +42,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
 }
+
+.button-grid .wide {
+  grid-column: span 2;
+}

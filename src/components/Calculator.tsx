@@ -129,6 +129,7 @@ export function Calculator() {
             key={label}
             label={label}
             onClick={() => handleButtonClick(label)}
+            className={label === '0' ? 'wide' : ''}
           />
         ))}
       </div>
