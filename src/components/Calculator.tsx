@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Display } from './Display'
 import { Button } from './Button'
+import { ThemeContext } from '../App'
 import './Calculator.css'
 
 export function Calculator() {
+  const { theme, toggleTheme } = useContext(ThemeContext)
   const [currentValue, setCurrentValue] = useState('0')
   const [previousValue, setPreviousValue] = useState('')
   const [operation, setOperation] = useState('')
@@ -113,6 +115,13 @@ export function Calculator() {
 
   return (
     <div className="calculator">
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+      >
+        {theme === 'light' ? '🌙' : '☀️'}
+      </button>
       <Display value={currentValue} />
       <div className="button-grid">
         {buttons.map((label) => (

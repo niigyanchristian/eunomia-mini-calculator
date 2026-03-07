@@ -2,9 +2,39 @@
   max-width: 320px;
   margin: 0 auto;
   padding: 1rem;
-  background: #e8e8e8;
+  background: var(--calculator-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--calculator-shadow);
+  position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--button-focus-outline);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .button-grid {

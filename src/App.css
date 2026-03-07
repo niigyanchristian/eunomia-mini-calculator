@@ -1,10 +1,62 @@
+:root {
+  --app-bg: #ffffff;
+  --app-text: #333333;
+  --calculator-bg: #e8e8e8;
+  --calculator-shadow: rgba(0, 0, 0, 0.15);
+  --display-bg: #f5f5f5;
+  --display-border: #dddddd;
+  --display-text: #333333;
+  --display-shadow-inset: rgba(0, 0, 0, 0.1);
+  --button-bg-start: #ffffff;
+  --button-bg-end: #f5f5f5;
+  --button-border: #dddddd;
+  --button-text: #333333;
+  --button-shadow: rgba(0, 0, 0, 0.1);
+  --button-hover-bg-start: #f8f8f8;
+  --button-hover-bg-end: #e8e8e8;
+  --button-hover-border: #cccccc;
+  --button-hover-shadow: rgba(0, 0, 0, 0.15);
+  --button-active-bg-start: #e8e8e8;
+  --button-active-bg-end: #d8d8d8;
+  --button-active-border: #bbbbbb;
+  --button-focus-outline: #4a9eff;
+}
+
+[data-theme='dark'] {
+  --app-bg: #1a1a1a;
+  --app-text: #e0e0e0;
+  --calculator-bg: #2a2a2a;
+  --calculator-shadow: rgba(0, 0, 0, 0.5);
+  --display-bg: #1f1f1f;
+  --display-border: #444444;
+  --display-text: #e0e0e0;
+  --display-shadow-inset: rgba(0, 0, 0, 0.3);
+  --button-bg-start: #3a3a3a;
+  --button-bg-end: #2f2f2f;
+  --button-border: #444444;
+  --button-text: #e0e0e0;
+  --button-shadow: rgba(0, 0, 0, 0.3);
+  --button-hover-bg-start: #454545;
+  --button-hover-bg-end: #3a3a3a;
+  --button-hover-border: #555555;
+  --button-hover-shadow: rgba(0, 0, 0, 0.4);
+  --button-active-bg-start: #2f2f2f;
+  --button-active-bg-end: #252525;
+  --button-active-border: #333333;
+  --button-focus-outline: #5ab3ff;
+}
+
 .app {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: var(--app-bg);
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
 }
 
 h1 {
-  color: #333;
+  color: var(--app-text);
+  transition: color 0.3s ease;
 }
