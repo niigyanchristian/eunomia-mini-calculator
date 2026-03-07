@@ -2,37 +2,24 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "AUDIT-001",
-      "task_type": "refactor",
-      "recommended_model": "sonnet",
-      "title": "Audit Codebase for Dead Code",
-      "description": "Perform a comprehensive dead code analysis across the entire codebase:\n\n1. Check all TypeScript/TSX files for:\n   - Unused imports\n   - Unused variables and functions\n   - Unused type definitions and interfaces\n   - Unreachable code paths\n\n2. Check all CSS files for:\n   - Unused CSS classes\n   - Unused CSS custom properties (CSS variables)\n   - Duplicate or redundant styles\n\n3. Check all test files for:\n   - Unused test helpers\n   - Unused imports\n   - Commented-out tests\n\n4. Review configuration files:\n   - Unused dependencies in package.json\n   - Unused TypeScript compiler options\n   - Unused ESLint rules\n\n5. Use TypeScript compiler with `noUnusedLocals` and `noUnusedParameters` to identify unused code\n\n6. If dead code is found, remove it. If none is found, document that the codebase is clean.\n\n7. Run all tests after any removals to ensure nothing breaks.\n\nFiles to audit:\n- src/App.tsx\n- src/main.tsx\n- src/components/Calculator.tsx\n- src/components/Button.tsx\n- src/components/Display.tsx\n- src/App.css\n- src/components/Calculator.css\n- src/components/Button.css\n- src/components/Display.css\n- All test files (*.test.tsx)\n- package.json\n- tsconfig.json\n- .eslintrc.json",
+      "task_id": "DOC-001",
+      "task_type": "enhancement",
+      "recommended_model": "opus",
+      "title": "Create Comprehensive Architectural Documentation",
+      "description": "Perform a deep architectural analysis of the mini calculator project and create a detailed architectural.md file in the project root.\n\nAnalysis Requirements:\n1. Read and analyze all source files:\n   - src/App.tsx (main application entry)\n   - src/components/Calculator.tsx (core calculator logic and state)\n   - src/components/Display.tsx (display component)\n   - src/components/Button.tsx (button component)\n   - src/App.css, src/components/*.css (styling and theming)\n   - vite.config.ts (build configuration)\n   - tsconfig.json (TypeScript configuration)\n   - package.json (dependencies and tooling)\n\n2. Document the following in architectural.md:\n   - Project Overview: Purpose, tech stack, key features\n   - Architecture Overview: High-level design patterns and principles\n   - Component Architecture: Component hierarchy, data flow, and relationships\n   - State Management: How state is managed and flows through the application\n   - Styling Architecture: CSS approach, theming system (dark/light mode), design tokens\n   - Testing Strategy: Test framework setup, testing patterns, coverage approach\n   - Build & Development: Vite configuration, TypeScript setup, development workflow\n   - Code Organization: Directory structure, file naming conventions, module organization\n   - Technical Decisions: Key architectural choices and their rationale\n   - Future Considerations: Potential improvements or technical debt\n\n3. Use clear sections, subsections, and code examples where appropriate\n4. Include ASCII diagrams for component hierarchy and data flow if helpful\n5. Make the documentation comprehensive yet readable for new developers joining the project",
       "dependencies": [],
       "acceptance_criteria": [
-        "All source files analyzed for unused code",
-        "Any dead code identified is removed",
-        "All tests pass after cleanup",
-        "TypeScript compiles without unused variable warnings",
-        "Documentation of findings (clean or list of removals)"
+        "architectural.md file created in project root directory",
+        "All major architectural aspects documented with clear explanations",
+        "Component relationships and data flow clearly described",
+        "Styling and theming architecture explained",
+        "Testing strategy and patterns documented",
+        "Build configuration and tooling explained",
+        "Technical decisions documented with rationale",
+        "Documentation is well-structured with clear sections and examples"
       ],
-      "filename": "src/App.tsx",
-      "language": "typescript"
-    },
-    {
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
-      "recommended_model": "haiku",
-      "title": "Validate Dead Code Removal",
-      "description": "Run the complete test suite to verify that no functionality was broken during dead code removal:\n\n1. Run `npx vitest run` to execute all tests\n2. Verify all tests pass (0 failures)\n3. Check that the application still builds successfully with `npm run build`\n4. Confirm TypeScript compilation has no errors\n\nIf all validations pass, the dead code audit is complete.",
-      "dependencies": ["AUDIT-001"],
-      "acceptance_criteria": [
-        "All tests pass",
-        "Build completes successfully",
-        "No TypeScript compilation errors",
-        "Application functionality intact"
-      ],
-      "filename": "src/App.test.tsx",
-      "language": "typescript"
+      "filename": "architectural.md",
+      "language": "markdown"
     }
   ]
 }
