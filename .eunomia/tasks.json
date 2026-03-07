@@ -2,33 +2,17 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "enhancement",
-      "recommended_model": "sonnet",
-      "title": "Implement Dark/Light Mode Theme Support",
-      "description": "Implement theme switching functionality to support both dark and light modes in the calculator application.\n\nRead and modify the following existing files:\n- `src/App.tsx` - Add theme state management using React useState/Context\n- `src/App.css` - Define CSS variables for light and dark themes\n- `src/components/Calculator.tsx` - Add theme toggle button/control\n- `src/components/Calculator.css` - Update styles to use theme CSS variables\n- `src/components/Display.css` - Update styles to use theme CSS variables\n- `src/components/Button.css` - Update styles to use theme CSS variables\n\nImplementation steps:\n1. Add theme state in App.tsx (light/dark mode toggle)\n2. Create CSS variables in App.css for both themes (background colors, text colors, button colors)\n3. Update all component CSS files to use CSS variables instead of hardcoded colors\n4. Add a theme toggle button in the Calculator component UI\n5. Persist theme preference in localStorage\n6. Write tests for theme switching functionality including:\n   - Theme toggle button renders correctly\n   - Clicking toggle switches between light and dark mode\n   - Theme preference is persisted in localStorage\n   - CSS variables are applied correctly for each theme",
-      "dependencies": [],
-      "acceptance_criteria": [
-        "Theme can be toggled between light and dark modes",
-        "All calculator components respond to theme changes",
-        "Theme preference persists across page reloads",
-        "Tests validate theme switching functionality",
-        "Visual contrast meets accessibility standards in both modes"
-      ],
-      "filename": "src/App.tsx",
-      "language": "typescript"
-    },
-    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Validate Theme Switching Tests",
-      "description": "Run the test suite to validate theme switching functionality. Verify all tests pass for:\n- Theme toggle component rendering\n- Light/dark mode switching\n- localStorage persistence\n- CSS variable application\n\nExecute: `npx vitest run src/App.test.tsx src/components/Calculator.test.tsx`",
-      "dependencies": ["REQ-001"],
+      "title": "Run All Tests and Verify Pass Status",
+      "description": "Run the complete test suite using vitest to ensure all tests pass. Execute: npx vitest run\n\nTest files to validate:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nVerify that all test suites execute successfully with no failures.",
+      "dependencies": [],
       "acceptance_criteria": [
-        "All theme-related tests pass",
-        "No regression in existing calculator tests",
-        "Test coverage includes both light and dark mode scenarios"
+        "All test suites run without errors",
+        "All test cases pass",
+        "No test failures or errors reported",
+        "vitest exit code is 0"
       ],
       "filename": "src/App.test.tsx",
       "language": "typescript"
