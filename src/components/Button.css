@@ -30,3 +30,24 @@
   outline: 2px solid var(--button-focus-outline);
   outline-offset: 2px;
 }
+
+/* Tablet responsive styles */
+@media (max-width: 768px) {
+  .calculator-button {
+    font-size: 1.375rem;
+    padding: 1.125rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Mobile responsive styles */
+@media (max-width: 480px) {
+  .calculator-button {
+    font-size: 1.25rem;
+    padding: 1rem;
+    min-height: 44px;
+    min-width: 44px;
+    border-radius: 6px;
+  }
+}

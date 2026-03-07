@@ -46,3 +46,37 @@
 .button-grid .wide {
   grid-column: span 2;
 }
+
+/* Tablet responsive styles */
+@media (max-width: 768px) {
+  .calculator {
+    max-width: 100%;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .button-grid {
+    gap: 0.625rem;
+  }
+}
+
+/* Mobile responsive styles */
+@media (max-width: 480px) {
+  .calculator {
+    max-width: 100%;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 8px;
+  }
+
+  .theme-toggle {
+    font-size: 1.25rem;
+    top: 0.375rem;
+    right: 0.375rem;
+    padding: 0.375rem;
+  }
+
+  .button-grid {
+    gap: 0.5rem;
+  }
+}
