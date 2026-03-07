@@ -41,3 +41,15 @@
     border-radius: 6px;
   }
 }
+
+/* Extra small mobile devices */
+@media (max-width: 320px) {
+  .display {
+    font-size: 1.25rem;
+    padding: 0.75rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+    min-height: 2.25rem;
+    border-radius: 4px;
+  }
+}

@@ -51,3 +51,14 @@
     border-radius: 6px;
   }
 }
+
+/* Extra small mobile devices */
+@media (max-width: 320px) {
+  .calculator-button {
+    font-size: 1.125rem;
+    padding: 0.875rem;
+    min-height: 44px;
+    min-width: 44px;
+    border-radius: 4px;
+  }
+}

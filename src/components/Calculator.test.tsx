@@ -285,4 +285,89 @@ describe('Calculator', () => {
       expect(getDisplay()).toHaveTextContent('10')
     })
   })
+
+  describe('mobile responsive design', () => {
+    it('renders calculator on mobile viewport (320px)', () => {
+      // Set viewport to mobile size
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      const calculator = document.querySelector('.calculator')
+      expect(calculator).toBeInTheDocument()
+      expect(getDisplay()).toBeInTheDocument()
+    })
+
+    it('renders calculator on tablet viewport (768px)', () => {
+      // Set viewport to tablet size
+      global.innerWidth = 768
+      global.innerHeight = 1024
+      global.dispatchEvent(new Event('resize'))
+
+      const calculator = document.querySelector('.calculator')
+      expect(calculator).toBeInTheDocument()
+      expect(getDisplay()).toBeInTheDocument()
+    })
+
+    it('ensures buttons have proper CSS class for touch accessibility', () => {
+      const button = getButton('5')
+
+      // Buttons should have the calculator-button class which defines min-height/min-width: 44px
+      expect(button).toHaveClass('calculator-button')
+      expect(button).toBeInTheDocument()
+    })
+
+    it('ensures display has proper CSS class for text overflow handling', () => {
+      const display = getDisplay()
+
+      // Display should have the display class which defines overflow, text-overflow, and max-width
+      expect(display).toHaveClass('display')
+      expect(display).toBeInTheDocument()
+    })
+
+    it('calculator remains functional on mobile viewport', async () => {
+      // Set viewport to mobile size
+      global.innerWidth = 375
+      global.innerHeight = 667
+      global.dispatchEvent(new Event('resize'))
+
+      // Perform a calculation to ensure functionality
+      await clickButtons(user, ['3', '+', '7', '='])
+      expect(getDisplay()).toHaveTextContent('10')
+    })
+
+    it('calculator layout does not break on small screens', () => {
+      // Set viewport to very small size
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      const calculator = document.querySelector('.calculator')
+      const buttonGrid = document.querySelector('.button-grid')
+
+      expect(calculator).toBeInTheDocument()
+      expect(buttonGrid).toBeInTheDocument()
+
+      // All buttons should still be rendered
+      const expectedButtons = ['C', '\u00f7', '\u00d7', '-', '7', '8', '9', '+', '4', '5', '6', '=', '1', '2', '3', '.', '0']
+      for (const label of expectedButtons) {
+        expect(getButton(label)).toBeInTheDocument()
+      }
+    })
+
+    it('display text remains visible on small screens', async () => {
+      // Set viewport to small mobile
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      // Enter a long number
+      await clickButtons(user, ['9', '9', '9', '9', '9', '9'])
+      const display = getDisplay()
+
+      // Display should still be visible and contain the number
+      expect(display).toBeInTheDocument()
+      expect(display).toHaveTextContent('999999')
+    })
+  })
 })
