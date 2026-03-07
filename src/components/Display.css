@@ -1,3 +1,17 @@
+/*
+ * Display Component - Responsive Design
+ *
+ * Layout Behavior:
+ * - Font size scales proportionally across breakpoints (2rem → 1.25rem)
+ * - Padding and margins adjust to optimize space usage
+ * - Always maintains max-width: 100% to prevent horizontal scrolling
+ *
+ * Text Overflow Handling:
+ * - overflow: hidden prevents layout breaking
+ * - text-overflow: ellipsis shows truncation for very long numbers
+ * - white-space: nowrap keeps display on single line
+ */
+
 .display {
   background-color: var(--display-bg);
   border: 2px solid var(--display-border);
@@ -20,20 +34,20 @@
   max-width: 100%;
 }
 
-/* Tablet responsive styles */
+/* Tablet responsive styles (481px - 768px) */
 @media (max-width: 768px) {
   .display {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* Proportionally scaled font size */
     padding: 1.25rem;
     margin-top: 1.75rem;
     min-height: 2.75rem;
   }
 }
 
-/* Mobile responsive styles */
+/* Mobile responsive styles (320px - 480px) */
 @media (max-width: 480px) {
   .display {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Readable font size on mobile */
     padding: 1rem;
     margin-top: 1.5rem;
     margin-bottom: 0.875rem;
@@ -42,10 +56,10 @@
   }
 }
 
-/* Extra small mobile devices */
+/* Extra small mobile devices (<320px) */
 @media (max-width: 320px) {
   .display {
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Minimal readable size */
     padding: 0.75rem;
     margin-top: 1.25rem;
     margin-bottom: 0.75rem;

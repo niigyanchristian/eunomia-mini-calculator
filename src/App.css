@@ -1,3 +1,33 @@
+/*
+ * App Styles - Responsive Design & Theme Variables
+ *
+ * Responsive Breakpoints (mobile-first approach):
+ * - Large screens (769px+): Full padding and spacing
+ * - Tablet (481px-768px): Moderate padding reduction
+ * - Mobile (320px-480px): Compact padding for small screens
+ * - Extra small (<320px): Minimal padding for edge cases
+ *
+ * Theme System:
+ * - Light theme (default): High contrast, bright background
+ * - Dark theme: Reduced eye strain, comfortable for low-light use
+ */
+
+/* Global box-sizing for consistent layout calculations */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling on all screen sizes */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
 :root {
   --app-bg: #ffffff;
   --app-text: #333333;
@@ -61,35 +91,35 @@ h1 {
   transition: color 0.3s ease;
 }
 
-/* Tablet responsive styles */
+/* Tablet responsive styles (481px - 768px) */
 @media (max-width: 768px) {
   .app {
-    padding: 1.5rem;
+    padding: 1.5rem; /* Moderate padding for tablets */
   }
 
   h1 {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* Scaled heading for tablet screens */
   }
 }
 
-/* Mobile responsive styles */
+/* Mobile responsive styles (320px - 480px) */
 @media (max-width: 480px) {
   .app {
-    padding: 1rem;
+    padding: 1rem; /* Compact padding for mobile */
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Mobile-optimized heading size */
   }
 }
 
-/* Extra small mobile devices */
+/* Extra small mobile devices (<320px) */
 @media (max-width: 320px) {
   .app {
-    padding: 0.75rem;
+    padding: 0.75rem; /* Minimal padding for very small screens */
   }
 
   h1 {
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Smallest readable heading size */
   }
 }

@@ -1,3 +1,16 @@
+/*
+ * Button Component - Responsive Design
+ *
+ * Touch Target Requirements:
+ * - Minimum 44px x 44px for touch accessibility (WCAG 2.1 Level AAA)
+ * - Maintained across all breakpoints via min-height and min-width
+ *
+ * Responsive Adjustments:
+ * - Font size scales down on smaller screens for better fit
+ * - Padding adjusts to maintain touch targets while optimizing space
+ * - Border radius scales proportionally for visual consistency
+ */
+
 .calculator-button {
   font-size: 1.5rem;
   font-weight: 600;
@@ -31,34 +44,34 @@
   outline-offset: 2px;
 }
 
-/* Tablet responsive styles */
+/* Tablet responsive styles (481px - 768px) */
 @media (max-width: 768px) {
   .calculator-button {
-    font-size: 1.375rem;
+    font-size: 1.375rem; /* Slightly smaller font for tablet */
     padding: 1.125rem;
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 44px; /* WCAG 2.1 minimum touch target */
+    min-width: 44px;  /* WCAG 2.1 minimum touch target */
   }
 }
 
-/* Mobile responsive styles */
+/* Mobile responsive styles (320px - 480px) */
 @media (max-width: 480px) {
   .calculator-button {
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Compact font size for mobile */
     padding: 1rem;
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 44px; /* Maintains accessibility standards */
+    min-width: 44px;  /* Maintains accessibility standards */
     border-radius: 6px;
   }
 }
 
-/* Extra small mobile devices */
+/* Extra small mobile devices (<320px) */
 @media (max-width: 320px) {
   .calculator-button {
-    font-size: 1.125rem;
+    font-size: 1.125rem; /* Minimal font for very small screens */
     padding: 0.875rem;
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 44px; /* Still maintains 44px minimum */
+    min-width: 44px;  /* Still maintains 44px minimum */
     border-radius: 4px;
   }
 }

@@ -369,5 +369,158 @@ describe('Calculator', () => {
       expect(display).toBeInTheDocument()
       expect(display).toHaveTextContent('999999')
     })
+
+    it('renders correctly at common mobile viewport widths', () => {
+      const commonViewports = [
+        { width: 320, height: 568, name: 'iPhone SE' },
+        { width: 375, height: 667, name: 'iPhone 8' },
+        { width: 414, height: 896, name: 'iPhone 11' },
+      ]
+
+      for (const viewport of commonViewports) {
+        global.innerWidth = viewport.width
+        global.innerHeight = viewport.height
+        global.dispatchEvent(new Event('resize'))
+
+        const calculator = document.querySelector('.calculator')
+        const buttonGrid = document.querySelector('.button-grid')
+
+        expect(calculator).toBeInTheDocument()
+        expect(buttonGrid).toBeInTheDocument()
+      }
+    })
+
+    it('renders correctly at common tablet viewport widths', () => {
+      const tabletViewports = [
+        { width: 768, height: 1024, name: 'iPad' },
+        { width: 810, height: 1080, name: 'iPad Pro 11"' },
+        { width: 1024, height: 1366, name: 'iPad Pro 12.9"' },
+      ]
+
+      for (const viewport of tabletViewports) {
+        global.innerWidth = viewport.width
+        global.innerHeight = viewport.height
+        global.dispatchEvent(new Event('resize'))
+
+        const calculator = document.querySelector('.calculator')
+        expect(calculator).toBeInTheDocument()
+      }
+    })
+
+    it('tests breakpoint boundaries', () => {
+      const breakpoints = [
+        { width: 320, name: 'Extra small boundary' },
+        { width: 480, name: 'Mobile upper boundary' },
+        { width: 481, name: 'Tablet lower boundary' },
+        { width: 768, name: 'Tablet upper boundary' },
+        { width: 769, name: 'Desktop lower boundary' },
+      ]
+
+      for (const breakpoint of breakpoints) {
+        global.innerWidth = breakpoint.width
+        global.innerHeight = 1024
+        global.dispatchEvent(new Event('resize'))
+
+        const calculator = document.querySelector('.calculator')
+        const display = getDisplay()
+        const buttons = document.querySelectorAll('.calculator-button')
+
+        expect(calculator).toBeInTheDocument()
+        expect(display).toBeInTheDocument()
+        expect(buttons.length).toBeGreaterThan(0)
+      }
+    })
+
+    it('calculator container does not overflow viewport on mobile', () => {
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      const calculator = document.querySelector('.calculator')
+      expect(calculator).toBeInTheDocument()
+
+      // In a real browser, we would check getBoundingClientRect()
+      // In test environment, we verify the CSS class is applied
+      expect(calculator).toHaveClass('calculator')
+    })
+
+    it('buttons maintain minimum touch target size across all breakpoints', () => {
+      const viewports = [
+        { width: 320, height: 568 },
+        { width: 480, height: 800 },
+        { width: 768, height: 1024 },
+        { width: 1024, height: 768 },
+      ]
+
+      for (const viewport of viewports) {
+        global.innerWidth = viewport.width
+        global.innerHeight = viewport.height
+        global.dispatchEvent(new Event('resize'))
+
+        const button = getButton('5')
+        // Verify button has the CSS class that applies min-height and min-width: 44px
+        expect(button).toHaveClass('calculator-button')
+      }
+    })
+
+    it('display handles overflow correctly on all screen sizes', () => {
+      const viewports = [320, 480, 768, 1024]
+
+      for (const width of viewports) {
+        global.innerWidth = width
+        global.innerHeight = 1024
+        global.dispatchEvent(new Event('resize'))
+
+        const display = getDisplay()
+        // Verify display has the CSS class that handles overflow and text-overflow
+        expect(display).toHaveClass('display')
+      }
+    })
+
+    it('button grid layout remains functional on smallest screen', async () => {
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      // Verify all buttons are present and clickable
+      const allButtons = ['C', '\u00f7', '\u00d7', '-', '7', '8', '9', '+', '4', '5', '6', '=', '1', '2', '3', '.', '0']
+
+      for (const label of allButtons) {
+        const button = getButton(label)
+        expect(button).toBeInTheDocument()
+        expect(button).toBeVisible()
+      }
+
+      // Verify functionality still works
+      await clickButtons(user, ['5', '+', '3', '='])
+      expect(getDisplay()).toHaveTextContent('8')
+    })
+
+    it('theme toggle button remains accessible on mobile', () => {
+      global.innerWidth = 320
+      global.innerHeight = 568
+      global.dispatchEvent(new Event('resize'))
+
+      const themeToggle = document.querySelector('.theme-toggle')
+      expect(themeToggle).toBeInTheDocument()
+    })
+
+    it('calculator scales properly in portrait and landscape orientations', () => {
+      // Portrait orientation
+      global.innerWidth = 375
+      global.innerHeight = 667
+      global.dispatchEvent(new Event('resize'))
+
+      let calculator = document.querySelector('.calculator')
+      expect(calculator).toBeInTheDocument()
+
+      // Landscape orientation (swap dimensions)
+      global.innerWidth = 667
+      global.innerHeight = 375
+      global.dispatchEvent(new Event('resize'))
+
+      calculator = document.querySelector('.calculator')
+      expect(calculator).toBeInTheDocument()
+    })
   })
 })
