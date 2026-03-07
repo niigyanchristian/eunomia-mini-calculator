@@ -5,17 +5,17 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "sonnet",
-      "title": "Review and Ensure Complete Mobile Responsive Design",
-      "description": "Review and verify the existing mobile responsive implementation:\n\n1. Read and analyze current responsive CSS:\n   - src/components/Calculator.css - check media queries for mobile/tablet/desktop\n   - src/components/Display.css - verify responsive font sizing and layout\n   - src/components/Button.css - check button sizing on mobile devices\n   - index.html - verify viewport meta tag is present and correct\n\n2. Test responsive behavior:\n   - Start dev server (npm run dev)\n   - Take screenshots at key breakpoints: 375x667 (iPhone SE), 414x896 (iPhone 11 Pro Max), 768x1024 (tablet), 1920x1080 (desktop)\n   - Save screenshots to .eunomia/screenshots/developer/\n\n3. Fix any responsive issues found:\n   - Ensure touch targets are appropriately sized (minimum 44x44px)\n   - Verify text is readable without zooming\n   - Check that layout adapts properly at all breakpoints\n   - Ensure no horizontal scrolling on mobile\n\n4. Write or update responsive tests:\n   - Create/update tests in src/components/Calculator.test.tsx to verify responsive behavior\n   - Test that components render correctly at different viewport sizes\n\nFiles to modify if needed:\n- src/components/Calculator.css\n- src/components/Display.css\n- src/components/Button.css\n- src/components/Calculator.test.tsx (for tests)",
+      "title": "Review and Enhance Mobile Responsive Design",
+      "description": "Review and enhance the mobile responsive design for the calculator application.\n\n1. Read existing responsive CSS files:\n   - src/components/Calculator.css (media queries, layout)\n   - src/components/Display.css (display responsive behavior)\n   - src/components/Button.css (button sizing)\n\n2. Verify responsive breakpoints:\n   - Mobile: < 480px\n   - Tablet: 480px - 768px\n   - Desktop: > 768px\n\n3. Test responsive behavior:\n   - Start dev server (npm run dev)\n   - Take screenshots at multiple viewport sizes: 375x667 (iPhone SE), 414x896 (iPhone XR), 768x1024 (iPad)\n   - Verify layout, button sizes, display readability\n   - Stop dev server\n\n4. Write/update responsive tests:\n   - Update src/components/Calculator.test.tsx to test responsive behavior if not already present\n   - Ensure tests validate mobile layout adapts correctly\n   - Test that components render without breaking at different viewport sizes\n\n5. Fix any issues found:\n   - Adjust CSS if layout breaks on any viewport\n   - Ensure touch targets are at least 44x44px on mobile\n   - Verify text is readable at all sizes\n   - Ensure no horizontal scrolling on mobile viewports",
       "dependencies": [],
       "acceptance_criteria": [
-        "Calculator displays correctly on mobile devices (375px wide and above)",
-        "All buttons are easily tappable on touch devices (44x44px minimum)",
-        "Text is readable without zooming on all device sizes",
-        "Layout adapts smoothly across breakpoints (mobile, tablet, desktop)",
-        "No horizontal scrolling on any device size",
-        "Screenshots demonstrate proper responsive behavior",
-        "Tests verify responsive rendering"
+        "Calculator layout works correctly on mobile (< 480px)",
+        "Calculator layout works correctly on tablet (480-768px)",
+        "Calculator layout works correctly on desktop (> 768px)",
+        "Touch targets are at least 44x44px on mobile",
+        "Display text is readable at all viewport sizes",
+        "No horizontal scrolling on mobile devices",
+        "Tests validate responsive behavior"
       ],
       "filename": "src/components/Calculator.css",
       "language": "css"
@@ -25,15 +25,13 @@
       "task_type": "qa_validation",
       "recommended_model": "haiku",
       "title": "Validate Mobile Responsive Design",
-      "description": "Validate that the calculator application is fully responsive on mobile devices:\n\n1. Run the test suite:\n   - Execute: npm test\n   - Verify all tests pass, especially responsive-related tests\n\n2. Visual validation:\n   - Start dev server: npm run dev\n   - Take screenshots at multiple device sizes:\n     * Mobile: 375x667 (iPhone SE), 414x896 (iPhone 11 Pro Max)\n     * Tablet: 768x1024 (iPad)\n     * Desktop: 1920x1080\n   - Save screenshots to .eunomia/screenshots/qa/\n\n3. Check responsive criteria:\n   - Verify calculator is usable at all tested sizes\n   - Confirm no layout breaking or horizontal scroll\n   - Ensure buttons are appropriately sized for touch\n   - Verify text readability\n\n4. Review developer screenshots in .eunomia/screenshots/developer/ for comparison",
+      "description": "Validate that the mobile responsive design works correctly across all device sizes.\n\n1. Run the test suite:\n   - Execute: npm test\n   - Verify all tests pass, including responsive tests\n\n2. Visual validation:\n   - Start dev server: npm run dev\n   - Take screenshots at mobile viewports (375x667, 414x896)\n   - Take screenshot at tablet viewport (768x1024)\n   - Take screenshot at desktop viewport (1920x1080)\n   - Verify layouts are correct at each size\n   - Check for any overflow or layout breaking\n   - Stop dev server\n\n3. Validate acceptance criteria:\n   - Mobile layout displays correctly without horizontal scrolling\n   - Tablet layout is appropriate for medium screens\n   - Desktop layout utilizes larger screen space\n   - Touch targets are appropriately sized on mobile\n   - Text remains readable at all viewport sizes",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
         "All tests pass",
-        "Calculator renders correctly on mobile devices (screenshots confirm)",
-        "Calculator renders correctly on tablet devices (screenshots confirm)",
-        "Calculator renders correctly on desktop devices (screenshots confirm)",
-        "No visual defects or layout issues at any breakpoint",
-        "Touch targets are appropriately sized on mobile"
+        "Screenshots show correct layout at all viewport sizes (mobile, tablet, desktop)",
+        "No layout breaking or overflow issues at any viewport size",
+        "Calculator is fully functional on mobile devices"
       ],
       "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
