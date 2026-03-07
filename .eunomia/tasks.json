@@ -3,24 +3,35 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "feature",
+      "task_type": "bugfix",
       "recommended_model": "sonnet",
-      "title": "Create Comprehensive User Manual",
-      "description": "Create a detailed manual.md file in the project root that documents the mini calculator application.\n\nAnalysis Requirements:\n1. Read and analyze all source files:\n   - src/App.tsx\n   - src/components/Calculator.tsx\n   - src/components/Button.tsx\n   - src/components/Display.tsx\n   - All test files (*.test.tsx)\n   - package.json\n   - README.md\n   - vite.config.ts\n   - tsconfig.json\n\n2. Document the following sections in manual.md:\n   - **Project Overview**: What it does, key features, technology stack\n   - **Architecture**: Component structure, state management, data flow\n   - **Installation & Setup**: Prerequisites, npm install, running dev server\n   - **Usage Guide**: How to use the calculator, available operations, keyboard support\n   - **Development Guide**: Code structure, adding features, coding conventions\n   - **Testing**: How to run tests, test structure, writing new tests\n   - **Building & Deployment**: Build commands, output, deployment options\n   - **Theme Support**: Dark/light mode functionality and implementation\n   - **Troubleshooting**: Common issues and solutions\n   - **API Reference**: Component props, interfaces, key functions\n\n3. Include code examples where relevant\n4. Reference specific files and line numbers for key implementations\n5. Write in clear, user-friendly language suitable for both users and developers\n6. Use proper markdown formatting with table of contents",
+      "title": "Audit and Fix All Failing Tests",
+      "description": "Run the full test suite using `npm test` to identify all failing tests. Read each failing test file and investigate the root cause of failures. Fix issues such as: incorrect imports, outdated test assertions, missing mocks, improper async handling, or incorrect component props. Test files to audit: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Also check vite.config.ts and src/test/setup.ts for any test configuration issues. Ensure all tests pass locally by running the full suite before completing this task.",
       "dependencies": [],
       "acceptance_criteria": [
-        "manual.md file created in project root",
-        "All major features documented comprehensively",
-        "Installation and setup instructions included",
-        "Usage examples with code snippets provided",
-        "Testing instructions with examples included",
-        "Architecture overview with component relationships present",
-        "Document is well-structured with clear headings and table of contents",
-        "Theme support implementation documented",
-        "Troubleshooting section included"
+        "All test files execute without errors",
+        "No skipped or failing tests in the suite",
+        "Test suite completes successfully with 100% pass rate",
+        "All test files follow consistent patterns and conventions"
       ],
-      "filename": "manual.md",
-      "language": "markdown"
+      "filename": "src/App.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Validate Complete Test Suite Passes",
+      "description": "Run the complete test suite using `npm test` and verify all tests pass without failures or errors. Confirm that all test files execute successfully: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Check test output for any warnings or issues that need attention.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "All tests pass with zero failures",
+        "Zero test errors reported",
+        "Complete test suite runs successfully",
+        "No skipped tests unless intentionally marked"
+      ],
+      "filename": "src/App.test.tsx",
+      "language": "typescript"
     }
   ]
 }
