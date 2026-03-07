@@ -2,23 +2,24 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "DOC-001",
-      "task_type": "enhancement",
-      "recommended_model": "opus",
-      "title": "Create Comprehensive Architectural Documentation",
-      "description": "Perform a deep architectural analysis of the mini calculator project and create a detailed architectural.md file in the project root.\n\nAnalysis Requirements:\n1. Read and analyze all source files:\n   - src/App.tsx (main application entry)\n   - src/components/Calculator.tsx (core calculator logic and state)\n   - src/components/Display.tsx (display component)\n   - src/components/Button.tsx (button component)\n   - src/App.css, src/components/*.css (styling and theming)\n   - vite.config.ts (build configuration)\n   - tsconfig.json (TypeScript configuration)\n   - package.json (dependencies and tooling)\n\n2. Document the following in architectural.md:\n   - Project Overview: Purpose, tech stack, key features\n   - Architecture Overview: High-level design patterns and principles\n   - Component Architecture: Component hierarchy, data flow, and relationships\n   - State Management: How state is managed and flows through the application\n   - Styling Architecture: CSS approach, theming system (dark/light mode), design tokens\n   - Testing Strategy: Test framework setup, testing patterns, coverage approach\n   - Build & Development: Vite configuration, TypeScript setup, development workflow\n   - Code Organization: Directory structure, file naming conventions, module organization\n   - Technical Decisions: Key architectural choices and their rationale\n   - Future Considerations: Potential improvements or technical debt\n\n3. Use clear sections, subsections, and code examples where appropriate\n4. Include ASCII diagrams for component hierarchy and data flow if helpful\n5. Make the documentation comprehensive yet readable for new developers joining the project",
+      "task_id": "REQ-001",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Create Comprehensive User Manual",
+      "description": "Create a detailed manual.md file in the project root that documents the mini calculator application.\n\nAnalysis Requirements:\n1. Read and analyze all source files:\n   - src/App.tsx\n   - src/components/Calculator.tsx\n   - src/components/Button.tsx\n   - src/components/Display.tsx\n   - All test files (*.test.tsx)\n   - package.json\n   - README.md\n   - vite.config.ts\n   - tsconfig.json\n\n2. Document the following sections in manual.md:\n   - **Project Overview**: What it does, key features, technology stack\n   - **Architecture**: Component structure, state management, data flow\n   - **Installation & Setup**: Prerequisites, npm install, running dev server\n   - **Usage Guide**: How to use the calculator, available operations, keyboard support\n   - **Development Guide**: Code structure, adding features, coding conventions\n   - **Testing**: How to run tests, test structure, writing new tests\n   - **Building & Deployment**: Build commands, output, deployment options\n   - **Theme Support**: Dark/light mode functionality and implementation\n   - **Troubleshooting**: Common issues and solutions\n   - **API Reference**: Component props, interfaces, key functions\n\n3. Include code examples where relevant\n4. Reference specific files and line numbers for key implementations\n5. Write in clear, user-friendly language suitable for both users and developers\n6. Use proper markdown formatting with table of contents",
       "dependencies": [],
       "acceptance_criteria": [
-        "architectural.md file created in project root directory",
-        "All major architectural aspects documented with clear explanations",
-        "Component relationships and data flow clearly described",
-        "Styling and theming architecture explained",
-        "Testing strategy and patterns documented",
-        "Build configuration and tooling explained",
-        "Technical decisions documented with rationale",
-        "Documentation is well-structured with clear sections and examples"
+        "manual.md file created in project root",
+        "All major features documented comprehensively",
+        "Installation and setup instructions included",
+        "Usage examples with code snippets provided",
+        "Testing instructions with examples included",
+        "Architecture overview with component relationships present",
+        "Document is well-structured with clear headings and table of contents",
+        "Theme support implementation documented",
+        "Troubleshooting section included"
       ],
-      "filename": "architectural.md",
+      "filename": "manual.md",
       "language": "markdown"
     }
   ]
