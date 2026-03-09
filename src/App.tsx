@@ -28,6 +28,20 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
+        <div className="particles" data-testid="particles-container">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={i}
+              className="particle"
+              data-testid={`particle-${i}`}
+              style={{
+                left: `${(i * 5) % 100}%`,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${15 + (i % 10) * 2}s`,
+              }}
+            />
+          ))}
+        </div>
         <h1>Mini Calculator</h1>
         <Calculator />
       </div>

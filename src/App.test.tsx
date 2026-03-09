@@ -105,3 +105,56 @@ describe('App Theme Functionality', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark')
   })
 })
+
+describe('App Particle Background', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    document.documentElement.removeAttribute('data-theme')
+  })
+
+  it('renders particles container', () => {
+    render(<App />)
+    const particlesContainer = screen.getByTestId('particles-container')
+    expect(particlesContainer).toBeInTheDocument()
+    expect(particlesContainer).toHaveClass('particles')
+  })
+
+  it('renders 20 particle elements', () => {
+    render(<App />)
+    for (let i = 0; i < 20; i++) {
+      const particle = screen.getByTestId(`particle-${i}`)
+      expect(particle).toBeInTheDocument()
+      expect(particle).toHaveClass('particle')
+    }
+  })
+
+  it('particles have unique animation properties', () => {
+    render(<App />)
+    const particle0 = screen.getByTestId('particle-0')
+    const particle1 = screen.getByTestId('particle-1')
+
+    const style0 = particle0.getAttribute('style')
+    const style1 = particle1.getAttribute('style')
+
+    expect(style0).toBeTruthy()
+    expect(style1).toBeTruthy()
+    expect(style0).not.toBe(style1)
+  })
+
+  it('particles render in both light and dark themes', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    const particlesContainer = screen.getByTestId('particles-container')
+    expect(particlesContainer).toBeInTheDocument()
+
+    const toggleButton = screen.getByRole('button', { name: /toggle theme/i })
+    await user.click(toggleButton)
+
+    expect(particlesContainer).toBeInTheDocument()
+    for (let i = 0; i < 20; i++) {
+      const particle = screen.getByTestId(`particle-${i}`)
+      expect(particle).toBeInTheDocument()
+    }
+  })
+})

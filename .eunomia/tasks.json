@@ -3,19 +3,35 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Add color animation to Mini Calculator title",
-      "description": "Add CSS color animation to the h1 title element in src/App.css. Read the file to see the existing typewriter and blinkCursor animations (lines 91-107, 109-121). Create a new @keyframes rule for color animation that cycles through multiple colors. Update the h1 animation property (line 118) to include the new color animation alongside the existing typewriter and blinkCursor animations. The color animation should work in both light and dark themes by using appropriate color values. Ensure the animation is smooth and visually appealing.",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Add floating particle background animation",
+      "description": "Add animated floating particles to the background of the Mini Calculator. Read src/App.tsx to understand the current structure and App component. Read src/App.css to see existing animations (typewriter, blinkCursor, colorAnimation). Create particle elements in the App component that render behind the calculator. Add CSS animations for floating/drifting motion with varying speeds, sizes, and opacity. Style particles to work in both light and dark themes using CSS variables. Position particles absolutely to create depth. Write tests in src/App.test.tsx to verify particle elements render correctly. Take a screenshot to verify the visual appearance matches the design intent.",
       "dependencies": [],
       "acceptance_criteria": [
-        "New @keyframes rule for color animation is added",
-        "h1 animation property includes typewriter, blinkCursor, and color animation",
-        "Color animation works in both light and dark themes",
-        "Animation is smooth and does not interfere with typewriter effect"
+        "Particle elements render in the background",
+        "Particles animate with floating/drifting motion",
+        "Particles work in both light and dark themes",
+        "Tests verify particle rendering",
+        "Visual verification via screenshot confirms design"
       ],
-      "filename": "src/App.css",
-      "language": "css"
+      "filename": "src/App.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Validate floating particles implementation",
+      "description": "Run the test suite to validate the floating particles feature. Execute npm test to run all tests including the new particle rendering tests in src/App.test.tsx. Verify all tests pass and the particles feature works correctly.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "All tests pass",
+        "Particle tests verify correct rendering",
+        "No regression in existing functionality"
+      ],
+      "filename": "src/App.test.tsx",
+      "language": "typescript"
     }
   ]
 }
