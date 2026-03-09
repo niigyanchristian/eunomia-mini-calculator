@@ -4,16 +4,15 @@
     {
       "task_id": "REQ-001",
       "task_type": "modify",
-      "recommended_model": "sonnet",
-      "title": "Implement writing animation for Mini Calculator title",
-      "description": "Change the current title animation to a typewriter/writing effect. Read src/App.tsx to locate the h1 title element and src/App.css to see the current animation styles. Replace or modify the existing animation with a typewriter/writing effect where characters appear one by one from left to right. Consider using CSS animation with steps() function or a combination of width animation with overflow hidden to create the writing effect. After implementing the animation, start the dev server in the background using 'npm run dev', take a screenshot using Playwright to .eunomia/screenshots/developer/writing-animation.png, verify the writing animation displays correctly, then stop the dev server using TaskStop. If any component behavior changes, update related tests in src/App.test.tsx.",
+      "recommended_model": "haiku",
+      "title": "Add color animation to Mini Calculator title",
+      "description": "Add CSS color animation to the h1 title element in src/App.css. Read the file to see the existing typewriter and blinkCursor animations (lines 91-107, 109-121). Create a new @keyframes rule for color animation that cycles through multiple colors. Update the h1 animation property (line 118) to include the new color animation alongside the existing typewriter and blinkCursor animations. The color animation should work in both light and dark themes by using appropriate color values. Ensure the animation is smooth and visually appealing.",
       "dependencies": [],
       "acceptance_criteria": [
-        "Title displays with typewriter/writing animation effect",
-        "Characters appear sequentially from left to right",
-        "Animation timing is smooth and natural (suggest 2-3 second duration)",
-        "Screenshot confirms the animation works correctly",
-        "Animation respects prefers-reduced-motion for accessibility"
+        "New @keyframes rule for color animation is added",
+        "h1 animation property includes typewriter, blinkCursor, and color animation",
+        "Color animation works in both light and dark themes",
+        "Animation is smooth and does not interfere with typewriter effect"
       ],
       "filename": "src/App.css",
       "language": "css"

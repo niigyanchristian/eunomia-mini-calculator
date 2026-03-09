@@ -106,8 +106,28 @@ body {
   }
 }
 
+@keyframes colorAnimation {
+  0% {
+    color: #ff4444;
+  }
+  20% {
+    color: #ff7700;
+  }
+  40% {
+    color: #ffcc00;
+  }
+  60% {
+    color: #0099ff;
+  }
+  80% {
+    color: #9933ff;
+  }
+  100% {
+    color: #ff4444;
+  }
+}
+
 h1 {
-  color: var(--app-text) !important;
   transition: color 0.3s ease;
   font-weight: 600;
   opacity: 1 !important;
@@ -115,7 +135,7 @@ h1 {
   white-space: nowrap;
   border-right: 3px solid var(--app-text);
   max-width: 0;
-  animation: typewriter 1.5s steps(15) forwards, blinkCursor 0.75s step-end infinite;
+  animation: typewriter 1.5s steps(15) forwards, blinkCursor 0.75s step-end infinite, colorAnimation 4s linear infinite;
   display: inline-block;
   margin: 0 auto;
 }
