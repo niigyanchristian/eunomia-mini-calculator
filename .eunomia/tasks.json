@@ -5,13 +5,14 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Fix dark mode white background areas",
-      "description": "Update src/App.css to apply dark background to html and body elements. Currently the .app class has the correct background (var(--app-bg)), but the html/body elements showing on the sides are still white. Add 'background-color: var(--app-bg);' and 'transition: background-color 0.3s ease;' to the 'html, body' CSS rule (lines 23-29) so the entire page background matches the theme in both light and dark modes.",
+      "title": "Add animation to calculator title",
+      "description": "Add CSS animation to the 'Mini Calculator' h1 title in src/App.tsx (line 31). Create a smooth fade-in and slide-down animation in src/App.css using @keyframes. Apply the animation to the h1 element with appropriate duration (0.6-0.8s) and easing (ease-out). The animation should trigger once on page load and be subtle and professional.",
       "dependencies": [],
       "acceptance_criteria": [
-        "No white areas visible on page sides in dark mode",
-        "Body and html elements use var(--app-bg) for background color",
-        "Background color transitions smoothly between light and dark themes"
+        "Title animates smoothly on page load with fade-in and slide-down effect",
+        "Animation duration is between 0.6-0.8 seconds",
+        "Animation uses appropriate easing function for natural motion",
+        "No layout shift or janky behavior during animation"
       ],
       "filename": "src/App.css",
       "language": "css"

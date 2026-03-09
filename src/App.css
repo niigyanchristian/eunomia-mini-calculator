@@ -88,9 +88,21 @@ body {
   transition: background-color 0.3s ease;
 }
 
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 h1 {
   color: var(--app-text);
   transition: color 0.3s ease;
+  animation: fadeInSlideDown 0.7s ease-out;
 }
 
 /* Tablet responsive styles (481px - 768px) */
