@@ -135,7 +135,7 @@ body {
     max-width: 0;
   }
   to {
-    max-width: 20ch;
+    max-width: 100%;
   }
 }
 
@@ -187,7 +187,6 @@ body {
 }
 
 h1 {
-  max-width: 0;
   color: var(--app-text);
   transition: color 0.3s ease;
   font-weight: 600;
@@ -196,10 +195,12 @@ h1 {
   white-space: nowrap;
   border-right: 3px solid var(--app-text);
   animation: typewriter 1.5s steps(15) forwards, blinkCursor 0.75s step-end infinite, colorAnimation 4s linear infinite;
+  animation-fill-mode: forwards;
   display: inline-block;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  animation-delay: 0s;
 }
 
 /* Respect user's motion preferences */
