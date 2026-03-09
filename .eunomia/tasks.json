@@ -2,33 +2,16 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "feature",
-      "recommended_model": "sonnet",
-      "title": "Add floating particle background animation",
-      "description": "Add animated floating particles to the background of the Mini Calculator. Read src/App.tsx to understand the current structure and App component. Read src/App.css to see existing animations (typewriter, blinkCursor, colorAnimation). Create particle elements in the App component that render behind the calculator. Add CSS animations for floating/drifting motion with varying speeds, sizes, and opacity. Style particles to work in both light and dark themes using CSS variables. Position particles absolutely to create depth. Write tests in src/App.test.tsx to verify particle elements render correctly. Take a screenshot to verify the visual appearance matches the design intent.",
-      "dependencies": [],
-      "acceptance_criteria": [
-        "Particle elements render in the background",
-        "Particles animate with floating/drifting motion",
-        "Particles work in both light and dark themes",
-        "Tests verify particle rendering",
-        "Visual verification via screenshot confirms design"
-      ],
-      "filename": "src/App.tsx",
-      "language": "typescript"
-    },
-    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Validate floating particles implementation",
-      "description": "Run the test suite to validate the floating particles feature. Execute npm test to run all tests including the new particle rendering tests in src/App.test.tsx. Verify all tests pass and the particles feature works correctly.",
-      "dependencies": ["REQ-001"],
+      "title": "Verify all tests pass",
+      "description": "Run the complete test suite to verify all tests pass. Execute npm test to run all vitest tests including src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx. Ensure all test cases pass without errors.",
+      "dependencies": [],
       "acceptance_criteria": [
-        "All tests pass",
-        "Particle tests verify correct rendering",
-        "No regression in existing functionality"
+        "All tests execute successfully",
+        "No test failures or errors",
+        "Test coverage meets project standards"
       ],
       "filename": "src/App.test.tsx",
       "language": "typescript"
