@@ -2,22 +2,19 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
+      "task_id": "REQ-001",
+      "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Validate arithmetic operations implementation",
-      "description": "Verify that all basic arithmetic operations are correctly implemented and tested:\n\n1. Run the test suite: npm test\n2. Verify tests pass for all acceptance criteria:\n   - Addition: 5 + 3 = 8 (test exists at line 93-96)\n   - Subtraction: 10 - 4 = 6 (test exists at line 110-113)\n   - Multiplication: 6 × 7 = 42 (test exists at line 127-130)\n   - Division: 15 ÷ 3 = 5 (test exists at line 144-147)\n   - Division by zero displays Error (test exists at line 154-157)\n3. Review src/components/Calculator.tsx to confirm implementation:\n   - calculate() function handles all four operations (lines 46-60)\n   - Division by zero returns 'Error' (line 55)\n4. Confirm all acceptance criteria from PRD EUN-77 are satisfied",
+      "title": "Fix dark mode white background areas",
+      "description": "Update src/App.css to apply dark background to html and body elements. Currently the .app class has the correct background (var(--app-bg)), but the html/body elements showing on the sides are still white. Add 'background-color: var(--app-bg);' and 'transition: background-color 0.3s ease;' to the 'html, body' CSS rule (lines 23-29) so the entire page background matches the theme in both light and dark modes.",
       "dependencies": [],
       "acceptance_criteria": [
-        "All tests in Calculator.test.tsx pass",
-        "Addition produces correct results (5 + 3 = 8)",
-        "Subtraction produces correct results (10 - 4 = 6)",
-        "Multiplication produces correct results (6 × 7 = 42)",
-        "Division produces correct results (15 ÷ 3 = 5)",
-        "Division by zero displays Error message"
+        "No white areas visible on page sides in dark mode",
+        "Body and html elements use var(--app-bg) for background color",
+        "Background color transitions smoothly between light and dark themes"
       ],
-      "filename": "src/components/Calculator.test.tsx",
-      "language": "typescript"
+      "filename": "src/App.css",
+      "language": "css"
     }
   ]
 }
