@@ -5,14 +5,14 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Add animation to calculator title",
-      "description": "Add CSS animation to the 'Mini Calculator' h1 title in src/App.tsx (line 31). Create a smooth fade-in and slide-down animation in src/App.css using @keyframes. Apply the animation to the h1 element with appropriate duration (0.6-0.8s) and easing (ease-out). The animation should trigger once on page load and be subtle and professional.",
+      "title": "Animate the Mini Calculator title",
+      "description": "Add or enhance CSS animation to the 'Mini Calculator' h1 title element. Read src/App.tsx to locate the title element and src/App.css to see existing animation styles. Implement or improve the CSS animation using @keyframes (e.g., fade-in with slide-down, scale, or bounce effect). Apply the animation to the title element. After implementing, start the dev server in the background, take a screenshot to .eunomia/screenshots/developer/ to verify the animation appears correctly, then stop the server. No unit tests are needed for CSS animations - visual verification is sufficient.",
       "dependencies": [],
       "acceptance_criteria": [
-        "Title animates smoothly on page load with fade-in and slide-down effect",
-        "Animation duration is between 0.6-0.8 seconds",
-        "Animation uses appropriate easing function for natural motion",
-        "No layout shift or janky behavior during animation"
+        "Title displays smooth animation on page load",
+        "Animation enhances user experience without being distracting",
+        "No layout shifts or broken styling",
+        "Screenshot confirms visual correctness"
       ],
       "filename": "src/App.css",
       "language": "css"
