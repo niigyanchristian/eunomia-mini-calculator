@@ -3,38 +3,18 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "enhancement",
-      "recommended_model": "sonnet",
-      "title": "Verify and Fix Mobile Responsive Design Implementation",
-      "description": "Review and ensure the calculator is fully responsive on mobile devices:\n\n1. Read existing CSS files to check responsive implementation:\n   - src/components/Calculator.css (check media queries and breakpoints)\n   - src/components/Button.css (check button sizing for mobile)\n   - src/components/Display.css (check display sizing for mobile)\n   - src/App.css\n\n2. Verify viewport meta tag in index.html\n\n3. Test responsive behavior:\n   - Use playwright-responsive-test.js if available to capture screenshots\n   - Check layout at common mobile widths: 375px (iPhone SE), 390px (iPhone 12), 414px (iPhone 11 Pro Max)\n   - Check tablet sizes: 768px (iPad)\n   - Ensure calculator buttons are appropriately sized and touch-friendly\n   - Ensure display text is readable on small screens\n   - Verify proper spacing and padding at all breakpoints\n\n4. Fix any responsive issues found:\n   - Adjust media query breakpoints if needed\n   - Fix button sizing, spacing, or font sizes\n   - Ensure the calculator container fits properly on small screens\n   - Verify no horizontal scrolling occurs on mobile\n\n5. Update or write tests in src/components/Calculator.test.tsx to verify responsive behavior and ensure they properly test the responsive features\n\n6. Take screenshots at multiple device sizes using playwright to verify the fixes work correctly",
+      "task_type": "modify",
+      "recommended_model": "haiku",
+      "title": "Fix dark mode white background areas",
+      "description": "Update src/App.css to apply dark background to html and body elements. Currently the .app class has the correct background (var(--app-bg)), but the html/body elements showing on the sides are still white. Add 'background-color: var(--app-bg);' and 'transition: background-color 0.3s ease;' to the 'html, body' CSS rule (lines 23-29) so the entire page background matches the theme in both light and dark modes.",
       "dependencies": [],
       "acceptance_criteria": [
-        "Calculator displays correctly on mobile devices (375px-414px width)",
-        "Calculator displays correctly on tablets (768px width)",
-        "All buttons are touch-friendly and properly sized for mobile interaction",
-        "Display text is readable at all screen sizes without horizontal scrolling",
-        "Tests written/updated to verify responsive behavior",
-        "Screenshots confirm proper layout across device sizes"
+        "No white areas visible on page sides in dark mode",
+        "Body and html elements use var(--app-bg) for background color",
+        "Background color transitions smoothly between light and dark themes"
       ],
-      "filename": "src/components/Calculator.css",
+      "filename": "src/App.css",
       "language": "css"
-    },
-    {
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
-      "recommended_model": "haiku",
-      "title": "Validate Mobile Responsive Design",
-      "description": "Validate that the calculator is fully responsive on mobile devices:\n\n1. Run the test suite:\n   - Execute: npm test\n   - Verify all tests pass, especially responsive tests in src/components/Calculator.test.tsx\n\n2. Visual validation using screenshots:\n   - Run playwright-responsive-test.js to capture screenshots at multiple device sizes\n   - Verify screenshots show proper layout, sizing, and spacing\n   - Check mobile sizes: 375px (iPhone SE), 390px (iPhone 12 Pro), 414px (iPhone 11 Pro Max)\n   - Check tablet size: 768px (iPad)\n   - Check desktop size: 1920px\n\n3. Verify acceptance criteria:\n   - Calculator fits within viewport at all screen sizes\n   - Buttons are appropriately sized and touch-friendly on mobile\n   - Display text is readable without horizontal scrolling\n   - Layout is clean and functional across all tested device sizes",
-      "dependencies": ["REQ-001"],
-      "acceptance_criteria": [
-        "All unit tests pass",
-        "Screenshots confirm proper responsive layout at all tested sizes",
-        "Calculator is fully usable on mobile, tablet, and desktop sizes",
-        "No visual or functional issues detected",
-        "No horizontal scrolling on any device size"
-      ],
-      "filename": "src/components/Calculator.test.tsx",
-      "language": "typescript"
     }
   ]
 }
