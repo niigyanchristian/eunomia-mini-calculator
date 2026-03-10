@@ -6,14 +6,10 @@
       "task_type": "qa_validation",
       "recommended_model": "haiku",
       "title": "Run all tests and verify they pass",
-      "description": "Run the complete test suite using vitest to verify all tests pass. Execute: npm test or vitest run. The project has tests in: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx",
+      "description": "Run the complete test suite using vitest to verify all tests pass. Execute: npm test or vitest run. The project has tests in: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Ensure all tests execute successfully with no failures.",
       "dependencies": [],
-      "acceptance_criteria": [
-        "All unit tests pass",
-        "No test failures reported",
-        "Test suite completes successfully"
-      ],
-      "filename": "vitest.config.ts",
+      "acceptance_criteria": ["All tests pass with no failures", "No test errors or timeouts", "Test coverage validates existing functionality"],
+      "filename": "src/App.test.tsx",
       "language": "typescript"
     }
   ]
