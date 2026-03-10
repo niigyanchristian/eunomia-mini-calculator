@@ -2,19 +2,19 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "modify",
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Fix dark mode white background areas",
-      "description": "Update src/App.css to apply dark background to html and body elements. Currently the .app class has the correct background (var(--app-bg)), but the html/body elements showing on the sides are still white. Add 'background-color: var(--app-bg);' and 'transition: background-color 0.3s ease;' to the 'html, body' CSS rule (lines 23-29) so the entire page background matches the theme in both light and dark modes.",
+      "title": "Run all tests and verify they pass",
+      "description": "Run the complete test suite using vitest to verify all tests pass. Execute: npm test or vitest run. The project has tests in: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx",
       "dependencies": [],
       "acceptance_criteria": [
-        "No white areas visible on page sides in dark mode",
-        "Body and html elements use var(--app-bg) for background color",
-        "Background color transitions smoothly between light and dark themes"
+        "All unit tests pass",
+        "No test failures reported",
+        "Test suite completes successfully"
       ],
-      "filename": "src/App.css",
-      "language": "css"
+      "filename": "vitest.config.ts",
+      "language": "typescript"
     }
   ]
 }
