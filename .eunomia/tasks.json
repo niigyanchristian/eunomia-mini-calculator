@@ -2,31 +2,17 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "bugfix",
-      "recommended_model": "sonnet",
-      "title": "Ensure all tests pass",
-      "description": "Run the test suite (npm test) to identify any failing tests. Read the test output carefully. If any tests fail:\n1. Read the failing test files (src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx)\n2. Read the corresponding source files being tested\n3. Fix either the test code or source code to make tests pass\n4. Verify all tests pass with npm test\n\nThe project uses vitest for testing. Recent history shows QA validation tasks failing, indicating tests may still be broken. Investigate and fix all failures.",
-      "dependencies": [],
-      "acceptance_criteria": [
-        "npm test exits with code 0",
-        "All test files pass: App.test.tsx, Button.test.tsx, Display.test.tsx, Calculator.test.tsx",
-        "No test failures, errors, or warnings in output"
-      ],
-      "filename": "src/components/Calculator.test.tsx",
-      "language": "typescript"
-    },
-    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Validate all tests pass",
-      "description": "Run the complete test suite using npm test. Verify that:\n1. The command exits with code 0\n2. All test files execute successfully\n3. No failures, errors, or warnings appear in the output\n\nReport the test results clearly.",
-      "dependencies": ["REQ-001"],
+      "title": "Verify all tests pass",
+      "description": "Run the complete test suite using npm test to verify all tests pass. Execute the command and ensure the test suite exits with code 0. Check that all test files execute successfully: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Report the test results including number of tests run, passed, and any failures.",
+      "dependencies": [],
       "acceptance_criteria": [
-        "Test suite exits with code 0",
-        "All tests pass",
-        "No errors or warnings"
+        "npm test exits with code 0",
+        "All test files execute without errors",
+        "All test assertions pass",
+        "No test failures reported in output"
       ],
       "filename": "package.json",
       "language": "typescript"
