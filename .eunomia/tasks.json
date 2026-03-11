@@ -2,13 +2,34 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
+      "task_id": "REQ-001",
+      "task_type": "bugfix",
+      "recommended_model": "sonnet",
+      "title": "Investigate and fix failing tests",
+      "description": "Run the test suite (npm test or vitest run) to identify which tests are failing. Read the existing test files (src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx) and their corresponding source files to understand what's breaking. Fix any bugs in the source code or update test assertions as needed to make all tests pass. Previous sessions show tests have been failing, so investigate error messages carefully. Ensure no functionality is broken during fixes.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "All test failures are diagnosed and understood",
+        "Code or test fixes are implemented",
+        "No new bugs or regressions introduced",
+        "All test files can execute without errors"
+      ],
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
+    },
+    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Run the complete test suite using vitest to verify all tests pass. Execute: npm test or vitest run. The project has tests in: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Ensure all tests execute successfully with no failures.",
-      "dependencies": [],
-      "acceptance_criteria": ["All tests pass with no failures", "No test errors or timeouts", "Test coverage validates existing functionality"],
+      "title": "Validate all tests pass",
+      "description": "Run the complete test suite using npm test to verify all tests pass. Ensure the test suite exits with code 0 and there are no failures, errors, or warnings. Check that all test files execute successfully: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "All tests execute successfully",
+        "Test suite exits with code 0",
+        "No test failures, errors, or warnings",
+        "All existing functionality remains intact"
+      ],
       "filename": "src/App.test.tsx",
       "language": "typescript"
     }
