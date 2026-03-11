@@ -5,15 +5,16 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' command. Verify that all tests pass successfully. Check the following test files: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Ensure the command exits with code 0 and all test suites complete without errors.",
+      "title": "Run test suite and verify all tests pass",
+      "description": "Execute the complete test suite using 'npm test'. Verify that all tests pass successfully. The test files are: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Check the exit code is 0 and no tests failed.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npm test command completes successfully with exit code 0",
-        "All test suites pass without errors",
-        "No failing test cases in any test file"
+        "npm test command executes successfully",
+        "All test files run without errors",
+        "Exit code is 0",
+        "No failing tests reported"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "package.json",
       "language": "typescript"
     }
   ]
