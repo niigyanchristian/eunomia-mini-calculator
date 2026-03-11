@@ -5,15 +5,16 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite and validate all tests pass",
-      "description": "Run all existing Vitest tests to verify they pass. READ FIRST: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx — understand what is being tested. Run the full test suite with: npx vitest run. Check exit code is 0 and all tests pass. Report any failures with the exact error messages.",
+      "title": "Verify all tests pass",
+      "description": "Run the complete test suite using 'npm test' command. Verify that all tests pass successfully. Test files include: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. All tests must pass with no failures or errors.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx vitest run exits with code 0",
-        "All test suites in src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx pass without errors",
-        "No test failures or skipped tests reported in the output"
+        "All test files execute successfully",
+        "All test cases pass with 0 failures",
+        "No runtime errors or warnings in test execution",
+        "Test summary shows 100% pass rate"
       ],
-      "filename": "src/components/Calculator.test.tsx",
+      "filename": "src/App.test.tsx",
       "language": "typescript"
     }
   ]
