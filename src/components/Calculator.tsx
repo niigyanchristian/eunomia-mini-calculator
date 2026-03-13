@@ -43,20 +43,72 @@ export function Calculator() {
     }
   }
 
+  // Round to specified significant digits to handle IEEE 754 precision
+  const roundToPrecision = (num: number, significantDigits: number = 14): number => {
+    if (num === 0) return 0
+    const magnitude = Math.floor(Math.log10(Math.abs(num))) + 1
+    const scale = Math.pow(10, significantDigits - magnitude)
+    return Math.round(num * scale) / scale
+  }
+
+  // Validate number is within calculator range
+  const isInRange = (num: number): boolean => {
+    const MAX_VALUE = 9999999999
+    return Math.abs(num) <= MAX_VALUE
+  }
+
+  // Format number for display, removing unnecessary trailing zeros
+  const formatNumber = (num: number): string => {
+    // Handle special cases
+    if (num === 0) return '0'
+    if (!isFinite(num)) return 'Error'
+
+    // Convert to string, avoiding scientific notation for numbers within our range
+    const str = num.toString()
+
+    // If toString used scientific notation, avoid it for display
+    if (str.includes('e')) {
+      // For numbers we can represent normally, convert back
+      if (Math.abs(num) >= 0.000001 && Math.abs(num) <= 9999999999) {
+        // Use toFixed with appropriate decimal places
+        const decimalPlaces = Math.max(0, Math.min(10, 14 - Math.floor(Math.log10(Math.abs(num))) - 1))
+        return parseFloat(num.toFixed(decimalPlaces)).toString()
+      }
+    }
+
+    return str
+  }
+
   const calculate = (left: number, right: number, op: string): string => {
+    let result: number
+
     switch (op) {
       case '+':
-        return String(left + right)
+        result = left + right
+        break
       case '-':
-        return String(left - right)
+        result = left - right
+        break
       case '\u00d7':
-        return String(left * right)
+        result = left * right
+        break
       case '\u00f7':
         if (right === 0) return 'Error'
-        return String(left / right)
+        result = left / right
+        break
       default:
         return String(right)
     }
+
+    // Round to 14 significant digits (IEEE 754 double precision)
+    result = roundToPrecision(result, 14)
+
+    // Validate range
+    if (!isInRange(result)) {
+      return 'Error'
+    }
+
+    return formatNumber(result)
   }
 
   const handleOperation = (nextOp: string) => {
