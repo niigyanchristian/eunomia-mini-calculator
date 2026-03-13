@@ -46,7 +46,7 @@ body {
   --app-bg: #ffffff;
   --app-text: #333333;
   --calculator-bg: #e8e8e8;
-  --calculator-shadow: rgba(0, 0, 0, 0.1);
+  --calculator-shadow: rgba(0, 0, 0, 0.45);
   --display-bg: #f5f5f5;
   --display-border: #dddddd;
   --display-text: #333333;
