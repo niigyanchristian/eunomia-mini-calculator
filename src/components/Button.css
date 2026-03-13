@@ -75,3 +75,13 @@
     border-radius: 4px;
   }
 }
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .calculator-button {
+    padding: 0.5rem;
+    font-size: 1.125rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
