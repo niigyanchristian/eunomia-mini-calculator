@@ -6,13 +6,13 @@
       "task_type": "qa_validation",
       "recommended_model": "haiku",
       "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures.",
+      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures. Run the command and verify the output shows all tests passing.",
       "dependencies": [],
       "acceptance_criteria": [
         "All test files execute without errors",
-        "All test cases pass",
-        "No test failures or warnings reported",
-        "Test coverage report shows successful execution"
+        "All test assertions pass",
+        "Test suite completes with 100% pass rate",
+        "No failing or skipped tests"
       ],
       "filename": "src/App.test.tsx",
       "language": "typescript"
