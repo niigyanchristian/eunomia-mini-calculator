@@ -2,19 +2,33 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
+      "task_id": "REQ-001",
+      "task_type": "modify",
+      "recommended_model": "haiku",
+      "title": "Add test for negative result reuse in chained calculation",
+      "description": "Add one test to src/components/Calculator.test.tsx inside the 'realistic user interactions' describe block. The test verifies that a negative result from a previous calculation (e.g., 3 - 8 = -5) can be used as the operand in a subsequent chained calculation (e.g., -5 + 3 = -2). This test has already been added to the file.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "New test 'uses negative result from previous calculation in new one' exists in Calculator.test.tsx",
+        "Test clicks 3 - 8 = and expects display to show -5",
+        "Test then clicks + 3 = and expects display to show -2",
+        "npx vitest run src/components/Calculator.test.tsx passes with all tests green"
+      ],
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
+    },
+    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures. Run the command and verify the output shows all tests passing.",
-      "dependencies": [],
+      "title": "Validate Calculator tests pass",
+      "description": "Run the Calculator test suite to confirm all tests pass, including the newly added 'uses negative result from previous calculation in new one' test. Command: npx vitest run src/components/Calculator.test.tsx from the project root /Users/one-don/.eunomia/workspace/eunomia-mini-calculator.",
+      "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "All test files execute without errors",
-        "All test assertions pass",
-        "Test suite completes with 100% pass rate",
-        "No failing or skipped tests"
+        "All tests in src/components/Calculator.test.tsx pass",
+        "No test failures or errors reported"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
     }
   ]
