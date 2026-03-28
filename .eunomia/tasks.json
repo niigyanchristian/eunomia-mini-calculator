@@ -2,20 +2,37 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
+      "task_id": "REQ-001",
+      "task_type": "feature",
+      "recommended_model": "haiku",
+      "title": "Write Dockerfile to containerize the React/Vite app",
+      "description": "Create a Dockerfile at the project root (/Users/one-don/.eunomia/workspace/eunomia-mini-calculator/Dockerfile). The project is a React 18 + TypeScript app built with Vite (package manager: npm). Use a multi-stage build: Stage 1 — use node:18-alpine as builder, set WORKDIR /app, copy package.json and package-lock.json, run `npm ci`, copy the rest of the source, run `npm run build` (which executes `tsc && vite build` per package.json). Stage 2 — use nginx:alpine as the final image, copy the built dist/ folder from the builder stage to /usr/share/nginx/html, expose port 80, and set CMD [\"nginx\", \"-g\", \"daemon off;\"]. The vite.config.ts confirms the dev server runs on port 5173, but for the container the built static assets should be served by nginx on port 80. Do not add a .dockerignore yet (only create Dockerfile). No tests are needed for this infrastructure file.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "Dockerfile exists at project root",
+        "Uses multi-stage build: node:18-alpine builder stage and nginx:alpine serve stage",
+        "Builder stage runs `npm ci` then `npm run build`",
+        "Final stage copies dist/ from builder to /usr/share/nginx/html",
+        "Port 80 is exposed",
+        "CMD starts nginx in foreground"
+      ],
+      "filename": "Dockerfile",
+      "language": "dockerfile"
+    },
+    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures. Run the command and verify the output shows all tests passing.",
-      "dependencies": [],
+      "title": "Validate Dockerfile exists and is well-formed",
+      "description": "Verify the Dockerfile at the project root exists and contains the expected multi-stage build instructions. Read the file and confirm: (1) it has a FROM node:18-alpine builder stage, (2) it runs npm ci and npm run build, (3) it has a FROM nginx:alpine final stage, (4) it copies dist/ to /usr/share/nginx/html, (5) it exposes port 80, (6) CMD is set to run nginx. If Docker is available, optionally run `docker build -t eunomia-mini-calculator .` from the project root to confirm the image builds without errors.",
+      "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "All test files execute without errors",
-        "All test assertions pass",
-        "Test suite completes with 100% pass rate",
-        "No failing or skipped tests"
+        "Dockerfile is present at project root",
+        "Multi-stage build structure is correct",
+        "All required directives (FROM, WORKDIR, COPY, RUN, EXPOSE, CMD) are present and correct"
       ],
-      "filename": "src/App.test.tsx",
-      "language": "typescript"
+      "filename": "Dockerfile",
+      "language": "dockerfile"
     }
   ]
 }

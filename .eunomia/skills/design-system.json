@@ -1,0 +1,143 @@
+{
+  "project_name": "eunomia-mini-calculator",
+  "generated_at": "2026-03-28T11:46:43.325203+00:00",
+  "framework": "React",
+  "tokens": {
+    "colors": [
+      { "name": "color-bg-light", "value": "⚠️ CSS_SOURCE_NEEDED (App.css)", "usage": "App page background in light theme" },
+      { "name": "color-bg-dark", "value": "⚠️ CSS_SOURCE_NEEDED (App.css)", "usage": "App page background in dark theme" },
+      { "name": "color-display-bg-light", "value": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "usage": "Calculator display panel background in light theme" },
+      { "name": "color-display-bg-dark", "value": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "usage": "Calculator display panel background in dark theme" },
+      { "name": "color-display-text-light", "value": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "usage": "Display text colour in light theme" },
+      { "name": "color-display-text-dark", "value": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "usage": "Display text colour in dark theme" },
+      { "name": "color-btn-digit-light", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Default digit button background in light theme" },
+      { "name": "color-btn-digit-dark", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Default digit button background in dark theme" },
+      { "name": "color-btn-operator-light", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Operator button background in light theme" },
+      { "name": "color-btn-operator-dark", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Operator button background in dark theme" },
+      { "name": "color-btn-equals-light", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Equals button background in light theme" },
+      { "name": "color-btn-equals-dark", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Equals button background in dark theme" },
+      { "name": "color-btn-clear-light", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Clear button background in light theme" },
+      { "name": "color-btn-clear-dark", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "usage": "Clear button background in dark theme" }
+    ],
+    "typography": {
+      "font_families": ["⚠️ CSS_SOURCE_NEEDED (App.css)", "⚠️ CSS_SOURCE_NEEDED (Display.css — likely monospace)", "⚠️ CSS_SOURCE_NEEDED (Button.css)"],
+      "scale": [
+        { "name": "h1", "size": "⚠️ CSS_SOURCE_NEEDED (App.css)", "weight": "⚠️ CSS_SOURCE_NEEDED (App.css)", "line_height": "⚠️ CSS_SOURCE_NEEDED (App.css)", "letter_spacing": "⚠️ CSS_SOURCE_NEEDED (App.css)" },
+        { "name": "display-value", "size": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "weight": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "line_height": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "letter_spacing": "⚠️ CSS_SOURCE_NEEDED (Display.css)" },
+        { "name": "button-label", "size": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "weight": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "line_height": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "letter_spacing": "⚠️ CSS_SOURCE_NEEDED (Button.css)" }
+      ]
+    },
+    "spacing": [
+      { "name": "calculator-grid-gap", "value": "⚠️ CSS_SOURCE_NEEDED (Calculator.css)" },
+      { "name": "button-padding", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)" },
+      { "name": "page-padding", "value": "⚠️ CSS_SOURCE_NEEDED (App.css)" }
+    ],
+    "radii": [
+      { "name": "button-radius", "value": "⚠️ CSS_SOURCE_NEEDED (Button.css)" },
+      { "name": "display-radius", "value": "⚠️ CSS_SOURCE_NEEDED (Display.css)" },
+      { "name": "calculator-container-radius", "value": "⚠️ CSS_SOURCE_NEEDED (Calculator.css)" }
+    ],
+    "shadows": [
+      { "name": "calculator-elevation", "value": "⚠️ CSS_SOURCE_NEEDED (Calculator.css / App.css)" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "description": "Core interactive button element used for digit input, operators, equals, clear, decimal, and theme toggle actions.",
+      "category": "molecule",
+      "variants": [
+        { "name": "digit", "props": { "className": "", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } },
+        { "name": "operator", "props": { "className": "operator", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } },
+        { "name": "equals", "props": { "className": "equals", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } },
+        { "name": "clear", "props": { "className": "clear", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } },
+        { "name": "zero", "props": { "className": "zero", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } },
+        { "name": "decimal", "props": { "className": "", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } },
+        { "name": "theme-toggle", "props": { "className": "theme-toggle", "bg": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Button.css)" } }
+      ],
+      "sizes": [
+        { "name": "default", "height": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "padding": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "font_size": "⚠️ CSS_SOURCE_NEEDED (Button.css)" },
+        { "name": "zero (wide)", "height": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "padding": "⚠️ CSS_SOURCE_NEEDED (Button.css)", "font_size": "⚠️ CSS_SOURCE_NEEDED (Button.css)" }
+      ],
+      "states": ["default", "hover", "active", "focus"],
+      "code_example": "// src/components/Button.tsx\nimport './Button.css'\n\ninterface ButtonProps {\n  label: string\n  onClick: () => void\n  className?: string\n}\n\nexport function Button({ label, onClick, className = '' }: ButtonProps) {\n  const buttonClass = `calculator-button${className ? ' ' + className : ''}`\n  return (\n    <button className={buttonClass} onClick={onClick}>\n      {label}\n    </button>\n  )\n}",
+      "visual_spec": {
+        "base_class": "calculator-button",
+        "keyboard_activation": "Enter and Space (native button behaviour, verified by tests)",
+        "unicode_operators": "× is \\u00d7, ÷ is \\u00f7",
+        "zero_button_layout": "Spans 2+ columns via CSS class 'zero' (likely grid-column: span 2 in Calculator.css)",
+        "theme_toggle_icons": "🌙 in light mode, ☀️ in dark mode",
+        "aria_label_toggle": "aria-label='Toggle theme' on theme toggle button"
+      }
+    },
+    {
+      "name": "Display",
+      "description": "Read-only output element rendering the calculator's current value as a div.",
+      "category": "atom",
+      "variants": [
+        { "name": "default", "props": { "bg": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "text": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "border": "⚠️ CSS_SOURCE_NEEDED (Display.css)" } }
+      ],
+      "sizes": [
+        { "name": "default", "height": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "padding": "⚠️ CSS_SOURCE_NEEDED (Display.css)", "font_size": "⚠️ CSS_SOURCE_NEEDED (Display.css)" }
+      ],
+      "states": ["default"],
+      "code_example": "// src/components/Display.tsx\nimport './Display.css'\n\ninterface DisplayProps {\n  value: string | number\n}\n\nexport function Display({ value }: DisplayProps) {\n  return (\n    <div className=\"display\">\n      {value}\n    </div>\n  )\n}",
+      "visual_spec": {
+        "element_type": "div (read-only, not an input)",
+        "css_class": "display",
+        "text_alignment": "right-aligned (calculator convention — verify in Display.css)",
+        "content_types": "integers, decimals, negatives, zero, 'Error', empty string, long numbers (up to 15 digits), scientific notation",
+        "overflow_handling": "⚠️ CSS_SOURCE_NEEDED (Display.css) — likely overflow:hidden or text-overflow:ellipsis or font-size scaling",
+        "accessibility_gap": "No aria-live region — screen reader users won't hear updates (anti-pattern)"
+      }
+    },
+    {
+      "name": "Calculator",
+      "description": "Main organism composing Display and Button grid with full calculator state management and theme toggle.",
+      "category": "organism",
+      "variants": [
+        { "name": "light", "props": { "bg": "⚠️ CSS_SOURCE_NEEDED (App.css / Calculator.css)", "text": "⚠️ CSS_SOURCE_NEEDED", "border": "⚠️ CSS_SOURCE_NEEDED" } },
+        { "name": "dark", "props": { "bg": "⚠️ CSS_SOURCE_NEEDED (App.css / Calculator.css)", "text": "⚠️ CSS_SOURCE_NEEDED", "border": "⚠️ CSS_SOURCE_NEEDED" } }
+      ],
+      "sizes": [
+        { "name": "container", "height": "⚠️ CSS_SOURCE_NEEDED (Calculator.css)", "padding": "⚠️ CSS_SOURCE_NEEDED (Calculator.css)", "font_size": "N/A" }
+      ],
+      "states": ["default"],
+      "code_example": "// src/components/Calculator.tsx\nimport { useState, useContext } from 'react'\nimport { Display } from './Display'\nimport { Button } from './Button'\nimport { ThemeContext } from '../App'\nimport './Calculator.css'\n\nexport function Calculator() {\n  const { theme, toggleTheme } = useContext(ThemeContext)\n  const [currentValue, setCurrentValue] = useState('0')\n  const [previousValue, setPreviousValue] = useState('')\n  const [operation, setOperation] = useState('')\n  const [shouldResetDisplay, setShouldResetDisplay] = useState(false)\n\n  const handleDigit = (digit: string) => {\n    if (currentValue === 'Error') {\n      setCurrentValue(digit)\n      return\n    }\n    if (shouldResetDisplay) {\n      setCurrentValue(digit)\n      setShouldResetDisplay(false)\n      return\n    }\n    if (currentValue === '0' && digit !== '.') {\n      setCurrentValue(digit)\n    } else {\n      setCurrentValue(currentValue + digit)\n    }\n  }\n\n  const handleDecimal = () => {\n    if (currentValue === 'Error') {\n      setCurrentValue('0.')\n      return\n    }\n    if (shouldResetDisplay) {\n      setCurrentValue('0.')\n      setShouldResetDisplay(false)\n      return\n    }\n    if (!currentValue.includes('.')) {\n      setCurrentValue(currentValue + '.')\n    }\n  }\n\n  const calculate = (left: number, right: number, op: string): string => {\n    switch (op) {\n      case '+': return String(left + right)\n      case '-': return String(left - right)\n      case '\\u00d7': return String(left * right)\n      case '\\u00f7':\n        if (right === 0) return 'Error'\n        return String(left / right)\n      default: return String(right)\n    }\n  }\n\n  const handleOperation = (nextOp: string) => {\n    if (currentValue === 'Error') return\n    if (previousValue && operation && !shouldResetDisplay) {\n      const result = calculate(parseFloat(previousValue), parseFloat(currentValue), operation)\n      setPreviousValue(result)\n      setCurrentValue(result)\n    } else {\n      setPreviousValue(currentValue)\n    }\n    setOperation(nextOp)\n    setShouldResetDisplay(true)\n  }\n\n  const handleEquals = () => {\n    if (!previousValue || !operation || currentValue === 'Error') return\n    const result = calculate(parseFloat(previousValue), parseFloat(currentValue), operation)\n    setCurrentValue(result)\n    setPreviousValue('')\n    setOperation('')\n    setShouldResetDisplay(true)\n  }\n\n  const handleClear = () => {\n    setCurrentValue('0')\n    setPreviousValue('')\n    setOperation('')\n    setShouldResetDisplay(false)\n  }\n\n  const handleButtonClick = (btn: string) => {\n    if (btn === 'C') return handleClear()\n    if (btn === '=') return handleEquals()\n    if (btn === '.') return handleDecimal()\n    if (['+', '-', '\\u00d7', '\\u00f7'].includes(btn)) return handleOperation(btn)\n    handleDigit(btn)\n  }\n\n  const getButtonClass = (btn: string): string => {\n    if (['+', '-', '\\u00d7', '\\u00f7'].includes(btn)) return 'operator'\n    if (btn === '=') return 'equals'\n    if (btn === 'C') return 'clear'\n    if (btn === '0') return 'zero'\n    return ''\n  }\n\n  const buttons = [\n    'C', '\\u00f7', '\\u00d7', '-',\n    '7', '8', '9', '+',\n    '4', '5', '6', '=',\n    '1', '2', '3', '.',\n    '0',\n  ]\n\n  return (\n    <div className=\"calculator\">\n      <button\n        className=\"theme-toggle\"\n        onClick={toggleTheme}\n        aria-label=\"Toggle theme\"\n      >\n        {theme === 'light' ? '🌙' : '☀️'}\n      </button>\n      <Display value={currentValue} />\n      <div className=\"button-grid\">\n        {buttons.map((btn) => (\n          <Button\n            key={btn}\n            label={btn}\n            onClick={() => handleButtonClick(btn)}\n            className={getButtonClass(btn)}\n          />\n        ))}\n      </div>\n    </div>\n  )\n}",
+      "visual_spec": {
+        "grid_columns": "4",
+        "grid_layout": "CSS Grid defined in Calculator.css",
+        "button_order": "C, ÷, ×, -, 7, 8, 9, +, 4, 5, 6, =, 1, 2, 3, ., 0",
+        "zero_button": "Spans 2+ columns via 'zero' CSS class",
+        "theme_toggle_placement": "Inside Calculator component, consumes ThemeContext",
+        "theme_storage": "localStorage key: 'calculator-theme', values: 'light' | 'dark', default: 'light'",
+        "theme_application": "document.documentElement.setAttribute('data-theme', theme) AND <div className='app' data-theme={theme}>",
+        "state_variables": "currentValue (string, init '0'), previousValue (string, init ''), operation (string, init ''), shouldResetDisplay (boolean, init false)",
+        "division_by_zero": "Displays 'Error' string",
+        "responsive_breakpoints": "Mobile 375×667, Tablet 768×1024 (from test evidence)",
+        "elevation": "⚠️ CSS_SOURCE_NEEDED (Calculator.css / App.css)"
+      }
+    },
+    {
+      "name": "App",
+      "description": "Top-level template providing ThemeContext, page layout, app title, and wrapping the Calculator organism.",
+      "category": "organism",
+      "variants": [
+        { "name": "light", "props": { "bg": "⚠️ CSS_SOURCE_NEEDED (App.css)", "text": "⚠️ CSS_SOURCE_NEEDED", "border": "none" } },
+        { "name": "dark", "props": { "bg": "⚠️ CSS_SOURCE_NEEDED (App.css)", "text": "⚠️ CSS_SOURCE_NEEDED", "border": "none" } }
+      ],
+      "sizes": [
+        { "name": "full-page", "height": "min-height: 100vh (likely — verify App.css)", "padding": "⚠️ CSS_SOURCE_NEEDED (App.css)", "font_size": "N/A" }
+      ],
+      "states": ["light-theme", "dark-theme"],
+      "code_example": "// src/App.tsx\n<ThemeContext.Provider value={{ theme, toggleTheme }}>\n  <div className=\"app\" data-theme={theme}>\n    <h1>Mini Calculator</h1>\n    <Calculator />\n  </div>\n</ThemeContext.Provider>",
+      "visual_spec": {
+        "layout": "Centred flex container, likely display:flex; justify-content:center; align-items:center; min-height:100vh — verify App.css",
+        "routing": "None — single view",
+        "context": "ThemeContext exported from App.tsx, consumed by Calculator.tsx",
+        "data_theme_attribute": "Applied to both <html> via document.documentElement and <div className='app'>",
+        "heading": "<h1>Mini Calculator</h1> — single heading, no h2-h6 used"
+      }
+    }
+  ]
+}
