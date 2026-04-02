@@ -2,19 +2,18 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
+      "task_id": "REQ-001",
+      "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures. Run the command and verify the output shows all tests passing.",
+      "title": "Add one more test to Calculator test suite",
+      "description": "1. WHAT: Add one new test case to the Calculator test suite covering repeated equals behavior (pressing = multiple times applies the last operation again). 2. READ FIRST: Read src/components/Calculator.test.tsx to understand existing test patterns and identify a gap. Read src/components/Calculator.tsx to confirm the repeated-equals behavior. 3. FILES: Modify src/components/Calculator.test.tsx only — no new files needed. 4. APPROACH: Add the test inside the existing 'consecutive operations' describe block. Use the same clickButtons helper and getDisplay() pattern already established in the file. The test should verify that pressing '=' twice after '5 + 3 =' produces 16 (i.e., 8 + 8). 5. PATTERNS: Follow the exact structure of the existing tests in consecutive operations describe block (lines 244-258 of src/components/Calculator.test.tsx).",
       "dependencies": [],
       "acceptance_criteria": [
-        "All test files execute without errors",
-        "All test assertions pass",
-        "Test suite completes with 100% pass rate",
-        "No failing or skipped tests"
+        "npx vitest run src/components/Calculator.test.tsx exits with code 0",
+        "The new test case appears inside the 'consecutive operations' describe block",
+        "TypeScript compiles without errors: npx tsc --noEmit"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
     }
   ]
