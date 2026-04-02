@@ -2,21 +2,22 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "feature",
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Write Dockerfile to containerize the React/Vite app",
-      "description": "Create a Dockerfile at the project root (/Users/one-don/.eunomia/workspace/eunomia-mini-calculator/Dockerfile) using a multi-stage build. Stage 1 (builder): use node:20-alpine, set WORKDIR /app, copy package.json and package-lock.json (if present), run 'npm ci', copy the rest of the source, then run 'npm run build' (which executes 'tsc && vite build' per package.json, outputting to dist/). Stage 2 (runtime): use nginx:alpine, copy the built dist/ folder from the builder stage to /usr/share/nginx/html, expose port 80, and set CMD [\"nginx\", \"-g\", \"daemon off;\"]. The dev server runs on port 5173 (vite.config.ts) but the production container should serve the static build via nginx on port 80. Do NOT modify any existing source files.",
+      "title": "Run all tests and verify they pass",
+      "description": "Run the full Vitest test suite for the mini calculator project. Execute `npx vitest run` from the project root to run all test files: `src/App.test.tsx`, `src/components/Button.test.tsx`, `src/components/Calculator.test.tsx`, and `src/components/Display.test.tsx`. Report any failing tests with their error messages. All tests must pass with no failures or errors.",
       "dependencies": [],
       "acceptance_criteria": [
-        "Dockerfile exists at the project root",
-        "Multi-stage build: node:20-alpine builder stage installs deps and runs npm run build",
-        "Runtime stage uses nginx:alpine to serve the dist/ output",
-        "Port 80 is exposed",
-        "CMD starts nginx in foreground mode"
+        "All test files execute without errors",
+        "src/App.test.tsx passes",
+        "src/components/Button.test.tsx passes",
+        "src/components/Calculator.test.tsx passes",
+        "src/components/Display.test.tsx passes",
+        "Zero test failures reported by Vitest"
       ],
-      "filename": "Dockerfile",
-      "language": "dockerfile"
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
     }
   ]
 }
