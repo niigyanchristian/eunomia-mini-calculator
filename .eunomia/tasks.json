@@ -6,15 +6,13 @@
       "task_type": "qa_validation",
       "recommended_model": "haiku",
       "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures. Run the command and verify the output shows all tests passing.",
+      "description": "Run the full test suite using `npx vitest run` from the project root (/Users/one-don/.eunomia/workspace/eunomia-mini-calculator). Check all test files: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Report pass/fail counts and any failing test details.",
       "dependencies": [],
       "acceptance_criteria": [
-        "All test files execute without errors",
-        "All test assertions pass",
-        "Test suite completes with 100% pass rate",
-        "No failing or skipped tests"
+        "All tests pass with zero failures",
+        "Test output shows passing counts for App, Button, Display, and Calculator test files"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
     }
   ]
