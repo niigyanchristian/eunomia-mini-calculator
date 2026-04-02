@@ -2,16 +2,16 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "modify",
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Add one more test to Calculator test suite",
-      "description": "1. WHAT: Add one new test case to the Calculator test suite covering repeated equals behavior (pressing = multiple times applies the last operation again). 2. READ FIRST: Read src/components/Calculator.test.tsx to understand existing test patterns and identify a gap. Read src/components/Calculator.tsx to confirm the repeated-equals behavior. 3. FILES: Modify src/components/Calculator.test.tsx only — no new files needed. 4. APPROACH: Add the test inside the existing 'consecutive operations' describe block. Use the same clickButtons helper and getDisplay() pattern already established in the file. The test should verify that pressing '=' twice after '5 + 3 =' produces 16 (i.e., 8 + 8). 5. PATTERNS: Follow the exact structure of the existing tests in consecutive operations describe block (lines 244-258 of src/components/Calculator.test.tsx).",
+      "title": "Run all tests and verify they pass",
+      "description": "Run the full Vitest test suite and confirm all tests pass. READ FIRST: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Run: npx vitest run from the project root. Report any failures with the full error output.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx vitest run src/components/Calculator.test.tsx exits with code 0",
-        "The new test case appears inside the 'consecutive operations' describe block",
-        "TypeScript compiles without errors: npx tsc --noEmit"
+        "npx vitest run exits with code 0",
+        "All test suites in src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx report PASS",
+        "No test failures or errors in the output"
       ],
       "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
