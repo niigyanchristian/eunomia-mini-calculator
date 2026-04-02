@@ -2,19 +2,17 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
+      "task_id": "REQ-001",
+      "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Execute the complete test suite using 'npm test' or 'npx vitest run' to verify all existing tests pass. The test files to validate are:\n- src/App.test.tsx\n- src/components/Button.test.tsx\n- src/components/Display.test.tsx\n- src/components/Calculator.test.tsx\n\nEnsure all tests execute successfully with no failures. Run the command and verify the output shows all tests passing.",
+      "title": "Add one more test to Calculator test suite",
+      "description": "1. WHAT: Add one new test case to the Calculator test suite to verify that a negative result from a subtraction can be used as the first operand in a subsequent chained calculation.\n2. READ FIRST: Read src/components/Calculator.test.tsx to understand the existing test structure, helpers (clickButtons, getDisplay, getButton), and the describe block layout.\n3. FILES: Modify src/components/Calculator.test.tsx only — no new files needed.\n4. APPROACH: Add a new it() block inside the existing 'realistic user interactions' describe block (around line 260). The test should click: ['3', '-', '8', '='] to get -5, then click ['+', '3', '='] to get -2, and assert the display shows '-2'. Use the existing clickButtons helper and getDisplay helper.\n5. PATTERNS: Follow the same pattern as the 'uses result from previous calculation in new one' test — same helper usage, same assertion style.",
       "dependencies": [],
       "acceptance_criteria": [
-        "All test files execute without errors",
-        "All test assertions pass",
-        "Test suite completes with 100% pass rate",
-        "No failing or skipped tests"
+        "A new it() block is present inside the 'realistic user interactions' describe block in src/components/Calculator.test.tsx",
+        "Running `npx vitest run src/components/Calculator.test.tsx` from the project root exits with code 0 and all tests pass"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
     }
   ]

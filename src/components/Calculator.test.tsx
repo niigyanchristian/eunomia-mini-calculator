@@ -284,6 +284,14 @@ describe('Calculator', () => {
       await clickButtons(user, ['+', '2', '='])
       expect(getDisplay()).toHaveTextContent('10')
     })
+
+    it('uses negative result as first operand in chained calculation', async () => {
+      // 3 - 8 = -5, then -5 + 3 = -2
+      await clickButtons(user, ['3', '-', '8', '='])
+      expect(getDisplay()).toHaveTextContent('-5')
+      await clickButtons(user, ['+', '3', '='])
+      expect(getDisplay()).toHaveTextContent('-2')
+    })
   })
 
   describe('mobile responsive design', () => {
