@@ -5,16 +5,16 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Change style of the calculator title",
-      "description": "1. WHAT: Update the visual style of the 'Mini Calculator' h1 title in App.css to give it a more prominent, modern appearance. 2. READ FIRST: src/App.css (current h1 styles at lines 98-101 and responsive overrides at lines 109-111, 121-123, 131-133), src/App.tsx (h1 element at line 31). 3. FILES: Modify src/App.css only — update the h1 rule block to change font-weight, font-size, letter-spacing, and/or add a text-shadow using the existing CSS variable system. Do not change the HTML or TypeScript files. 4. APPROACH: Enhance the base h1 rule (lines 98-101) with additional properties such as font-size (e.g. 2.5rem), font-weight: 700, letter-spacing (e.g. 0.05em), and a text-shadow using the existing --calculator-shadow variable. Adjust the responsive media query h1 font-sizes proportionally to match the new base size. 5. PATTERNS: Follow the existing CSS variable and responsive media query patterns already present in src/App.css.",
+      "title": "Change calculator title text to Chris' Calculator",
+      "description": "1. WHAT: Update the h1 title text in App.tsx from 'Mini Calculator' to \"Chris' Calculator\" as requested in the HQA review. 2. READ FIRST: src/App.tsx (h1 element at line 31). 3. FILES: Modify src/App.tsx only — change the h1 text content from 'Mini Calculator' to \"Chris' Calculator\". No CSS or other file changes needed. 4. APPROACH: Simple text replacement on line 31 of src/App.tsx. The apostrophe in \"Chris'\" must be handled correctly in JSX (use the literal character, not an HTML entity). 5. PATTERNS: No pattern needed — this is a single-line text change.",
       "dependencies": [],
       "acceptance_criteria": [
-        "src/App.css h1 rule contains at least one new or modified style property beyond color and transition",
-        "npx tsc --noEmit exits code 0 (no TypeScript errors)",
+        "src/App.tsx h1 element renders the text \"Chris' Calculator\" (not \"Mini Calculator\")",
+        "npx tsc --noEmit exits code 0",
         "npm run build exits code 0"
       ],
-      "filename": "src/App.css",
-      "language": "css"
+      "filename": "src/App.tsx",
+      "language": "typescript"
     }
   ]
 }
