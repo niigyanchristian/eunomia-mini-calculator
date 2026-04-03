@@ -5,16 +5,17 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Change calculator title text to Chris' Calculator",
-      "description": "1. WHAT: Update the h1 title text in App.tsx from 'Mini Calculator' to \"Chris' Calculator\" as requested in the HQA review. 2. READ FIRST: src/App.tsx (h1 element at line 31). 3. FILES: Modify src/App.tsx only — change the h1 text content from 'Mini Calculator' to \"Chris' Calculator\". No CSS or other file changes needed. 4. APPROACH: Simple text replacement on line 31 of src/App.tsx. The apostrophe in \"Chris'\" must be handled correctly in JSX (use the literal character, not an HTML entity). 5. PATTERNS: No pattern needed — this is a single-line text change.",
+      "title": "Make theme toggle icon white in dark mode",
+      "description": "1. WHAT: Set the theme toggle icon color to white when dark mode is active, so the Sun/Moon lucide-react icon is visible against the dark calculator background. 2. READ FIRST: src/components/Calculator.css (current .theme-toggle styles at lines 24-50 — no color property is set). 3. FILES: Modify src/components/Calculator.css only — add a `[data-theme='dark'] .theme-toggle { color: #ffffff; }` rule after the existing `.theme-toggle:focus` rule (after line 50). 4. APPROACH: The `.theme-toggle` button renders lucide-react SVG icons (Moon/Sun) whose stroke color inherits from the CSS `color` property. Adding `color: #ffffff` scoped to `[data-theme='dark'] .theme-toggle` will make the icon white in dark mode without affecting light mode. The `data-theme` attribute is set on the `.app` div in App.tsx (line 30). 5. PATTERNS: Follow the existing `[data-theme='dark']` selector override pattern already used in App.css (lines 59-81).",
       "dependencies": [],
       "acceptance_criteria": [
-        "src/App.tsx h1 element renders the text \"Chris' Calculator\" (not \"Mini Calculator\")",
-        "npx tsc --noEmit exits code 0",
+        "The theme toggle icon (Sun/Moon) appears white (#ffffff) when dark mode is active",
+        "The theme toggle icon color is unchanged in light mode",
+        "npx tsc --noEmit exits code 0 (no TypeScript errors)",
         "npm run build exits code 0"
       ],
-      "filename": "src/App.tsx",
-      "language": "typescript"
+      "filename": "src/components/Calculator.css",
+      "language": "css"
     }
   ]
 }

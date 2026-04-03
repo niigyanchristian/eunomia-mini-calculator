@@ -49,6 +49,10 @@
   border-radius: 4px;
 }
 
+[data-theme='dark'] .theme-toggle {
+  color: #ffffff;
+}
+
 .button-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
