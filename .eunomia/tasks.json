@@ -5,15 +5,15 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Add one more test to Calculator test suite",
-      "description": "1. WHAT: Add one new test case to the Calculator test suite covering repeated equals behavior (pressing = multiple times applies the last operation again). 2. READ FIRST: Read src/components/Calculator.test.tsx to understand existing test patterns and identify a gap. Read src/components/Calculator.tsx to confirm the repeated-equals behavior. 3. FILES: Modify src/components/Calculator.test.tsx only — no new files needed. 4. APPROACH: Add the test inside the existing 'consecutive operations' describe block. Use the same clickButtons helper and getDisplay() pattern already established in the file. The test should verify that pressing '=' twice after '5 + 3 =' produces 16 (i.e., 8 + 8). 5. PATTERNS: Follow the exact structure of the existing tests in consecutive operations describe block (lines 244-258 of src/components/Calculator.test.tsx).",
+      "title": "Change calculator title to Christian's Calculator",
+      "description": "1. WHAT: Update the h1 title text in App.tsx from 'Mini Calculator' to \"Christian's Calculator\" as requested in the PRD. 2. READ FIRST: src/App.tsx — the h1 element is at line 31. 3. FILES: Modify src/App.tsx only. No new files needed. 4. APPROACH: Simply change the text content of the <h1> element from 'Mini Calculator' to \"Christian's Calculator\". 5. PATTERNS: The file uses a default export functional component. Only change the h1 text, nothing else.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx vitest run src/components/Calculator.test.tsx exits with code 0",
-        "The new test case appears inside the 'consecutive operations' describe block",
-        "TypeScript compiles without errors: npx tsc --noEmit"
+        "src/App.tsx h1 element contains exactly the text \"Christian's Calculator\"",
+        "npx tsc --noEmit exits with code 0 (no TypeScript errors)",
+        "npm run build exits with code 0"
       ],
-      "filename": "src/components/Calculator.test.tsx",
+      "filename": "src/App.tsx",
       "language": "typescript"
     }
   ]
