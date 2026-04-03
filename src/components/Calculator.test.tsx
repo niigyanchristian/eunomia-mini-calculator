@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
 import { Calculator } from './Calculator'
+import { ThemeContext } from '../App'
 
 function getButton(label: string) {
   return screen.getByRole('button', { name: label })
@@ -298,6 +300,45 @@ describe('Calculator', () => {
       expect(getDisplay()).toHaveTextContent('-5')
       await clickButtons(user, ['+', '3', '='])
       expect(getDisplay()).toHaveTextContent('-2')
+    })
+  })
+
+  describe('theme toggle icons', () => {
+    beforeEach(() => {
+      cleanup()
+    })
+
+    it('shows moon icon (🌙) in light mode', () => {
+      render(
+        <ThemeContext.Provider value={{ theme: 'light', toggleTheme: vi.fn() }}>
+          <Calculator />
+        </ThemeContext.Provider>
+      )
+      const toggleButton = screen.getByRole('button', { name: 'Toggle theme' })
+      expect(toggleButton).toHaveTextContent('🌙')
+    })
+
+    it('shows sun icon (☀️) in dark mode', () => {
+      render(
+        <ThemeContext.Provider value={{ theme: 'dark', toggleTheme: vi.fn() }}>
+          <Calculator />
+        </ThemeContext.Provider>
+      )
+      const toggleButton = screen.getByRole('button', { name: 'Toggle theme' })
+      expect(toggleButton).toHaveTextContent('☀️')
+    })
+
+    it('calls toggleTheme when the toggle button is clicked', async () => {
+      const user = userEvent.setup()
+      const mockToggleTheme = vi.fn()
+      render(
+        <ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockToggleTheme }}>
+          <Calculator />
+        </ThemeContext.Provider>
+      )
+      const toggleButton = screen.getByRole('button', { name: 'Toggle theme' })
+      await user.click(toggleButton)
+      expect(mockToggleTheme).toHaveBeenCalledTimes(1)
     })
   })
 

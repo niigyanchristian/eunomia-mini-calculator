@@ -4,14 +4,31 @@
     {
       "task_id": "REQ-001",
       "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Add one more test to Calculator test suite",
-      "description": "1. WHAT: Add one new test case to the Calculator test suite covering repeated equals behavior (pressing = multiple times applies the last operation again). 2. READ FIRST: Read src/components/Calculator.test.tsx to understand existing test patterns and identify a gap. Read src/components/Calculator.tsx to confirm the repeated-equals behavior. 3. FILES: Modify src/components/Calculator.test.tsx only — no new files needed. 4. APPROACH: Add the test inside the existing 'consecutive operations' describe block. Use the same clickButtons helper and getDisplay() pattern already established in the file. The test should verify that pressing '=' twice after '5 + 3 =' produces 16 (i.e., 8 + 8). 5. PATTERNS: Follow the exact structure of the existing tests in consecutive operations describe block (lines 244-258 of src/components/Calculator.test.tsx).",
+      "recommended_model": "sonnet",
+      "title": "Add mode toggle icon tests to Calculator test suite",
+      "description": "1. WHAT: Add tests that verify the theme toggle button displays the correct icon (🌙 in light mode, ☀️ in dark mode) and that clicking the toggle switches the icon. 2. READ FIRST: src/components/Calculator.tsx (lines 116-138, theme-toggle button renders `{theme === 'light' ? '🌙' : '☀️'}`), src/App.tsx (ThemeContext provides theme and toggleTheme), src/components/Calculator.test.tsx (existing test structure — describe/it blocks, userEvent.setup() pattern). 3. FILES: Modify src/components/Calculator.test.tsx only — add a new describe block 'theme toggle icons' inside the top-level describe('Calculator'). 4. APPROACH: The Calculator component reads theme from ThemeContext via useContext. To test icon display, wrap the rendered Calculator in a ThemeContext.Provider with a controlled theme value. Test that: (a) in light mode the toggle button text content is '🌙', (b) in dark mode the toggle button text content is '☀️', (c) clicking the toggle button calls toggleTheme. Use `screen.getByRole('button', { name: 'Toggle theme' })` to query the button (it has aria-label='Toggle theme'). Use `vi.fn()` for the toggleTheme mock. Import ThemeContext from '../App'. 5. PATTERNS: Follow the exact same describe/it/beforeEach/userEvent pattern used in the existing tests. Import ThemeContext from '../App' — it is already exported as a named export.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx vitest run src/components/Calculator.test.tsx exits with code 0",
-        "The new test case appears inside the 'consecutive operations' describe block",
-        "TypeScript compiles without errors: npx tsc --noEmit"
+        "New 'theme toggle icons' describe block exists in src/components/Calculator.test.tsx",
+        "Test verifies toggle button shows '🌙' when theme is 'light'",
+        "Test verifies toggle button shows '☀️' when theme is 'dark'",
+        "Test verifies clicking the toggle button invokes the toggleTheme callback",
+        "npx tsc --noEmit exits code 0 (no TypeScript errors)"
+      ],
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Run Calculator tests and validate mode toggle icon tests pass",
+      "description": "Run the full Calculator test suite to verify all existing tests plus the new theme toggle icon tests pass. READ FIRST: src/components/Calculator.test.tsx. Run: npx vitest run src/components/Calculator.test.tsx. Confirm exit code 0 and that the 'theme toggle icons' describe block tests are listed as passing.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "npx vitest run src/components/Calculator.test.tsx exits code 0",
+        "All tests in the 'theme toggle icons' describe block pass",
+        "No pre-existing tests are broken (all previously passing tests still pass)"
       ],
       "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
