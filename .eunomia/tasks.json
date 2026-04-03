@@ -28,6 +28,16 @@
         "npx vitest run src/components/Calculator.test.tsx exits with code 0",
         "All test suites pass including the new 'theme toggle icons' describe block",
         "npx tsc --noEmit exits with code 0 (no TypeScript errors)"
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Run all tests and verify they pass",
+      "description": "Run the full Vitest test suite and confirm all tests pass. READ FIRST: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Run: npx vitest run from the project root. Report any failures with the full error output.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "npx vitest run exits with code 0",
+        "All test suites in src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx report PASS",
+        "No test failures or errors in the output"
       ],
       "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
