@@ -5,15 +5,16 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Add one more test to Calculator test suite",
-      "description": "1. WHAT: Add one new test case to the Calculator test suite covering repeated equals behavior (pressing = multiple times applies the last operation again). 2. READ FIRST: Read src/components/Calculator.test.tsx to understand existing test patterns and identify a gap. Read src/components/Calculator.tsx to confirm the repeated-equals behavior. 3. FILES: Modify src/components/Calculator.test.tsx only — no new files needed. 4. APPROACH: Add the test inside the existing 'consecutive operations' describe block. Use the same clickButtons helper and getDisplay() pattern already established in the file. The test should verify that pressing '=' twice after '5 + 3 =' produces 16 (i.e., 8 + 8). 5. PATTERNS: Follow the exact structure of the existing tests in consecutive operations describe block (lines 244-258 of src/components/Calculator.test.tsx).",
+      "title": "Check and verify mode toggle icons display correctly",
+      "description": "1. WHAT: Visually verify that the theme toggle button icons (🌙 for light mode, ☀️ for dark mode) render correctly in both modes, and fix any rendering issues found.\n2. READ FIRST: src/components/Calculator.tsx (toggle button at line 118–124), src/components/Calculator.css (theme-toggle styles at line 24–50).\n3. FILES: src/components/Calculator.tsx if icons need fixing; src/components/Calculator.css if styling needs adjustment.\n4. APPROACH: Start the dev server as a background task with `npm run dev`, take screenshots using Playwright in both light and dark modes, inspect visually. If icons are misaligned, oversized, or not rendering, fix the font-size, line-height, or padding in Calculator.css. If the wrong icon is shown for a given mode, correct the ternary in Calculator.tsx.\n5. PATTERNS: Follow the existing screenshot workflow: save screenshots to .eunomia/screenshots/developer/, then stop the background task using TaskStop.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx vitest run src/components/Calculator.test.tsx exits with code 0",
-        "The new test case appears inside the 'consecutive operations' describe block",
-        "TypeScript compiles without errors: npx tsc --noEmit"
+        "Screenshot shows 🌙 icon visible in light mode on the theme toggle button",
+        "Screenshot shows ☀️ icon visible in dark mode on the theme toggle button",
+        "TypeScript compiles without errors: npx tsc --noEmit exits code 0",
+        "npm run build exits code 0"
       ],
-      "filename": "src/components/Calculator.test.tsx",
+      "filename": "src/components/Calculator.tsx",
       "language": "typescript"
     }
   ]
