@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
 import { Calculator } from './Calculator'
+import { ThemeContext } from '../App'
 
 function getButton(label: string) {
   return screen.getByRole('button', { name: label })
@@ -536,6 +538,43 @@ describe('Calculator', () => {
 
       calculator = document.querySelector('.calculator')
       expect(calculator).toBeInTheDocument()
+    })
+  })
+
+  describe('theme toggle icons', () => {
+    it('renders an SVG icon inside the toggle button in light mode', () => {
+      const mockToggle = vi.fn()
+      const { container } = render(
+        <ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockToggle }}>
+          <Calculator />
+        </ThemeContext.Provider>
+      )
+      const button = within(container).getByRole('button', { name: 'Toggle theme' })
+      expect(button.querySelector('svg')).not.toBeNull()
+    })
+
+    it('renders an SVG icon inside the toggle button in dark mode', () => {
+      const mockToggle = vi.fn()
+      const { container } = render(
+        <ThemeContext.Provider value={{ theme: 'dark', toggleTheme: mockToggle }}>
+          <Calculator />
+        </ThemeContext.Provider>
+      )
+      const button = within(container).getByRole('button', { name: 'Toggle theme' })
+      expect(button.querySelector('svg')).not.toBeNull()
+    })
+
+    it('calls toggleTheme when the toggle button is clicked', async () => {
+      const mockToggle = vi.fn()
+      const themeUser = userEvent.setup()
+      const { container } = render(
+        <ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockToggle }}>
+          <Calculator />
+        </ThemeContext.Provider>
+      )
+      const button = within(container).getByRole('button', { name: 'Toggle theme' })
+      await themeUser.click(button)
+      expect(mockToggle).toHaveBeenCalledTimes(1)
     })
   })
 })
