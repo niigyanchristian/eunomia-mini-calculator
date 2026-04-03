@@ -4,42 +4,16 @@
     {
       "task_id": "REQ-001",
       "task_type": "modify",
-      "recommended_model": "sonnet",
-      "title": "Replace emoji icons with lucide-react icons and add theme toggle tests",
-      "description": "1. WHAT: Replace the emoji-based theme toggle icons (🌙 / ☀️) in Calculator.tsx with lucide-react Moon and Sun SVG components, add lucide-react as a dependency, and write tests that verify the correct icon renders per theme. 2. READ FIRST: src/components/Calculator.tsx (line 123 — current emoji rendering `{theme === 'light' ? '🌙' : '☀️'}`), src/App.tsx (ThemeContext export for test imports), src/components/Calculator.test.tsx (existing describe/it/beforeEach/userEvent pattern to follow). 3. FILES: (a) package.json — add `\"lucide-react\": \"^0.400.0\"` (or latest stable) to dependencies. (b) src/components/Calculator.tsx — import `{ Moon, Sun }` from 'lucide-react'; replace the emoji expression on line 123 with `{theme === 'light' ? <Moon size={18} aria-hidden=\"true\" /> : <Sun size={18} aria-hidden=\"true\" />}`. (c) src/components/Calculator.test.tsx — add a new `describe('theme toggle icons')` block inside the top-level `describe('Calculator')`. 4. APPROACH: For the tests, wrap <Calculator /> in a `<ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockFn }}>` to control the theme context. Since lucide icons render as SVG, query the toggle button with `screen.getByRole('button', { name: 'Toggle theme' })` (it already has aria-label='Toggle theme'). Assert the SVG is present inside the button using `button.querySelector('svg')`. Test three cases: (a) light mode renders an SVG inside the toggle button, (b) dark mode renders an SVG inside the toggle button, (c) clicking the toggle button calls toggleTheme. Use `vi.fn()` for the toggleTheme mock. Import ThemeContext from '../App'. Run `npm install` after updating package.json. 5. PATTERNS: Follow the exact same describe/it/beforeEach/userEvent.setup() pattern used in the existing Calculator.test.tsx. The ThemeContext import is already used in Calculator.tsx — follow that same import for tests.",
+      "recommended_model": "haiku",
+      "title": "Change calculator title to Christian's Calculator",
+      "description": "1. WHAT: Update the h1 title text in App.tsx from 'Mini Calculator' to \"Christian's Calculator\" as requested in the PRD. 2. READ FIRST: src/App.tsx — the h1 element is at line 31. 3. FILES: Modify src/App.tsx only. No new files needed. 4. APPROACH: Simply change the text content of the <h1> element from 'Mini Calculator' to \"Christian's Calculator\". 5. PATTERNS: The file uses a default export functional component. Only change the h1 text, nothing else.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npm install completes without errors after adding lucide-react to package.json",
-        "TypeScript compiles without errors: npx tsc --noEmit",
-        "src/components/Calculator.tsx imports Moon and Sun from 'lucide-react' and renders SVG icons instead of emoji strings",
-        "src/components/Calculator.test.tsx contains a 'theme toggle icons' describe block with tests for light mode icon, dark mode icon, and toggleTheme callback"
+        "src/App.tsx h1 element contains exactly the text \"Christian's Calculator\"",
+        "npx tsc --noEmit exits with code 0 (no TypeScript errors)",
+        "npm run build exits with code 0"
       ],
-      "filename": "src/components/Calculator.tsx",
-      "language": "typescript"
-    },
-    {
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
-      "recommended_model": "haiku",
-      "title": "Run Calculator test suite and validate all tests pass",
-      "description": "Run the full Calculator test suite to verify all existing tests plus the new theme toggle icon tests pass. READ FIRST: src/components/Calculator.test.tsx. Run: npx vitest run src/components/Calculator.test.tsx and confirm exit code 0 with no failures. Also run npx tsc --noEmit to confirm TypeScript compiles cleanly.",
-      "dependencies": ["REQ-001"],
-      "acceptance_criteria": [
-        "npx vitest run src/components/Calculator.test.tsx exits with code 0",
-        "All test suites pass including the new 'theme toggle icons' describe block",
-        "npx tsc --noEmit exits with code 0 (no TypeScript errors)"
-      "task_id": "QA-001",
-      "task_type": "qa_validation",
-      "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "Run the full Vitest test suite and confirm all tests pass. READ FIRST: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx. Run: npx vitest run from the project root. Report any failures with the full error output.",
-      "dependencies": [],
-      "acceptance_criteria": [
-        "npx vitest run exits with code 0",
-        "All test suites in src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx report PASS",
-        "No test failures or errors in the output"
-      ],
-      "filename": "src/components/Calculator.test.tsx",
+      "filename": "src/App.tsx",
       "language": "typescript"
     }
   ]
