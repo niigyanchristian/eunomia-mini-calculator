@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import { Moon, Sun } from 'lucide-react'
 import { Display } from './Display'
 import { Button } from './Button'
 import { ThemeContext } from '../App'
@@ -120,7 +121,7 @@ export function Calculator() {
         onClick={toggleTheme}
         aria-label="Toggle theme"
       >
-        {theme === 'light' ? '🌙' : '☀️'}
+        {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
       </button>
       <Display value={currentValue} />
       <div className="button-grid">

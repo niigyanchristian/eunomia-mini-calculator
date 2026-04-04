@@ -60,7 +60,7 @@
 }
 
 .button-grid .wide {
-  grid-column: span 2;
+  grid-column: span 4;
 }
 
 /* Tablet responsive styles (481px - 768px) */
