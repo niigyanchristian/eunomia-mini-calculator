@@ -5,13 +5,14 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Change calculator title to Christian's Calculator",
-      "description": "1. WHAT: Update the h1 title text in App.tsx from 'Mini Calculator' to \"Christian's Calculator\" as requested in the PRD. 2. READ FIRST: src/App.tsx — the h1 element is at line 31. 3. FILES: Modify src/App.tsx only. No new files needed. 4. APPROACH: Simply change the text content of the <h1> element from 'Mini Calculator' to \"Christian's Calculator\". 5. PATTERNS: The file uses a default export functional component. Only change the h1 text, nothing else.",
+      "title": "Change title to Christian's Calculator",
+      "description": "1. WHAT: Update the app title from 'Mini Calculator' to 'Christian's Calculator' in both the HTML page title and the visible h1 heading. 2. READ FIRST: Read src/App.tsx (contains the h1 heading on line 31) and index.html (contains the <title> tag on line 7). 3. FILES: Modify src/App.tsx — change the <h1>Mini Calculator</h1> to <h1>Christian's Calculator</h1>. Modify index.html — change <title>Mini Calculator</title> to <title>Christian's Calculator</title>. No new files needed. 4. APPROACH: Simple text substitution in two files. No logic changes. 5. PATTERNS: No pattern reference needed — straightforward text change.",
       "dependencies": [],
       "acceptance_criteria": [
-        "src/App.tsx h1 element contains exactly the text \"Christian's Calculator\"",
-        "npx tsc --noEmit exits with code 0 (no TypeScript errors)",
-        "npm run build exits with code 0"
+        "src/App.tsx contains <h1>Christian's Calculator</h1>",
+        "index.html contains <title>Christian's Calculator</title>",
+        "npx tsc --noEmit exits code 0",
+        "npm run build exits code 0"
       ],
       "filename": "src/App.tsx",
       "language": "typescript"
