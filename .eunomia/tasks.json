@@ -5,13 +5,13 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Change calculator title to Chris's Cal",
-      "description": "1. WHAT: Update the h1 title text in App.tsx from \"Chris's Calculator\" to \"Chris's Cal\". 2. READ FIRST: src/App.tsx — the h1 element is at line 31. 3. FILES: Modify src/App.tsx only. No new files needed. 4. APPROACH: Change the string literal in the JSX h1 tag from \"Chris's Calculator\" to \"Chris's Cal\". 5. PATTERNS: Follow the existing pattern in src/App.tsx.",
+      "title": "Change calculator title from Chris's Cal to Chris's Calculator",
+      "description": "1. WHAT: Update the app title text from \"Chris's Cal\" to \"Chris's Calculator\" wherever it appears. 2. READ FIRST: Read /home/ubuntu/.eunomia/workspace/eunomia-mini-calculator/index.html and /home/ubuntu/.eunomia/workspace/eunomia-mini-calculator/src/App.tsx to find all occurrences of \"Chris's Cal\". 3. FILES: Modify index.html (page <title> tag) and src/App.tsx (h1 heading or any visible title text) if they contain \"Chris's Cal\". 4. APPROACH: Simple string replacement — change every occurrence of \"Chris's Cal\" (that is not already \"Chris's Calculator\") to \"Chris's Calculator\". 5. PATTERNS: Follow the same pattern used in previous title changes in this project.",
       "dependencies": [],
       "acceptance_criteria": [
-        "The h1 element in src/App.tsx contains exactly \"Chris's Cal\"",
-        "npx tsc --noEmit exits code 0 with no TypeScript errors",
-        "npm run build exits code 0"
+        "index.html <title> tag contains \"Chris's Calculator\" and not the standalone \"Chris's Cal\"",
+        "The visible h1 heading in src/App.tsx reads \"Chris's Calculator\"",
+        "npx tsc --noEmit exits code 0 with no TypeScript errors"
       ],
       "filename": "src/App.tsx",
       "language": "typescript"
