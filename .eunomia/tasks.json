@@ -3,20 +3,18 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "feature",
+      "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Write Dockerfile to containerize the React/Vite app",
-      "description": "Create a Dockerfile at the project root (/Users/one-don/.eunomia/workspace/eunomia-mini-calculator/Dockerfile) using a multi-stage build. Stage 1 (builder): use node:20-alpine, set WORKDIR /app, copy package.json and package-lock.json (if present), run 'npm ci', copy the rest of the source, then run 'npm run build' (which executes 'tsc && vite build' per package.json, outputting to dist/). Stage 2 (runtime): use nginx:alpine, copy the built dist/ folder from the builder stage to /usr/share/nginx/html, expose port 80, and set CMD [\"nginx\", \"-g\", \"daemon off;\"]. The dev server runs on port 5173 (vite.config.ts) but the production container should serve the static build via nginx on port 80. Do NOT modify any existing source files.",
+      "title": "Make toggle icon white in dark mode",
+      "description": "1. WHAT: Add a CSS rule so the theme toggle icon appears white when dark mode is active. 2. READ FIRST: Read src/components/Calculator.css (contains .theme-toggle styling) and src/App.css (contains [data-theme='dark'] CSS variable overrides). 3. FILES: Modify src/components/Calculator.css only — no new files needed. 4. APPROACH: The toggle button uses emoji characters (🌙 / ☀️). Add the rule `[data-theme='dark'] .theme-toggle { filter: brightness(0) invert(1); }` after the existing .theme-toggle:focus block in Calculator.css. This converts the emoji to white via CSS filter. 5. PATTERNS: Follow the existing block-comment and selector style already in Calculator.css. No test changes needed for this purely visual CSS fix.",
       "dependencies": [],
       "acceptance_criteria": [
-        "Dockerfile exists at the project root",
-        "Multi-stage build: node:20-alpine builder stage installs deps and runs npm run build",
-        "Runtime stage uses nginx:alpine to serve the dist/ output",
-        "Port 80 is exposed",
-        "CMD starts nginx in foreground mode"
+        "src/components/Calculator.css contains a [data-theme='dark'] .theme-toggle selector with filter: brightness(0) invert(1)",
+        "TypeScript compiles without errors: npx tsc --noEmit exits code 0",
+        "npm run build exits code 0"
       ],
-      "filename": "Dockerfile",
-      "language": "dockerfile"
+      "filename": "src/components/Calculator.css",
+      "language": "css"
     }
   ]
 }
