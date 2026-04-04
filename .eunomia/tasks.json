@@ -5,16 +5,16 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Make toggle icon white in dark mode",
-      "description": "1. WHAT: Add a CSS rule so the theme toggle icon appears white when dark mode is active. 2. READ FIRST: Read src/components/Calculator.css (contains .theme-toggle styling) and src/App.css (contains [data-theme='dark'] CSS variable overrides). 3. FILES: Modify src/components/Calculator.css only — no new files needed. 4. APPROACH: The toggle button uses emoji characters (🌙 / ☀️). Add the rule `[data-theme='dark'] .theme-toggle { filter: brightness(0) invert(1); }` after the existing .theme-toggle:focus block in Calculator.css. This converts the emoji to white via CSS filter. 5. PATTERNS: Follow the existing block-comment and selector style already in Calculator.css. No test changes needed for this purely visual CSS fix.",
+      "title": "Change title to Chris's Calculator",
+      "description": "1. WHAT: Update the app title from 'Christian's Calculator' to 'Chris's Calculator' in both the HTML page title and the visible h1 heading. 2. READ FIRST: Read /home/ubuntu/.eunomia/workspace/eunomia-mini-calculator/index.html (contains the <title> tag) and /home/ubuntu/.eunomia/workspace/eunomia-mini-calculator/src/App.tsx (contains the h1 heading). 3. FILES: Modify index.html and src/App.tsx — replace all occurrences of \"Christian's Calculator\" with \"Chris's Calculator\". 4. APPROACH: Simple text replacement in two files. No logic changes needed. 5. PATTERNS: This is the same change pattern as the previous 'Change title to Christian's Calculator' task.",
       "dependencies": [],
       "acceptance_criteria": [
-        "src/components/Calculator.css contains a [data-theme='dark'] .theme-toggle selector with filter: brightness(0) invert(1)",
-        "TypeScript compiles without errors: npx tsc --noEmit exits code 0",
-        "npm run build exits code 0"
+        "index.html <title> tag contains \"Chris's Calculator\"",
+        "src/App.tsx h1 heading displays \"Chris's Calculator\"",
+        "No occurrences of \"Christian's Calculator\" remain in index.html or src/App.tsx"
       ],
-      "filename": "src/components/Calculator.css",
-      "language": "css"
+      "filename": "index.html",
+      "language": "html"
     }
   ]
 }
