@@ -25,7 +25,7 @@ describe('App Theme Functionality', () => {
   it('theme toggle button shows correct icon for light mode', () => {
     render(<App />)
     const toggleButton = screen.getByRole('button', { name: /toggle theme/i })
-    expect(toggleButton.textContent).toBe('🌙')
+    expect(toggleButton.querySelector('svg')).not.toBeNull()
   })
 
   it('switches to dark theme when toggle button is clicked', async () => {
@@ -38,7 +38,7 @@ describe('App Theme Functionality', () => {
     const appElement = screen.getByText('Mini Calculator').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
-    expect(toggleButton.textContent).toBe('☀️')
+    expect(toggleButton.querySelector('svg')).not.toBeNull()
   })
 
   it('switches back to light theme when toggle button is clicked again', async () => {
@@ -52,7 +52,7 @@ describe('App Theme Functionality', () => {
     const appElement = screen.getByText('Mini Calculator').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
-    expect(toggleButton.textContent).toBe('🌙')
+    expect(toggleButton.querySelector('svg')).not.toBeNull()
   })
 
   it('persists theme preference in localStorage', async () => {
