@@ -2,19 +2,19 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "modify",
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Change title to Chris's Calculator",
-      "description": "1. WHAT: Update the app title from 'Christian's Calculator' to 'Chris's Calculator' in both the HTML page title and the visible h1 heading. 2. READ FIRST: Read /home/ubuntu/.eunomia/workspace/eunomia-mini-calculator/index.html (contains the <title> tag) and /home/ubuntu/.eunomia/workspace/eunomia-mini-calculator/src/App.tsx (contains the h1 heading). 3. FILES: Modify index.html and src/App.tsx — replace all occurrences of \"Christian's Calculator\" with \"Chris's Calculator\". 4. APPROACH: Simple text replacement in two files. No logic changes needed. 5. PATTERNS: This is the same change pattern as the previous 'Change title to Christian's Calculator' task.",
+      "title": "Run full test suite and validate all tests pass",
+      "description": "Run all existing Vitest tests to verify they pass. READ FIRST: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx — understand what is being tested. Run the full test suite with: npx vitest run. Check exit code is 0 and all tests pass. Report any failures with the exact error messages.",
       "dependencies": [],
       "acceptance_criteria": [
-        "index.html <title> tag contains \"Chris's Calculator\"",
-        "src/App.tsx h1 heading displays \"Chris's Calculator\"",
-        "No occurrences of \"Christian's Calculator\" remain in index.html or src/App.tsx"
+        "npx vitest run exits with code 0",
+        "All test suites in src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx pass without errors",
+        "No test failures or skipped tests reported in the output"
       ],
-      "filename": "index.html",
-      "language": "html"
+      "filename": "src/components/Calculator.test.tsx",
+      "language": "typescript"
     }
   ]
 }
