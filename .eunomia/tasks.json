@@ -5,13 +5,13 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run all tests and verify they pass",
-      "description": "1. WHAT: Run the full test suite to verify all existing tests pass. 2. READ FIRST: src/App.test.tsx, src/components/Calculator.test.tsx, src/components/Display.test.tsx, src/components/Button.test.tsx — these are the existing test files. 3. FILES: No files to modify — validation only. 4. APPROACH: Run `npx vitest run` from the project root and confirm exit code 0 with all tests passing. 5. PATTERNS: Tests use Vitest with @testing-library/react; check the output for any failures or errors.",
+      "title": "Run full test suite and validate all tests pass",
+      "description": "Run all existing Vitest tests to verify they pass. READ FIRST: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx — understand what is being tested. Run the full test suite with: npx vitest run. Check exit code is 0 and all tests pass. Report any failures with the exact error messages.",
       "dependencies": [],
       "acceptance_criteria": [
         "npx vitest run exits with code 0",
-        "All test suites report 0 failures",
-        "No TypeScript compilation errors: npx tsc --noEmit exits code 0"
+        "All test suites in src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/components/Calculator.test.tsx pass without errors",
+        "No test failures or skipped tests reported in the output"
       ],
       "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
