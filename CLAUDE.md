@@ -24,7 +24,7 @@
 
 ## Git
 - Do not create commits unless explicitly asked.
-- Do not push to remote repositories.
+- Do not push to remote repositories unless explicitly asked.
 - Do not modify .gitignore unless the task requires it.
 
 ## React Conventions
