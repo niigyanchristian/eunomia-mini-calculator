@@ -37,6 +37,40 @@ describe('Calculator', () => {
     }
   })
 
+  describe('button variant classes', () => {
+    it('operator buttons have operator-button class', () => {
+      const operators = ['\u00f7', '\u00d7', '-', '+']
+      operators.forEach(op => {
+        expect(getButton(op)).toHaveClass('operator-button')
+      })
+    })
+
+    it('clear button has clear-button class', () => {
+      expect(getButton('C')).toHaveClass('clear-button')
+    })
+
+    it('equals button has equals-button class', () => {
+      expect(getButton('=')).toHaveClass('equals-button')
+    })
+
+    it('digit buttons do not have operator-button, clear-button, or equals-button class', () => {
+      const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      digits.forEach(digit => {
+        const button = getButton(digit)
+        expect(button).not.toHaveClass('operator-button')
+        expect(button).not.toHaveClass('clear-button')
+        expect(button).not.toHaveClass('equals-button')
+      })
+    })
+
+    it('decimal button does not have variant classes', () => {
+      const button = getButton('.')
+      expect(button).not.toHaveClass('operator-button')
+      expect(button).not.toHaveClass('clear-button')
+      expect(button).not.toHaveClass('equals-button')
+    })
+  })
+
   describe('digit input', () => {
     it('displays a single digit', async () => {
       await user.click(getButton('5'))

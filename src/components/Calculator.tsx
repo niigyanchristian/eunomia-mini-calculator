@@ -151,6 +151,19 @@ export function Calculator() {
     '0',
   ]
 
+  const getButtonClass = (label: string): string => {
+    if (label === '\u00f7' || label === '\u00d7' || label === '-' || label === '+') {
+      return 'operator-button'
+    }
+    if (label === 'C') {
+      return 'clear-button'
+    }
+    if (label === '=') {
+      return 'equals-button'
+    }
+    return ''
+  }
+
   const handleButtonClick = (label: string) => {
     if (label >= '0' && label <= '9') {
       handleDigit(label)
@@ -197,7 +210,7 @@ export function Calculator() {
             key={label}
             label={label}
             onClick={() => handleButtonClick(label)}
-            className={label === '0' ? 'wide' : ''}
+            className={[label === '0' ? 'wide' : '', getButtonClass(label)].filter(Boolean).join(' ')}
           />
         ))}
       </div>
