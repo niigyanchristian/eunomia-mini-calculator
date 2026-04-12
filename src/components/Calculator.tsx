@@ -143,12 +143,30 @@ export function Calculator() {
     setShouldResetDisplay(false)
   }
 
+  const handleBackspace = () => {
+    if (currentValue === 'Error' || shouldResetDisplay) return
+    if (currentValue.length <= 1) {
+      setCurrentValue('0')
+    } else {
+      setCurrentValue(currentValue.slice(0, -1))
+    }
+  }
+
+  const handleNegate = () => {
+    if (currentValue === 'Error' || currentValue === '0') return
+    if (currentValue.startsWith('-')) {
+      setCurrentValue(currentValue.slice(1))
+    } else {
+      setCurrentValue('-' + currentValue)
+    }
+  }
+
   const buttons = [
     'C', '\u00f7', '\u00d7', '-',
     '7', '8', '9', '+',
     '4', '5', '6', '=',
     '1', '2', '3', '.',
-    '0',
+    '0', '+/-', '\u232b',
   ]
 
   const handleButtonClick = (label: string) => {
@@ -160,6 +178,10 @@ export function Calculator() {
       handleEquals()
     } else if (label === 'C') {
       handleClear()
+    } else if (label === '\u232b') {
+      handleBackspace()
+    } else if (label === '+/-') {
+      handleNegate()
     } else {
       handleOperation(label)
     }
