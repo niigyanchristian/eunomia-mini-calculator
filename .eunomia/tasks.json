@@ -6,12 +6,13 @@
       "task_type": "qa_validation",
       "recommended_model": "haiku",
       "title": "Run full test suite and verify all tests pass",
-      "description": "1. WHAT: Run the full Vitest test suite to verify all existing tests pass without modification.\n2. READ FIRST: Review src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, and src/App.test.tsx to understand what is being tested.\n3. FILES: No files to create or modify — this is a validation-only task.\n4. APPROACH: Run `npx vitest run` from the project root to execute all tests. Capture output and check exit code.\n5. PATTERNS: Follow the existing Vitest setup in vite.config.ts and src/test/setup.ts.",
+      "description": "1. WHAT: Run the full Vitest test suite to verify all existing tests pass without any code modifications.\n2. READ FIRST: src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/App.test.tsx to understand what is being tested.\n3. FILES: No files to modify — this is a read-only validation task.\n4. APPROACH: Run `npx vitest run` from the project root to execute all test files. Check exit code. If tests fail, report which tests failed and why without modifying any code.\n5. PATTERNS: Test files follow the pattern `*.test.tsx` in `src/` and `src/components/`. The test setup file is at `src/test/setup.ts`.",
       "dependencies": [],
       "acceptance_criteria": [
         "npx vitest run exits with code 0",
-        "All test suites in src/components/*.test.tsx and src/App.test.tsx report PASS",
-        "Zero failing tests in the output"
+        "All test files pass: src/App.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Calculator.test.tsx",
+        "Zero failing tests reported in the output",
+        "No TypeScript compilation errors during test run"
       ],
       "filename": "src/components/Calculator.test.tsx",
       "language": "typescript"
