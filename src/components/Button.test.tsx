@@ -189,6 +189,51 @@ describe('Button', () => {
     })
   })
 
+  describe('button variant classes', () => {
+    it('does not assign variant class to digit buttons', () => {
+      const mockOnClick = vi.fn()
+      const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      digits.forEach(digit => {
+        const { container, unmount } = render(<Button label={digit} onClick={mockOnClick} />)
+        const button = container.querySelector('.calculator-button')
+        expect(button).not.toHaveClass('operator-button')
+        expect(button).not.toHaveClass('clear-button')
+        expect(button).not.toHaveClass('equals-button')
+        unmount()
+      })
+    })
+
+    it('does not assign variant class to decimal button', () => {
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="." onClick={mockOnClick} />)
+      const button = container.querySelector('.calculator-button')
+      expect(button).not.toHaveClass('operator-button')
+      expect(button).not.toHaveClass('clear-button')
+      expect(button).not.toHaveClass('equals-button')
+    })
+
+    it('applies operator-button class when className contains operator-button', () => {
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="+" onClick={mockOnClick} className="operator-button" />)
+      const button = container.querySelector('.calculator-button')
+      expect(button).toHaveClass('operator-button')
+    })
+
+    it('applies clear-button class when className contains clear-button', () => {
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="C" onClick={mockOnClick} className="clear-button" />)
+      const button = container.querySelector('.calculator-button')
+      expect(button).toHaveClass('clear-button')
+    })
+
+    it('applies equals-button class when className contains equals-button', () => {
+      const mockOnClick = vi.fn()
+      const { container } = render(<Button label="=" onClick={mockOnClick} className="equals-button" />)
+      const button = container.querySelector('.calculator-button')
+      expect(button).toHaveClass('equals-button')
+    })
+  })
+
   describe('edge cases', () => {
     it('handles empty string label', () => {
       const mockOnClick = vi.fn()
