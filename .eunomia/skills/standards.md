@@ -2,122 +2,98 @@
 
 ## 1. Project Overview
 
-**eunomia-mini-calculator** is a single-page frontend calculator application built with React and TypeScript. It provides basic arithmetic operations (addition, subtraction, multiplication, division), decimal support, and a light/dark theme toggle with localStorage persistence. The UI is fully responsive across desktop, tablet, mobile, and extra-small viewports, with WCAG 2.1 accessibility considerations (44px minimum touch targets, focus outlines).
-
-**Project type:** Frontend SPA (no backend, no routing)
-**Total source files:** ~14 in `src/`
-**Deployment:** Dockerized, served via Vite
-
----
+A single-page calculator application built with React and TypeScript, bundled with Vite. The app features a light/dark theme toggle (persisted to `localStorage`), responsive design across four breakpoints, and WCAG-compliant touch targets. The codebase is small (~32 files) and has no routing, no backend, and no external state library.
 
 ## 2. Tech Stack & Versions
 
-| Technology | Version | Purpose |
+| Layer | Technology | Version Constraint |
 |---|---|---|
-| TypeScript | ^5.3.0 | Language |
-| React | ^18.2.0 | UI framework |
-| React DOM | ^18.2.0 | DOM rendering |
-| Vite | ^5.0.0 | Bundler & dev server |
-| Vitest | ^1.0.0 | Unit test runner |
-| @testing-library/react | ^14.1.0 | Component testing |
-| @testing-library/user-event | ^14.6.1 | User interaction simulation |
-| @testing-library/jest-dom | ^6.1.0 | DOM assertion matchers |
-| Playwright | ^1.58.2 | Visual/E2E testing |
-| ESLint | ^8.55.0 | Linting |
-| @typescript-eslint/parser | ^8.56.1 | TS parsing for ESLint |
-| lucide-react | ^0.400.0 | Icon library (Moon/Sun icons) |
-| Node.js | (runtime) | Development runtime |
-| npm | (package manager) | Dependency management |
+| Language | TypeScript | `^5.3.0` |
+| UI Framework | React | `^18.2.0` |
+| Bundler | Vite | `^5.0.0` |
+| Package Manager | npm | — |
+| Runtime | Node.js | — |
+| Icon Library | lucide-react | `^0.400.0` |
+| Unit Test Runner | Vitest | `^1.0.0` |
+| Test Utilities | @testing-library/react | `^14.1.0` |
+| User-event Testing | @testing-library/user-event | `^14.6.1` |
+| E2E / Visual Testing | Playwright | `^1.58.2` |
+| Linter | ESLint | `^8.55.0` |
+| TS Compilation Target | ES2020 | — |
+| Module Resolution | `bundler` | — |
+| JSX Transform | `react-jsx` (automatic) | — |
 
-**Module system:** ESM (`"type": "module"` in package.json)
-**Target:** ES2020
-**JSX transform:** `react-jsx` (automatic — no `import React` needed for JSX)
-**TypeScript strict mode:** `false` (see §8 for resolution)
+### Key tsconfig settings
 
----
+- `strict: false` — TypeScript strict mode is **off**. This is the current state; do not enable strict mode without a project-wide migration.
+- `noEmit: true` — TypeScript is used for type-checking only; Vite handles transpilation.
+- `isolatedModules: true` — required by Vite.
+- Test files (`**/*.test.ts`, `**/*.test.tsx`, `**/test/**`) are **excluded** from `tsconfig.json` compilation but are picked up by Vitest independently.
 
 ## 3. Design Language
 
-### 3.1 Theme System
+### 3.1 Color Palette & Theming
 
-The app supports two themes — **light** (default) and **dark** — controlled via CSS custom properties on `:root` and `[data-theme='dark']`.
+All colors are defined as **CSS custom properties** on `:root` (light theme) and `[data-theme='dark']` (dark theme). Never use hard-coded color values in component CSS — always reference a `var(--*)` token.
 
-- Theme state is stored in React state, synced to `localStorage` under key `"calculator-theme"`, and applied as a `data-theme` attribute on both the `.app` wrapper and `document.documentElement`.
-- All color references in CSS **must** use `var(--token-name)`. Never use hardcoded color values in component CSS.
+**Light theme (default):**
 
-### 3.2 Color Palette (CSS Custom Properties)
+| Token | Value | Usage |
+|---|---|---|
+| `--app-bg` | `#ffffff` | Page background |
+| `--app-text` | `#333333` | Primary text |
+| `--calculator-bg` | `#e8e8e8` | Calculator container |
+| `--display-bg` | `#f5f5f5` | Display panel |
+| `--button-bg-start/end` | `#ffffff` / `#f5f5f5` | Button gradient |
+| `--button-focus-outline` | `#4a9eff` | Focus ring |
 
-All colors are defined in `src/App.css` under `:root` (light) and `[data-theme='dark']`.
+**Dark theme** mirrors these tokens with darker values (see `App.css` `[data-theme='dark']` block).
 
-| Token | Light | Dark | Usage |
+**Rules:**
+- Theme is toggled via `data-theme` attribute set on **both** the `.app` wrapper and `document.documentElement`.
+- Theme preference is persisted under `localStorage` key `"calculator-theme"` with values `"light"` or `"dark"`.
+- All themed transitions use `transition: ... 0.3s ease`.
+
+### 3.2 Typography
+
+| Context | Font | Size (desktop) | Weight |
 |---|---|---|---|
-| `--app-bg` | `#ffffff` | `#1a1a1a` | Page background |
-| `--app-text` | `#333333` | `#e0e0e0` | General text |
-| `--calculator-bg` | `#e8e8e8` | `#2a2a2a` | Calculator container |
-| `--display-bg` | `#f5f5f5` | `#1f1f1f` | Display background |
-| `--display-text` | `#333333` | `#e0e0e0` | Display text |
-| `--button-bg-start` | `#ffffff` | `#3a3a3a` | Button gradient start |
-| `--button-bg-end` | `#f5f5f5` | `#2f2f2f` | Button gradient end |
-| `--button-text` | `#333333` | `#e0e0e0` | Button label color |
-| `--button-focus-outline` | `#4a9eff` | `#5ab3ff` | Focus ring |
+| Display | `'Courier New', monospace` | `2rem` | 500 |
+| Buttons | Browser default (system) | `1.5rem` | 600 |
+| Heading (`h1`) | Inherited | — | — |
 
-**Rule:** When adding new UI elements, define new custom properties in `App.css` under both `:root` and `[data-theme='dark']`. Do not introduce one-off colors.
+### 3.3 Responsive Breakpoints (mobile-first conceptually, implemented as max-width)
 
-### 3.3 Typography
+| Name | Media Query | Description |
+|---|---|---|
+| Desktop | `> 768px` (no query; base styles) | Full padding, fixed `max-width: 320px` calculator |
+| Tablet | `max-width: 768px` | Full-width calculator, moderate reductions |
+| Mobile | `max-width: 480px` | Compact padding, smaller font sizes |
+| Extra-small | `max-width: 320px` | Minimal padding, smallest readable fonts |
 
-- **Display font:** `'Courier New', monospace` (calculator display only)
-- **Button font:** System default, `font-weight: 600`, size scales per breakpoint (1.5rem → 1.125rem)
-- **Display font size:** Scales from `2rem` (desktop) down to `1.25rem` (<320px)
+**Rules:**
+- Breakpoints are applied via `@media (max-width: ...)` in each component's own CSS file.
+- Every interactive element must maintain a **minimum 44×44 px** touch target (WCAG 2.1 Level AAA).
+- Use `min-height: 44px; min-width: 44px;` explicitly at every sub-desktop breakpoint.
 
 ### 3.4 Spacing System
 
-Spacing uses `rem` units throughout. There is no formal spacing scale — values are applied contextually:
+Spacing uses `rem` units throughout. There is no formal spacing scale; values are per-component. The dominant increments are `0.25rem` steps (`0.5rem`, `0.75rem`, `1rem`, `1.25rem`, `1.5rem`).
 
-| Context | Value |
-|---|---|
-| Calculator padding | `1rem` |
-| Button padding (desktop) | `1.25rem` |
-| Button grid gap | `0.5rem` (desktop), `0.625rem` (tablet) |
-| Display margin-bottom | `1rem` |
-| Display margin-top | `2rem` (desktop) → `1.25rem` (<320px) |
+**Rule:** Always use `rem` for padding, margin, and gap. Never use `px` for spacing (exception: borders and box-shadows, which use `px`).
 
-**Rule:** Always use `rem` for spacing. Do not use `px` for padding, margin, or gap.
+### 3.5 Component Visual Patterns
 
-### 3.5 Responsive Breakpoints (Mobile-First Adjustment)
+- **Buttons:** Styled with CSS `linear-gradient` backgrounds, `border-radius: 8px` (scaling down at breakpoints), subtle `box-shadow`, and a `translateY(-1px)` hover lift.
+- **Display:** `inset` box-shadow, `text-overflow: ellipsis`, single-line (`white-space: nowrap`).
+- **Calculator container:** `border-radius: 12px`, centered with `margin: 0 auto`.
+- **Transitions:** All interactive state changes use `transition: all 0.15s ease` (buttons) or `0.3s ease` (theme changes).
 
-Despite the comment claiming "mobile-first," the actual CSS uses **desktop-first** `max-width` media queries. This is the canonical pattern:
+### 3.6 Animation Conventions
 
-| Breakpoint | Target | Max-width |
-|---|---|---|
-| Desktop | 769px+ | (base styles) |
-| Tablet | 481px–768px | `@media (max-width: 768px)` |
-| Mobile | 320px–480px | `@media (max-width: 480px)` |
-| Extra small | <320px | `@media (max-width: 320px)` |
-
-**Rule:** Use `max-width` media queries (desktop-first). Define base styles for desktop, then override downward.
-
-### 3.6 Accessibility Requirements
-
-- All interactive elements must have a **minimum 44×44px touch target** (WCAG 2.1 AAA).
-- Buttons must have visible `:focus` outlines (`outline: 2px solid var(--button-focus-outline); outline-offset: 2px`).
-- Theme transition uses `transition: 0.3s ease` on background/color changes.
-- Buttons use `transition: all 0.15s ease` for hover/active states.
-
-### 3.7 Component Patterns
-
-- Components are **function components** using named exports (`export function ComponentName`).
-- The only exception is `App`, which uses a **default export** (`export default function App`).
-- Props are defined as inline `interface` declarations in the same file, named `{ComponentName}Props`.
-- CSS is component-scoped via co-located CSS files imported directly into the component.
-
-### 3.8 Animation Conventions
-
-- Theme transitions: `transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease`
-- Button hover: `transform: translateY(-1px)` with `0.15s ease`
-- Button active: `transform: translateY(0)` (return to baseline)
-- Theme toggle hover: `transform: scale(1.1)`; active: `transform: scale(0.95)`
-
----
+- Theme toggle button: `transform: scale(1.1)` on hover, `scale(0.95)` on active.
+- Calculator buttons: `translateY(-1px)` on hover, `translateY(0)` on active.
+- No keyframe animations are used. Keep transitions CSS-only and under `0.3s`.
 
 ## 4. Code Conventions
 
@@ -125,334 +101,265 @@ Despite the comment claiming "mobile-first," the actual CSS uses **desktop-first
 
 | Entity | Convention | Example |
 |---|---|---|
+| React components | PascalCase, named `export function` | `export function Calculator()` |
 | Component files | PascalCase `.tsx` | `Calculator.tsx`, `Button.tsx` |
-| Component CSS files | PascalCase `.css` (matches component) | `Calculator.css`, `Button.css` |
-| Component functions | PascalCase, named export | `export function Calculator()` |
-| App root component | PascalCase, default export | `export default function App()` |
-| Props interfaces | `{Component}Props` | `ButtonProps`, `DisplayProps` |
-| CSS classes | kebab-case | `.calculator-button`, `.button-grid` |
+| CSS files | PascalCase, matching component | `Calculator.css`, `Button.css` |
+| Test files | PascalCase with `.test.tsx` suffix | `Calculator.test.tsx` |
+| CSS class names | kebab-case | `.calculator-button`, `.theme-toggle` |
+| CSS custom properties | kebab-case with `--` prefix | `--button-bg-start` |
+| Interfaces/types | PascalCase with descriptive suffix | `ButtonProps`, `DisplayProps` |
 | State variables | camelCase | `currentValue`, `shouldResetDisplay` |
-| Handler functions | `handle{Action}` | `handleDigit`, `handleOperation` |
-| Test files | `{ComponentName}.test.tsx` | `Button.test.tsx` |
+| Event handlers | `handle` + action | `handleDigit`, `handleOperation` |
+| Test helpers | camelCase | `getButton`, `clickButtons` |
 | Context objects | PascalCase + `Context` | `ThemeContext` |
 
 ### 4.2 File & Folder Structure
 
-```
 src/
-├── App.tsx              # Root component (default export + ThemeContext)
-├── App.css              # Global styles, CSS custom properties, theme definitions
-├── App.test.tsx         # Tests for App
+├── App.tsx              # Root component, theme provider
+├── App.css              # Global styles, CSS variables, theme definitions
+├── App.test.tsx         # Tests co-located with App
 ├── main.tsx             # Entry point (ReactDOM.createRoot)
 ├── components/
-│   ├── Button.tsx       # Presentational component
-│   ├── Button.css
-│   ├── Button.test.tsx
-│   ├── Calculator.tsx   # Stateful container component
+│   ├── Calculator.tsx   # Main calculator logic
 │   ├── Calculator.css
 │   ├── Calculator.test.tsx
-│   ├── Display.tsx      # Presentational component
+│   ├── Button.tsx       # Presentational button
+│   ├── Button.css
+│   ├── Button.test.tsx
+│   ├── Display.tsx      # Presentational display
 │   ├── Display.css
 │   └── Display.test.tsx
 └── test/
-    └── setup.ts         # Vitest setup (jest-dom matchers, mocks)
+    └── setup.ts         # Vitest setup (jest-dom, mocks)
 ```
 
 **Rules:**
-- Components live in `src/components/` with co-located `.css` and `.test.tsx` files.
-- The root `App` component lives directly in `src/`.
-- Test setup and shared test utilities live in `src/test/`.
-- Each component has exactly one `.tsx`, one `.css`, and one `.test.tsx` file.
+- Each component gets **three co-located files**: `Component.tsx`, `Component.css`, `Component.test.tsx`.
+- Test files live **next to** the component they test, not in a separate `__tests__` directory.
+- The `src/test/` directory is reserved for test infrastructure (setup files, global mocks).
+- Playwright / visual test scripts live at the **project root**, not inside `src/`.
+- Global CSS variables and theme definitions live in `App.css`.
 
-### 4.3 Import Ordering
+### 4.3 Component Authoring
 
-Imports follow this order (observed from all component files):
+- Use **function declarations** (`export function Component()`) — not arrow-function components.
+- The root `App` component uses `export default function App()`. All other components use **named exports** (`export function Calculator()`).
+- Define a `Props` interface directly above the component in the same file, named `<Component>Props`.
+- Destructure props in the function signature with defaults where applicable:
+  ```tsx
+  export function Button({ label, onClick, className = '' }: ButtonProps) {
+  ```
+- Do **not** use `React.FC` or `React.FunctionComponent`.
 
-1. React/framework imports (`react`, `react-dom`)
-2. Third-party libraries (`lucide-react`, `@testing-library/*`, `vitest`)
-3. Local components (`./components/Calculator`)
-4. Context imports (`../App` for `ThemeContext`)
-5. CSS imports (`./Component.css`)
+### 4.4 Import Ordering
+
+Canonical order (observed in all source files):
 
 ```tsx
-// Example: Calculator.tsx
+// 1. React core imports
 import { useState, useContext } from 'react'
+
+// 2. Third-party library imports
 import { Moon, Sun } from 'lucide-react'
+
+// 3. Local component imports
 import { Display } from './Display'
 import { Button } from './Button'
+
+// 4. Context / utility imports
 import { ThemeContext } from '../App'
+
+// 5. CSS imports (always last)
 import './Calculator.css'
 ```
 
-**Rule:** CSS imports are always last. No blank lines between import groups (current pattern).
+**Rule:** CSS imports are always the last import in a component file.
 
-### 4.4 Comment Style
+### 4.5 Comment Style
 
-- **CSS files:** Block comments at the top of each file documenting responsive strategy, breakpoints, and design rationale. Inline comments for individual media queries.
-- **TypeScript files:** No JSDoc or inline comments (code is self-documenting). Do not add unnecessary comments to `.tsx` files.
+- CSS files include a **block comment header** at the top documenting the component's responsive design strategy, breakpoints, and any non-obvious layout behavior.
+- Inline CSS comments use `/* ... */` to explain specific values (e.g., `/* WCAG 2.1 minimum touch target */`).
+- TypeScript files have **no comments** — code is expected to be self-documenting. Do not add JSDoc to components or props interfaces unless the behavior is genuinely non-obvious.
 
-```css
-/* Correct — CSS file header */
-/*
- * Button Component - Responsive Design
- *
- * Touch Target Requirements:
- * - Minimum 44px x 44px for touch accessibility (WCAG 2.1 Level AAA)
- */
-```
+### 4.6 Formatting & Syntax
 
-### 4.5 Export Style
-
-- Components in `src/components/` use **named exports**: `export function Button()`
-- The root `App` component uses a **default export**: `export default function App()`
-- Context objects are **named exports** from the file that defines them: `export const ThemeContext`
-
-**Rule:** All new components must use named exports. Default exports are reserved for `App.tsx` only.
-
----
+- **No semicolons** in TypeScript/TSX files (the codebase omits them consistently).
+- **Single quotes** for string literals in TypeScript.
+- **Single quotes** for CSS attribute selectors (`[data-theme='dark']`).
+- **2-space indentation** in all files.
+- Trailing newline at end of files.
 
 ## 5. Architecture Patterns
 
-### 5.1 Component Architecture
+### 5.1 Component Hierarchy
 
-The project follows a simple **container/presentational** pattern:
+```
+App (theme state, context provider)
+└── Calculator (calculator state & logic, theme consumer)
+    ├── Display (presentational — renders value)
+    └── Button (presentational — fires onClick)
+```
 
-- **Container component:** `Calculator` — owns all calculator state, defines handlers, renders child components.
-- **Presentational components:** `Button`, `Display` — receive data and callbacks via props, contain no business logic.
-- **Root component:** `App` — owns theme state, provides `ThemeContext`, renders `Calculator`.
+- **App** owns theme state and provides it via `ThemeContext`.
+- **Calculator** owns all calculator state (`currentValue`, `previousValue`, `operation`, `shouldResetDisplay`) using `useState`.
+- **Display** and **Button** are pure presentational components with no internal state.
 
 ### 5.2 State Management
 
-- **Local state only** — all state is managed via `useState` hooks. No external state library.
-- **Context API** — used exclusively for cross-cutting concerns (theme). `ThemeContext` is defined in `App.tsx` and consumed via `useContext` in child components.
-- **No prop drilling for theme** — always consume `ThemeContext` rather than passing theme as props.
+- **React `useState` only.** No external state management library (Redux, Zustand, etc.).
+- **React `createContext`** is used solely for theme propagation.
+- Context is created and exported from `App.tsx`, consumed via `useContext` in child components.
+- Persistent state uses `localStorage` directly (no abstraction layer).
 
-```tsx
-// Canonical: use context for theme
-const { theme, toggleTheme } = useContext(ThemeContext)
+**Rule:** Do not introduce an external state management library. For cross-component state, use React Context. For component-local state, use `useState`.
 
-// Anti-pattern: do NOT pass theme as prop
-<Calculator theme={theme} />  // ❌
-```
+### 5.3 Styling Architecture
 
-### 5.3 State Shape (Calculator)
+- **Plain CSS files** — one per component, imported directly into the component file.
+- No CSS Modules, no CSS-in-JS, no Tailwind, no Sass/SCSS.
+- Theming is accomplished via CSS custom properties toggled by a `data-theme` attribute.
+- Component styles are scoped by class-name convention (`.calculator-button`, `.display`), not by CSS Modules.
 
-| State Variable | Type | Purpose |
-|---|---|---|
-| `currentValue` | `string` | Currently displayed value |
-| `previousValue` | `string` | Left operand stored during operation |
-| `operation` | `string` | Pending arithmetic operator |
-| `shouldResetDisplay` | `boolean` | Flag to clear display on next digit input |
+**Rule:** Do not introduce CSS Modules, styled-components, Tailwind, or any other styling paradigm. Use plain `.css` files with CSS custom properties for theming.
 
-**Rule:** Calculator values are stored as **strings**, not numbers. Parsing to `number` happens only at calculation time via `parseFloat()`.
+### 5.4 Error Handling
 
-### 5.4 Persistence
+- Calculator errors (e.g., division by zero) are represented by the string `"Error"` in `currentValue`.
+- When `currentValue === 'Error'`, operations are blocked and digit input resets the display.
+- There is no global error boundary. This is acceptable for the current project scope.
 
-- Theme preference persists in `localStorage` under key `"calculator-theme"`.
-- State is read from localStorage in the `useState` initializer (lazy init pattern).
-- State is written to localStorage in a `useEffect` that depends on the state value.
+## 6. Testing Conventions
 
-```tsx
-// Canonical localStorage pattern
-const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-  const saved = localStorage.getItem('calculator-theme')
-  return (saved === 'dark' || saved === 'light') ? saved : 'light'
-})
+### 6.1 Test Framework & Configuration
 
-useEffect(() => {
-  localStorage.setItem('calculator-theme', theme)
-}, [theme])
-```
+- **Vitest** with `globals: true` (no need to import `describe`, `it`, `expect` — but `vi` must be explicitly imported from `vitest`).
+- **jsdom** environment configured in `vite.config.ts`.
+- **Setup file:** `src/test/setup.ts` — imports `@testing-library/jest-dom` for DOM matchers and provides a `localStorage` mock.
 
-### 5.5 Error Handling
+### 6.2 Test File Naming & Placement
 
-- Division by zero returns the string `"Error"` as the display value.
-- The `"Error"` state is checked at the top of handler functions; most operations are blocked during error state.
-- Entering a new digit clears the error state.
-- There is no global error boundary.
+- Test files are named `<Component>.test.tsx` and placed **adjacent to the component file**.
+- Infrastructure/setup files go in `src/test/`.
 
----
+### 6.3 Test Structure
 
-## 6. Styling Conventions
-
-### 6.1 CSS Architecture
-
-- **Plain CSS** with component-scoped files (no CSS modules, no CSS-in-JS, no Tailwind).
-- Each component imports its own `.css` file.
-- Global styles and CSS custom property definitions live in `App.css`.
-- The global box-sizing reset (`box-sizing: border-box`) is defined in `App.css`.
-
-**Rule:** Do not introduce CSS modules, styled-components, Tailwind, or any CSS-in-JS solution. Use plain `.css` files.
-
-### 6.2 CSS Class Naming
-
-- Use **flat kebab-case** class names: `.calculator-button`, `.button-grid`, `.theme-toggle`.
-- No BEM methodology, no nesting-based naming.
-- Component root elements use the component concept as class name: `.calculator`, `.display`.
-- Modifier classes are simple descriptive words: `.wide`.
-
-### 6.3 Layout
-
-- The calculator uses `CSS Grid` for the button layout: `grid-template-columns: repeat(4, 1fr)`.
-- The wide button (e.g., "0") spans full width via `.wide { grid-column: span 4; }`.
-- Centering is achieved via `margin: 0 auto` on the calculator container.
-- The calculator has a `max-width: 320px` on desktop, expanding to `100%` on tablet/mobile.
-
----
-
-## 7. Testing Conventions
-
-### 7.1 Test Framework & Setup
-
-- **Test runner:** Vitest with `globals: true` (no need to import `describe`, `it`, `expect`, `beforeEach`).
-- **DOM environment:** jsdom
-- **Setup file:** `src/test/setup.ts` — imports `@testing-library/jest-dom` and provides a `localStorage` mock.
-- **User interaction:** Always use `@testing-library/user-event` (not `fireEvent`).
-
-### 7.2 Test File Naming & Placement
-
-- Test files are co-located with their component: `src/components/Button.test.tsx`
-- Test file naming: `{ComponentName}.test.tsx`
-- E2E/visual test scripts live at the project root: `playwright-visual-test.js`
-
-### 7.3 Test Structure
-
-```tsx
-// Canonical test structure
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { vi } from 'vitest'
-import { Button } from './Button'
-
-describe('Button', () => {
-  it('renders without crashing', () => { ... })
-
-  describe('onClick handler', () => {
-    it('calls onClick handler when clicked', async () => {
-      const user = userEvent.setup()
-      // ...
-    })
+- Use `describe` blocks to group by component and then by feature area:
+  ```tsx
+  describe('Calculator', () => {
+    describe('digit input', () => { ... })
+    describe('decimal point handling', () => { ... })
   })
-})
-```
+  ```
+- Use `beforeEach` to set up common state (render component, create `userEvent.setup()`).
+- Extract **test helper functions** at the top of the test file for repeated actions:
+  ```tsx
+  function getButton(label: string) {
+    return screen.getByRole('button', { name: label })
+  }
 
-**Rules:**
-- Use `describe` blocks to group related tests. Use nested `describe` for sub-categories.
-- Use `screen` queries (not destructured `getByX` from render) as the primary query method.
-- Use `userEvent.setup()` at the beginning of tests that involve user interaction. Assign to a `user` variable.
-- Mock functions with `vi.fn()`.
-- Use helper functions for repetitive test operations (e.g., `getButton()`, `getDisplay()`, `clickButtons()`).
+  async function clickButtons(user: ReturnType<typeof userEvent.setup>, labels: string[]) {
+    for (const label of labels) {
+      await user.click(getButton(label))
+    }
+  }
+  ```
 
-### 7.4 Query Priority
+### 6.4 Testing Patterns
 
-- Prefer `screen.getByRole('button', { name: '5' })` for buttons.
-- Use `screen.getByText()` for display content.
-- Use `document.querySelector('.display')` when querying by CSS class (used for the display element).
-- Use `container.querySelector()` sparingly, only when role/text queries are insufficient.
+- **Rendering:** Use `render(<Component />)` from `@testing-library/react`.
+- **Queries:** Prefer `screen.getByRole` and `screen.getByText`. Use `container.querySelector` only when testing CSS classes (no accessible role available).
+- **User interactions:** Always use `@testing-library/user-event` (not `fireEvent`):
+  ```tsx
+  const user = userEvent.setup()
+  await user.click(getButton('5'))
+  ```
+- **Mocking:** Use `vi.fn()` for callback mocks. Use `vi.mock()` sparingly.
+- **Assertions:** Use jest-dom matchers (`toBeInTheDocument`, `toHaveTextContent`, `toHaveAttribute`).
 
-### 7.5 What Must Be Tested
+### 6.5 What Must Be Tested
 
-- **Every component** must have a corresponding `.test.tsx` file.
-- **Rendering:** Verify the component renders without crashing.
-- **Props:** Verify all prop variations produce correct output.
-- **User interactions:** Click, keyboard (Enter, Space) for interactive elements.
-- **State transitions:** For stateful components, test the full lifecycle (input → operation → result).
-- **Edge cases:** Error states, empty values, boundary conditions.
-- **Theme:** Test theme toggle, persistence, and initial load from localStorage.
+- Every component must have a test file covering:
+  - Renders without crashing
+  - Correct CSS class is applied
+  - All props are rendered correctly (including edge cases)
+  - User interactions trigger expected behavior
+- Theme persistence and toggle behavior
+- Calculator arithmetic logic (all operations, chaining, error states)
 
-### 7.6 Visual/E2E Tests
+### 6.6 Visual / E2E Testing
 
-- Playwright scripts are standalone JS files at the project root.
-- They test across three viewport sizes: mobile (375×667), tablet (768×1024), desktop (1920×1080).
+- Playwright scripts exist at the project root for screenshot-based visual validation.
+- These are **not** part of the `npm test` command — they are run separately and require a running dev server.
 - Screenshots are saved to `.eunomia/screenshots/qa/`.
 
----
+## 7. Known Inconsistencies & Resolutions
 
-## 8. Known Inconsistencies & Resolutions
+### 7.1 Module System Conflict in Playwright Scripts
 
-### 8.1 `strict: false` in tsconfig.json
+| File | Module System |
+|---|---|
+| `playwright-visual-test.js` | ESM (`import { chromium } from 'playwright'`) |
+| `screenshot.js` | CommonJS (`const { chromium } = require('playwright')`) |
 
-**Issue:** TypeScript strict mode is disabled. This allows implicit `any`, unchecked nulls, and other type-safety gaps.
-**Resolution:** The current codebase works under non-strict mode. **For all new code, write as if strict mode were enabled** — explicitly type all function parameters, avoid implicit `any`, and handle null/undefined explicitly. Do not introduce code that would fail under `strict: true`.
+**Resolution:** The project uses `"type": "module"` in `package.json`. **All new JavaScript/TypeScript files must use ESM imports.** `screenshot.js` is non-conformant and should not be used as a reference. The canonical pattern is `playwright-visual-test.js`.
 
-### 8.2 CSS comment claims "mobile-first" but uses desktop-first queries
+### 7.2 Default Export vs Named Export
 
-**Issue:** `App.css` header comment says "mobile-first approach" but all media queries use `max-width` (desktop-first).
-**Resolution:** The **canonical pattern is desktop-first** (`max-width` queries). The comment is inaccurate. Use `max-width` media queries for all responsive styles.
+| File | Export Style |
+|---|---|
+| `App.tsx` | `export default function App()` |
+| All other components | `export function Component()` |
 
-### 8.3 `screenshot.js` uses CommonJS, `playwright-visual-test.js` uses ESM
+**Resolution:** The **canonical standard** is **named exports** for all components. `App.tsx` uses `export default` because Vite's entry-point resolution expects it. **Do not use `export default` for any new component.** Only `App.tsx` is permitted to use a default export.
 
-**Issue:** Two Playwright scripts exist at the root with different module systems. `screenshot.js` uses `require()` (CommonJS), while `playwright-visual-test.js` uses `import` (ESM). The project has `"type": "module"`, making `screenshot.js` invalid.
-**Resolution:** **`playwright-visual-test.js` is the canonical E2E script.** Use ESM (`import`) for all JavaScript files. See §9 for `screenshot.js` deprecation.
+### 7.3 `Display` Props Accept `string | number`
 
-### 8.4 App title inconsistency
+The `DisplayProps` interface accepts `value: string | number`, but the `Calculator` component always passes a `string`. The union type adds unnecessary complexity.
 
-**Issue:** `package.json` names the project `"eunomia-mini-calculator"`, tests reference `'Mini Calculator'`, but `App.tsx` renders `"Chris's Calculator"`.
-**Resolution:** The rendered title in `App.tsx` is the source of truth for UI. Tests should match the actual rendered text.
+**Resolution:** `Display` should accept `string | number` to remain flexible. This is acceptable but the `Calculator` should continue to pass strings. Do not narrow the type in `Display`.
 
-### 8.5 Display component accepts `string | number` but Calculator only passes `string`
+### 7.4 Global `describe`/`it`/`expect` vs Explicit Imports
 
-**Issue:** `DisplayProps.value` is typed as `string | number`, and tests exercise both types, but the Calculator only ever passes string values.
-**Resolution:** Keep the union type for flexibility, but **Calculator state values are always strings**. The Display component must handle both types.
+Some test files import `{ describe, it, expect, beforeEach }` from `vitest` explicitly (e.g., `App.test.tsx`), while others rely on `globals: true` and omit the import (e.g., `Calculator.test.tsx`).
 
-### 8.6 ThemeContext defined in App.tsx
+**Resolution:** Since `globals: true` is configured, **do not import** `describe`, `it`, `expect`, or `beforeEach` from `vitest`. Only import `vi` (for mocking) explicitly. Remove explicit imports of globals in existing files when touching them.
 
-**Issue:** `ThemeContext` is exported from `App.tsx` alongside the root component, creating a coupling where any component needing theme must import from App.
-**Resolution:** This is acceptable for the current project size. If the project grows, extract `ThemeContext` to `src/contexts/ThemeContext.ts`.
+### 7.5 `strict: false` in tsconfig
 
----
+TypeScript strict mode is disabled. This is intentional for this project's scope.
 
-## 9. Anti-Patterns (Do NOT do these)
+**Resolution:** Do not enable `strict: true` without a full migration. However, write new code **as if** strict mode were enabled — use explicit types, avoid `any`, handle potential `null`/`undefined`.
 
-### 9.1 ❌ Do not use CommonJS (`require`/`module.exports`)
+## 8. Anti-Patterns (Do NOT Do These)
 
-The project is ESM (`"type": "module"`). `screenshot.js` uses CommonJS and is broken. All new files must use `import`/`export`.
+### 8.1 Do NOT use `fireEvent` from `@testing-library/react`
+Always use `@testing-library/user-event` for simulating user interactions. `fireEvent` does not accurately simulate browser behavior (e.g., it skips focus, does not trigger `onChange` chains).
 
-### 9.2 ❌ Do not use `fireEvent` from @testing-library/react
+### 8.2 Do NOT use CommonJS (`require` / `module.exports`)
+The project is ESM-only (`"type": "module"`). Always use `import`/`export`. The file `screenshot.js` violates this — do not follow its pattern.
 
-Always use `@testing-library/user-event` for simulating user interactions. `fireEvent` does not simulate the full browser event chain.
+### 8.3 Do NOT hard-code color values in component CSS
+All colors must reference CSS custom properties defined in `App.css`. Hard-coded hex/rgb values in component CSS files will break theming.
 
-```tsx
-// ❌ Wrong
-fireEvent.click(button)
+### 8.4 Do NOT use `React.FC` or `React.FunctionComponent`
+Use plain function declarations with typed props interfaces.
 
-// ✅ Correct
-const user = userEvent.setup()
-await user.click(button)
+### 8.5 Do NOT introduce CSS Modules, CSS-in-JS, Tailwind, or SCSS
+The project uses plain CSS files with CSS custom properties. Maintain this approach.
+
+### 8.6 Do NOT add `px` units for spacing (padding, margin, gap)
+Use `rem` for all spacing. `px` is acceptable only for `border-width`, `box-shadow`, and `outline`.
+
+### 8.7 Do NOT create `__tests__` directories
+Test files are co-located with the source files they test.
+
+### 8.8 Do NOT use inline styles in JSX
+All styling is done via CSS classes and CSS custom properties. The only attribute set directly on elements is `data-theme`.
+
+### 8.9 Do NOT add comments to TypeScript files unless genuinely necessary
+The codebase convention is comment-free TypeScript. CSS files receive block-comment headers; TypeScript files do not.
+
+### 8.10 Do NOT use `var` or untyped variables
+Use `const` by default, `let` when reassignment is needed. Always provide type annotations for function parameters and non-obvious return types.
 ```
-
-### 9.3 ❌ Do not use inline styles in React components
-
-All styling is done via CSS classes in co-located `.css` files. Do not use `style={{}}` props.
-
-### 9.4 ❌ Do not hardcode color values in component CSS
-
-All colors must reference CSS custom properties defined in `App.css`.
-
-```css
-/* ❌ Wrong */
-.my-element { color: #333333; }
-
-/* ✅ Correct */
-.my-element { color: var(--app-text); }
-```
-
-### 9.5 ❌ Do not use `px` for spacing
-
-Use `rem` for all padding, margin, gap, and font-size values. `px` is acceptable only for borders (`1px`, `2px`) and minimum touch target sizes (`min-height: 44px`).
-
-### 9.6 ❌ Do not introduce external state management libraries
-
-State is managed via `useState` and `useContext`. Do not add Redux, Zustand, Jotai, or similar unless the project scope fundamentally changes.
-
-### 9.7 ❌ Do not add CSS-in-JS or utility CSS frameworks
-
-The project uses plain CSS with CSS custom properties. Do not introduce styled-components, Emotion, Tailwind, or CSS modules.
-
-### 9.8 ❌ Do not use class components
-
-All components are function components. Do not introduce React class components.
-
-### 9.9 ❌ Do not duplicate the visual test script
-
-`screenshot.js` is a broken duplicate of `playwright-visual-test.js`. Do not create additional screenshot scripts. Use and maintain `playwright-visual-test.js` as the single E2E visual test.
