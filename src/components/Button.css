@@ -75,3 +75,64 @@
     border-radius: 4px;
   }
 }
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .calculator-button {
+    padding: 0.5rem;
+    font-size: 1.125rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Operator buttons (+, -, ×, ÷) */
+.calculator-button.operator-button {
+  background: linear-gradient(180deg, #e67e22 0%, #d35400 100%);
+  border-color: #b94600;
+  color: #ffffff;
+}
+
+.calculator-button.operator-button:hover {
+  background: linear-gradient(180deg, #f39c12 0%, #e67e22 100%);
+  border-color: #d35400;
+}
+
+.calculator-button.operator-button:active {
+  background: linear-gradient(180deg, #d35400 0%, #b94600 100%);
+  border-color: #a03c00;
+}
+
+/* Clear button (C) */
+.calculator-button.clear-button {
+  background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+  border-color: #a93226;
+  color: #ffffff;
+}
+
+.calculator-button.clear-button:hover {
+  background: linear-gradient(180deg, #f15a4a 0%, #e74c3c 100%);
+  border-color: #c0392b;
+}
+
+.calculator-button.clear-button:active {
+  background: linear-gradient(180deg, #c0392b 0%, #a93226 100%);
+  border-color: #922b21;
+}
+
+/* Equals button (=) */
+.calculator-button.equals-button {
+  background: linear-gradient(180deg, #27ae60 0%, #1e8449 100%);
+  border-color: #196f3d;
+  color: #ffffff;
+}
+
+.calculator-button.equals-button:hover {
+  background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%);
+  border-color: #1e8449;
+}
+
+.calculator-button.equals-button:active {
+  background: linear-gradient(180deg, #1e8449 0%, #196f3d 100%);
+  border-color: #145a32;
+}

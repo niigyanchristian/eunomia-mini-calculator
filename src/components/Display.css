@@ -66,3 +66,13 @@
     border-radius: 4px;
   }
 }
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .display {
+    padding: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    min-height: 2rem;
+  }
+}
