@@ -3,18 +3,35 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Rename app title from 'Chris Min Calculator' to 'Chris Min Calc'",
-      "description": "1. WHAT: Rename the calculator app title from 'Chris Min Calculator' to 'Chris Min Calc' across all files where the app name appears.\n2. READ FIRST: Read index.html (line 7 has the <title> tag) and README.md (line 1 has the project heading). Also search the full codebase with grep for 'Chris Min Calculator' to catch any other occurrences.\n3. FILES: Modify index.html — change <title>Chris Min Calculator</title> to <title>Chris Min Calc</title>. Modify README.md — change '# Chris Min Calculator' to '# Chris Min Calc'. If the current title is 'Mini Calculator' rather than 'Chris Min Calculator', update all occurrences of 'Mini Calculator' to 'Chris Min Calc' in both files.\n4. APPROACH: Simple text substitution. No logic changes. Check index.html title tag and README.md heading. Run grep for both 'Chris Min Calculator' and 'Mini Calculator' to find all occurrences.\n5. PATTERNS: No existing pattern to follow — this is a cosmetic text change only.",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Add in-memory auth layer with Login page",
+      "description": "1. WHAT: Add a simple authentication layer so users must log in before seeing the calculator. Use hardcoded in-memory credentials (test@gmail.com / test123).\n\n2. READ FIRST: Read src/App.tsx (current app structure with ThemeContext), src/components/Calculator.tsx (existing component), src/App.test.tsx (existing tests that will need updating), src/components/Calculator.test.tsx, src/test/setup.ts (test setup pattern).\n\n3. FILES:\n   - CREATE src/components/Login.tsx — Login form component with email+password fields and a submit button. On submit, check credentials against hardcoded values (email: 'test@gmail.com', password: 'test123'). Show an error message for invalid credentials. Call an onLogin callback prop on success.\n   - CREATE src/components/Login.css — Styles for the login form: centered card layout matching the existing calculator aesthetic (use similar variables/colors from Calculator.css). Include styles for the form, inputs, submit button, and error message.\n   - CREATE src/components/Login.test.tsx — Tests for the Login component: renders email/password fields and submit button; shows error on invalid credentials; calls onLogin on valid credentials. Follow the pattern in src/components/Button.test.tsx (import from vitest, use @testing-library/react and userEvent).\n   - MODIFY src/App.tsx — Add an isAuthenticated boolean state (default false). When false, render the Login component instead of the Calculator. Pass a handleLogin callback to Login that sets isAuthenticated to true. Keep the ThemeContext and existing theme logic intact. Update the wrapper div so the h1 'Mini Calculator' is only shown when authenticated.\n   - MODIFY src/App.test.tsx — Update existing tests that query for 'Mini Calculator' text — they need to mock or simulate authenticated state OR update the test to first log in before checking the calculator. The simplest approach: add a helper that renders App and logs in (fills email/password, clicks submit) before each existing calculator/theme test. Also add new tests: 'renders login page by default', 'shows calculator after successful login', 'shows error message on invalid credentials'.\n\n4. APPROACH: Keep auth state local in App.tsx with useState (no external lib needed). The Login component receives an onLogin: () => void prop. Credentials are checked inline in Login.tsx as string equality against constants. No routing library — just conditional rendering.\n\n5. PATTERNS: Follow the named export pattern used in src/components/Button.tsx and Display.tsx. CSS follows the same file-per-component pattern as Button.css and Calculator.css. Tests follow the describe/it pattern with userEvent from src/components/Button.test.tsx.",
       "dependencies": [],
       "acceptance_criteria": [
-        "index.html <title> tag contains 'Chris Min Calc' and not 'Chris Min Calculator' or 'Mini Calculator'",
-        "README.md first heading reads '# Chris Min Calc'",
-        "grep for 'Chris Min Calculator' returns no matches across the entire project"
+        "npx tsc --noEmit exits code 0 (no TypeScript errors)",
+        "Login form renders by default when the app loads (unauthenticated state)",
+        "Entering test@gmail.com / test123 and submitting shows the calculator",
+        "Entering invalid credentials shows an error message without navigating away"
       ],
-      "filename": "index.html",
-      "language": "html"
+      "filename": "src/components/Login.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Run full test suite to validate auth layer",
+      "description": "Run the complete Vitest test suite to confirm all tests pass after the auth layer was added. Execute: npx vitest run src/App.test.tsx src/components/Login.test.tsx src/components/Calculator.test.tsx src/components/Button.test.tsx src/components/Display.test.tsx. Also run npx tsc --noEmit to verify no TypeScript compilation errors. Report any failures with the full error output.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "npx vitest run exits with code 0 and all test suites pass",
+        "npx tsc --noEmit exits with code 0 (no TypeScript errors)",
+        "src/components/Login.test.tsx exists and all its tests pass",
+        "src/App.test.tsx tests pass (including any updated tests for the auth flow)"
+      ],
+      "filename": "src/components/Login.test.tsx",
+      "language": "typescript"
     }
   ]
 }
