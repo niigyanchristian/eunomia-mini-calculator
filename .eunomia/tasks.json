@@ -2,38 +2,17 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
-      "task_id": "REQ-001",
-      "task_type": "feature",
-      "recommended_model": "sonnet",
-      "title": "Add Signup page with shared in-memory credential store",
-      "description": "1. WHAT: Introduce a shared in-memory credential store, a new Signup component, and wire both into the existing Login + App flow so that users who sign up have their credentials appended to the live store and can subsequently log in.\n\n2. READ FIRST: Read src/components/Login.tsx (current hardcoded auth logic), src/App.tsx (auth routing), src/components/Login.css (styles to reuse), src/components/Login.test.tsx (test patterns to follow).\n\n3. FILES:\n   - CREATE src/auth/credentialStore.ts — a module that holds an in-memory array of {email, password} objects pre-seeded with {email: 'test@gmail.com', password: 'test123'}. Export two functions: `validateCredentials(email, password): boolean` and `addCredential(email, password): void`.\n   - MODIFY src/components/Login.tsx — remove the two module-level constants (VALID_EMAIL, VALID_PASSWORD) and replace the hardcoded check with a call to `validateCredentials` from the new store. Pass no new props; the store is a singleton.\n   - CREATE src/components/Signup.tsx — a functional component accepting `{ onSignup: () => void, onGoToLogin: () => void }`. It renders a form with email, password, and confirm-password fields. On submit: validate that passwords match (show inline error if not), check that email is not already registered via a new exported `emailExists(email): boolean` helper in the store (show error if duplicate), then call `addCredential` and invoke `onSignup`. Follow the exact JSX/class-name structure of Login.tsx.\n   - ADD `emailExists(email): boolean` export to src/auth/credentialStore.ts.\n   - MODIFY src/App.tsx — add a `view` state: `'login' | 'signup'`. When `isAuthenticated` is false and `view === 'login'` render `<Login onLogin={handleLogin} onGoToSignup={() => setView('signup')} />`. When `view === 'signup'` render `<Signup onSignup={handleLogin} onGoToLogin={() => setView('login')} />`. Update the LoginProps interface in Login.tsx to include `onGoToSignup: () => void` and render a 'Sign up' link/button below the submit button.\n   - MODIFY src/components/Login.css — add a `.login-link` style (text button, no border/background, colored link appearance) for the sign-up link.\n   - CREATE src/components/Signup.test.tsx — tests covering: form renders email/password/confirm-password fields and submit button; mismatched passwords shows inline error and does not call onSignup; duplicate email shows inline error and does not call onSignup; valid unique email + matching passwords calls onSignup once; 'Back to login' link calls onGoToLogin. Follow the describe/it pattern in Login.test.tsx using @testing-library/react and userEvent.\n   - CREATE src/auth/credentialStore.test.ts — tests covering: validateCredentials returns true for seed credentials; returns false for unknown email; addCredential adds a new user that then validates successfully; emailExists returns true for existing email and false for new one. Note: because the store is a module-level singleton, reset or re-import between tests using vi.resetModules() as needed, or structure tests so they do not conflict.\n\n4. APPROACH: The credential store is a plain TypeScript module (no React context needed) — a module-level `let users: Array<{email: string; password: string}>` array. This keeps the diff minimal. Reuse Login.css class names in Signup (same card/form/field/label/input/error/submit selectors) — no separate Signup.css needed.\n\n5. PATTERNS: Mirror Login.tsx structure exactly for Signup.tsx. Mirror Login.test.tsx patterns for Signup.test.tsx.",
-      "dependencies": [],
-      "acceptance_criteria": [
-        "The app shows a 'Sign In' form by default when the page loads",
-        "A 'Sign up' link or button is visible on the login page and clicking it navigates to a signup form",
-        "The signup form has email, password, and confirm password fields plus a submit button",
-        "Submitting the signup form with mismatched passwords shows an inline error message on screen",
-        "After successfully signing up with a new email and matching passwords the user is logged in and the calculator is visible",
-        "After signing up, logging out and logging back in with the newly created credentials succeeds (calculator appears)"
-      ],
-      "filename": "src/components/Signup.tsx",
-      "language": "typescript"
-    },
-    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to validate signup feature",
-      "description": "Run the complete Vitest test suite to confirm all tests pass after the signup feature is added. Execute the following commands:\n1. npx vitest run src/auth/credentialStore.test.ts\n2. npx vitest run src/components/Signup.test.tsx\n3. npx vitest run src/components/Login.test.tsx\n4. npx vitest run (full suite)\n5. npx tsc --noEmit\nAll must exit with code 0.",
-      "dependencies": ["REQ-001"],
+      "title": "Run full test suite and verify all tests pass",
+      "description": "Run the complete Vitest test suite to confirm all existing tests pass. Execute the following commands in order:\n1. npx vitest run\n2. npx tsc --noEmit\n\nReport any failing tests with their error output.",
+      "dependencies": [],
       "acceptance_criteria": [
-        "npx vitest run src/auth/credentialStore.test.ts exits code 0 with all tests passing",
-        "npx vitest run src/components/Signup.test.tsx exits code 0 with at least 5 tests passing",
-        "npx vitest run src/components/Login.test.tsx exits code 0 with all existing tests passing",
-        "npx vitest run exits code 0 — full suite green",
-        "npx tsc --noEmit exits code 0 — no TypeScript errors"
+        "npx vitest run exits code 0 with all tests passing",
+        "npx tsc --noEmit exits code 0 with no type errors"
       ],
-      "filename": "src/auth/credentialStore.test.ts",
+      "filename": "src",
       "language": "typescript"
     }
   ]
