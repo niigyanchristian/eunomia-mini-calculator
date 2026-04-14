@@ -3,34 +3,35 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "feature",
+      "task_type": "bugfix",
       "recommended_model": "sonnet",
-      "title": "Add in-memory auth layer with Login page",
-      "description": "1. WHAT: Add a simple authentication layer so users must log in before seeing the calculator. Use hardcoded in-memory credentials (test@gmail.com / test123).\n\n2. READ FIRST: Read src/App.tsx (current app structure with ThemeContext), src/components/Calculator.tsx (existing component), src/App.test.tsx (existing tests that will need updating), src/components/Calculator.test.tsx, src/test/setup.ts (test setup pattern).\n\n3. FILES:\n   - CREATE src/components/Login.tsx — Login form component with email+password fields and a submit button. On submit, check credentials against hardcoded values (email: 'test@gmail.com', password: 'test123'). Show an error message for invalid credentials. Call an onLogin callback prop on success.\n   - CREATE src/components/Login.css — Styles for the login form: centered card layout matching the existing calculator aesthetic (use similar variables/colors from Calculator.css). Include styles for the form, inputs, submit button, and error message.\n   - CREATE src/components/Login.test.tsx — Tests for the Login component: renders email/password fields and submit button; shows error on invalid credentials; calls onLogin on valid credentials. Follow the pattern in src/components/Button.test.tsx (import from vitest, use @testing-library/react and userEvent).\n   - MODIFY src/App.tsx — Add an isAuthenticated boolean state (default false). When false, render the Login component instead of the Calculator. Pass a handleLogin callback to Login that sets isAuthenticated to true. Keep the ThemeContext and existing theme logic intact. Update the wrapper div so the h1 'Mini Calculator' is only shown when authenticated.\n   - MODIFY src/App.test.tsx — Update existing tests that query for 'Mini Calculator' text — they need to mock or simulate authenticated state OR update the test to first log in before checking the calculator. The simplest approach: add a helper that renders App and logs in (fills email/password, clicks submit) before each existing calculator/theme test. Also add new tests: 'renders login page by default', 'shows calculator after successful login', 'shows error message on invalid credentials'.\n\n4. APPROACH: Keep auth state local in App.tsx with useState (no external lib needed). The Login component receives an onLogin: () => void prop. Credentials are checked inline in Login.tsx as string equality against constants. No routing library — just conditional rendering.\n\n5. PATTERNS: Follow the named export pattern used in src/components/Button.tsx and Display.tsx. CSS follows the same file-per-component pattern as Button.css and Calculator.css. Tests follow the describe/it pattern with userEvent from src/components/Button.test.tsx.",
+      "title": "Fix failing theme icon assertions in App.test.tsx",
+      "description": "1. WHAT: Fix two failing test assertions in App.test.tsx that check toggleButton.textContent for emoji strings ('🌙' and '☀️'), but the Calculator renders Lucide SVG icons (<Moon /> and <Sun />) — not emoji text — causing those assertions to fail and the QA validation to report a broken auth layer.\n\n2. READ FIRST: Read src/App.test.tsx (lines 55-84 for the failing icon tests), src/components/Calculator.tsx (the theme toggle button renders <Moon /> / <Sun /> Lucide icons, not emoji), src/components/Calculator.test.tsx (see how it asserts on SVG icon presence using toggleButton.querySelector('svg.lucide-moon')).\n\n3. FILES: Modify src/App.test.tsx only. No other files need changes.\n\n4. APPROACH: Replace the two emoji-based textContent assertions with SVG presence checks that match the pattern already used in Calculator.test.tsx. For the light-mode test (currently expects '🌙'), assert that toggleButton.querySelector('svg.lucide-moon') is not null. For the dark-mode test (currently expects '☀️'), assert that toggleButton.querySelector('svg.lucide-sun') is not null. Do not change any other tests — the auth flow tests (renders login by default, shows calculator after login, shows error on invalid credentials) are correct and must remain unchanged.\n\n5. PATTERNS: Follow the SVG icon assertion pattern from src/components/Calculator.test.tsx — use querySelector('svg.lucide-moon') and querySelector('svg.lucide-sun') instead of checking textContent for emoji characters.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx tsc --noEmit exits code 0 (no TypeScript errors)",
-        "Login form renders by default when the app loads (unauthenticated state)",
-        "Entering test@gmail.com / test123 and submitting shows the calculator",
-        "Entering invalid credentials shows an error message without navigating away"
+        "npx vitest run src/App.test.tsx exits with code 0 and all tests pass",
+        "npx vitest run src/components/Login.test.tsx exits with code 0 and all tests pass",
+        "npx vitest run src/components/Calculator.test.tsx exits with code 0 and all tests pass",
+        "npx tsc --noEmit exits with code 0 (no TypeScript errors)"
       ],
-      "filename": "src/components/Login.tsx",
+      "filename": "src/App.test.tsx",
       "language": "typescript"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to validate auth layer",
-      "description": "Run the complete Vitest test suite to confirm all tests pass after the auth layer was added. Execute: npx vitest run src/App.test.tsx src/components/Login.test.tsx src/components/Calculator.test.tsx src/components/Button.test.tsx src/components/Display.test.tsx. Also run npx tsc --noEmit to verify no TypeScript compilation errors. Report any failures with the full error output.",
+      "title": "Run full test suite and validate auth layer",
+      "description": "Run the complete Vitest test suite to confirm all tests pass after the icon assertion fix. Execute: npx vitest run src/App.test.tsx src/components/Login.test.tsx src/components/Calculator.test.tsx src/components/Button.test.tsx src/components/Display.test.tsx. Verify: (1) all test files exit code 0, (2) the login gate test 'renders login page by default' passes, (3) 'shows calculator after successful login' passes, (4) 'shows error message on invalid credentials' passes, (5) theme toggle icon tests pass without emoji assertions.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits with code 0 and all test suites pass",
-        "npx tsc --noEmit exits with code 0 (no TypeScript errors)",
-        "src/components/Login.test.tsx exists and all its tests pass",
-        "src/App.test.tsx tests pass (including any updated tests for the auth flow)"
+        "npx vitest run exits with code 0 across all test files",
+        "Test output shows 'renders login page by default' as passing",
+        "Test output shows 'shows calculator after successful login' as passing",
+        "Test output shows 'theme toggle button shows correct icon for light mode' as passing",
+        "npx tsc --noEmit exits with code 0"
       ],
-      "filename": "src/components/Login.test.tsx",
+      "filename": "src/App.test.tsx",
       "language": "typescript"
     }
   ]

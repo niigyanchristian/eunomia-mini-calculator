@@ -1,0 +1,346 @@
+{
+  "project_name": "eunomia-mini-calculator",
+  "generated_at": "2026-04-12T11:50:57.045729+00:00",
+  "framework": "React",
+  "tokens": {
+    "colors": [
+      {
+        "name": "theme-light",
+        "value": "⚠️ VERIFY",
+        "usage": "Light theme — applied via [data-theme=\"light\"] on .app div and <html>"
+      },
+      {
+        "name": "theme-dark",
+        "value": "⚠️ VERIFY",
+        "usage": "Dark theme — applied via [data-theme=\"dark\"] on .app div and <html>"
+      },
+      {
+        "name": "app-background-light",
+        "value": "⚠️ VERIFY",
+        "usage": "Full-page background behind calculator in light theme"
+      },
+      {
+        "name": "app-background-dark",
+        "value": "⚠️ VERIFY",
+        "usage": "Full-page background behind calculator in dark theme"
+      },
+      {
+        "name": "calculator-body-surface",
+        "value": "⚠️ VERIFY",
+        "usage": "Calculator container surface (.calculator)"
+      },
+      {
+        "name": "display-surface",
+        "value": "⚠️ VERIFY",
+        "usage": "Display area background (.display)"
+      },
+      {
+        "name": "button-surface-default",
+        "value": "⚠️ VERIFY",
+        "usage": "Default button background (.calculator-button)"
+      },
+      {
+        "name": "button-surface-operator",
+        "value": "⚠️ VERIFY",
+        "usage": "Operator button background (.calculator-button.operator) for ÷, ×, -, +"
+      },
+      {
+        "name": "button-surface-equals",
+        "value": "⚠️ VERIFY",
+        "usage": "Equals button background (.calculator-button.equals)"
+      },
+      {
+        "name": "button-surface-clear",
+        "value": "⚠️ VERIFY",
+        "usage": "Clear button background (.calculator-button.clear)"
+      },
+      {
+        "name": "text-light",
+        "value": "⚠️ VERIFY",
+        "usage": "Text colour in light theme"
+      },
+      {
+        "name": "text-dark",
+        "value": "⚠️ VERIFY",
+        "usage": "Text colour in dark theme"
+      }
+    ],
+    "typography": {
+      "font_families": [
+        "⚠️ VERIFY — likely system or monospace for display"
+      ],
+      "scale": [
+        {
+          "name": "h1",
+          "size": "⚠️ VERIFY",
+          "weight": "⚠️ VERIFY",
+          "line_height": "⚠️ VERIFY",
+          "letter_spacing": "⚠️ VERIFY"
+        },
+        {
+          "name": "display",
+          "size": "⚠️ VERIFY",
+          "weight": "⚠️ VERIFY",
+          "line_height": "⚠️ VERIFY",
+          "letter_spacing": "⚠️ VERIFY"
+        },
+        {
+          "name": "calculator-button",
+          "size": "⚠️ VERIFY",
+          "weight": "⚠️ VERIFY",
+          "line_height": "⚠️ VERIFY",
+          "letter_spacing": "⚠️ VERIFY"
+        }
+      ]
+    },
+    "spacing": [
+      {
+        "name": "⚠️ VERIFY",
+        "value": "⚠️ VERIFY — inferred 4-column grid layout; exact spacing values require App.css, Calculator.css, Button.css, Display.css"
+      }
+    ],
+    "radii": [
+      {
+        "name": "button-radius",
+        "value": "⚠️ VERIFY — likely applied to .calculator-button"
+      },
+      {
+        "name": "display-radius",
+        "value": "⚠️ VERIFY — likely applied to .display"
+      },
+      {
+        "name": "calculator-container-radius",
+        "value": "⚠️ VERIFY — likely applied to .calculator container"
+      }
+    ],
+    "shadows": [
+      {
+        "name": "calculator-elevation",
+        "value": "⚠️ VERIFY — calculator container likely has box-shadow for elevation"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "description": "A single calculator key rendered as a native <button> element, supporting digit, operator, equals, clear, and decimal variants.",
+      "category": "atom",
+      "variants": [
+        {
+          "name": "digit",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": ""
+          }
+        },
+        {
+          "name": "operator",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "operator"
+          }
+        },
+        {
+          "name": "equals",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "equals"
+          }
+        },
+        {
+          "name": "clear",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "clear"
+          }
+        },
+        {
+          "name": "decimal",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "⚠️ VERIFY — empty string or \"decimal\""
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "default",
+          "height": "⚠️ VERIFY",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "focus"
+      ],
+      "code_example": "import './Button.css'\n\ninterface ButtonProps {\n  label: string\n  onClick: () => void\n  className?: string\n}\n\nexport function Button({ label, onClick, className = '' }: ButtonProps) {\n  const buttonClass = `calculator-button${className ? ' ' + className : ''}`\n  return (\n    <button className={buttonClass} onClick={onClick}>\n      {label}\n    </button>\n  )\n}",
+      "visual_spec": {
+        "base_class": "calculator-button",
+        "variant_class_construction": "calculator-button {className}",
+        "disabled": "Not implemented — no disabled prop",
+        "keyboard_accessible": "Enter and Space trigger onClick (native button behaviour)",
+        "zero_button": "May span 2 columns — ⚠️ VERIFY",
+        "no_inline_styles": "All styling via CSS classes only"
+      }
+    },
+    {
+      "name": "Display",
+      "description": "A single div that renders the current calculator value, handling integers, decimals, negatives, Error state, and scientific notation.",
+      "category": "atom",
+      "variants": [
+        {
+          "name": "default",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY"
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "default",
+          "height": "⚠️ VERIFY",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "default",
+        "error"
+      ],
+      "code_example": "import './Display.css'\n\ninterface DisplayProps {\n  value: string | number\n}\n\nexport function Display({ value }: DisplayProps) {\n  return (\n    <div className=\"display\">\n      {value}\n    </div>\n  )\n}",
+      "visual_spec": {
+        "selector": ".display",
+        "accepted_values": "string | number — integers, decimals, negative numbers, empty string, 'Error', scientific notation, long strings",
+        "text_alignment": "⚠️ VERIFY — typically right-aligned for calculators",
+        "overflow": "⚠️ VERIFY — likely overflow: hidden or text-overflow: ellipsis or font-size scaling"
+      }
+    },
+    {
+      "name": "Calculator",
+      "description": "Full calculator organism managing all arithmetic state, theme toggling, and rendering the Display and Button grid in a 4-column layout.",
+      "category": "organism",
+      "variants": [
+        {
+          "name": "light-theme",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "data-theme": "light"
+          }
+        },
+        {
+          "name": "dark-theme",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "data-theme": "dark"
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "default",
+          "height": "⚠️ VERIFY",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "default",
+        "error"
+      ],
+      "code_example": "import { useState, useContext } from 'react'\nimport { Moon, Sun } from 'lucide-react'\nimport { Display } from './Display'\nimport { Button } from './Button'\nimport { ThemeContext } from '../App'\nimport './Calculator.css'\n\nexport function Calculator() {\n  const { theme, toggleTheme } = useContext(ThemeContext)\n  const [currentValue, setCurrentValue] = useState('0')\n  const [previousValue, setPreviousValue] = useState('')\n  const [operation, setOperation] = useState('')\n  const [shouldResetDisplay, setShouldResetDisplay] = useState(false)\n\n  const handleDigit = (digit: string) => {\n    if (currentValue === 'Error') {\n      setCurrentValue(digit)\n      return\n    }\n    if (shouldResetDisplay) {\n      setCurrentValue(digit)\n      setShouldResetDisplay(false)\n      return\n    }\n    if (currentValue === '0' && digit !== '.') {\n      setCurrentValue(digit)\n    } else {\n      setCurrentValue(currentValue + digit)\n    }\n  }\n\n  const handleDecimal = () => {\n    if (currentValue === 'Error') {\n      setCurrentValue('0.')\n      return\n    }\n    if (shouldResetDisplay) {\n      setCurrentValue('0.')\n      setShouldResetDisplay(false)\n      return\n    }\n    if (!currentValue.includes('.')) {\n      setCurrentValue(currentValue + '.')\n    }\n  }\n\n  const calculate = (left: number, right: number, op: string): string => {\n    switch (op) {\n      case '+': return String(left + right)\n      case '-': return String(left - right)\n      case '\\u00d7': return String(left * right)\n      case '\\u00f7':\n        if (right === 0) return 'Error'\n        return String(left / right)\n      default: return String(right)\n    }\n  }\n\n  const handleOperation = (nextOp: string) => {\n    if (currentValue === 'Error') return\n    if (previousValue && operation && !shouldResetDisplay) {\n      const result = calculate(parseFloat(previousValue), parseFloat(currentValue), operation)\n      setPreviousValue(result)\n      setCurrentValue(result)\n    } else {\n      setPreviousValue(currentValue)\n    }\n    setOperation(nextOp)\n    setShouldResetDisplay(true)\n  }\n\n  const handleEquals = () => {\n    if (!previousValue || !operation || currentValue === 'Error') return\n    const result = calculate(parseFloat(previousValue), parseFloat(currentValue), operation)\n    setCurrentValue(result)\n    setPreviousValue('')\n    setOperation('')\n    setShouldResetDisplay(true)\n  }\n\n  const handleClear = () => {\n    setCurrentValue('0')\n    setPreviousValue('')\n    setOperation('')\n    setShouldResetDisplay(false)\n  }\n\n  const buttons = [\n    'C', '\\u00f7', '\\u00d7', '-',\n    '7', '8', '9', '+',\n    '4', '5', '6', '=',\n    '1', '2', '3', '.',\n    '0',\n  ]\n\n  const getButtonProps = (label: string) => {\n    const isOperator = ['+', '-', '\\u00d7', '\\u00f7'].includes(label)\n    const isEquals = label === '='\n    const isClear = label === 'C'\n\n    let className = ''\n    if (isOperator) className = 'operator'\n    else if (isEquals) className = 'equals'\n    else if (isClear) className = 'clear'\n\n    let handler: () => void\n    if (label === 'C') handler = handleClear\n    else if (label === '=') handler = handleEquals\n    else if (label === '.') handler = handleDecimal\n    else if (isOperator) handler = () => handleOperation(label)\n    else handler = () => handleDigit(label)\n\n    return { label, onClick: handler, className }\n  }\n\n  return (\n    <div className=\"calculator\">\n      <button\n        className=\"theme-toggle\"\n        onClick={toggleTheme}\n        aria-label=\"Toggle theme\"\n      >\n        {theme === 'light' ? <Moon /> : <Sun />}\n      </button>\n      <Display value={currentValue} />\n      <div className=\"button-grid\">\n        {buttons.map((label) => (\n          <Button key={label} {...getButtonProps(label)} />\n        ))}\n      </div>\n    </div>\n  )\n}",
+      "visual_spec": {
+        "selector": ".calculator",
+        "grid_columns": "4",
+        "button_count": "17",
+        "button_layout_row_1": "C ÷ × -",
+        "button_layout_row_2": "7 8 9 +",
+        "button_layout_row_3": "4 5 6 =",
+        "button_layout_row_4": "1 2 3 .",
+        "button_layout_row_5": "0 (spans multiple columns — ⚠️ VERIFY)",
+        "theme_toggle_icon_light": "Moon (lucide-react) — shown when theme is light",
+        "theme_toggle_icon_dark": "Sun (lucide-react) — shown when theme is dark",
+        "theme_toggle_aria_label": "Toggle theme",
+        "theme_toggle_class": "theme-toggle",
+        "state_currentValue_initial": "'0'",
+        "state_previousValue_initial": "''",
+        "state_operation_initial": "''",
+        "state_shouldResetDisplay_initial": "false",
+        "division_by_zero": "Returns 'Error'",
+        "operator_unicode_multiply": "\\u00d7",
+        "operator_unicode_divide": "\\u00f7",
+        "elevation": "⚠️ VERIFY — likely box-shadow on container"
+      }
+    },
+    {
+      "name": "App",
+      "description": "Root page shell providing the ThemeContext, page heading, and wrapping the Calculator organism in a centred single-page layout.",
+      "category": "organism",
+      "variants": [
+        {
+          "name": "light",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "none",
+            "data-theme": "light"
+          }
+        },
+        {
+          "name": "dark",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "none",
+            "data-theme": "dark"
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "full-page",
+          "height": "min-height: 100vh",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "light-theme",
+        "dark-theme"
+      ],
+      "code_example": "<ThemeContext.Provider value={{ theme, toggleTheme }}>\n  <div className=\"app\" data-theme={theme}>\n    <h1>Chris's Calculator</h1>\n    <Calculator />\n  </div>\n</ThemeContext.Provider>",
+      "visual_spec": {
+        "selector": ".app",
+        "layout": "⚠️ VERIFY — likely display: flex; justify-content: center; align-items: center; min-height: 100vh",
+        "heading_content": "Chris's Calculator",
+        "theme_context_key": "ThemeContext",
+        "localstorage_key": "calculator-theme",
+        "localstorage_valid_values": "\"light\" | \"dark\"",
+        "localstorage_default": "\"light\"",
+        "theme_attribute_targets": "document.documentElement AND .app div",
+        "routing": "None — single-page application",
+        "responsive_mobile_viewport": "375x667px",
+        "responsive_tablet_viewport": "768x1024px",
+        "css_strategy": "Plain .css file imports per component — no CSS Modules, no CSS-in-JS, no Tailwind"
+      }
+    }
+  ]
+}
