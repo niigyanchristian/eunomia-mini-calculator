@@ -14,7 +14,9 @@ export const ThemeContext = createContext<{
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [view, setView] = useState<'login' | 'signup'>('login')
+  const [view, setView] = useState<'login' | 'signup'>(() =>
+    window.location.pathname === '/signup' ? 'signup' : 'login'
+  )
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('calculator-theme')
     return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light'
@@ -38,9 +40,9 @@ export default function App() {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <div className="app" data-theme={theme}>
           {view === 'login' ? (
-            <Login onLogin={handleLogin} onGoToSignup={() => setView('signup')} />
+            <Login onLogin={handleLogin} onGoToSignup={() => { setView('signup'); window.history.pushState(null, '', '/signup') }} />
           ) : (
-            <Signup onSignup={handleLogin} onGoToLogin={() => setView('login')} />
+            <Signup onSignup={handleLogin} onGoToLogin={() => { setView('login'); window.history.pushState(null, '', '/') }} />
           )}
         </div>
       </ThemeContext.Provider>
