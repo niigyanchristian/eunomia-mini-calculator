@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from 'react'
 import './App.css'
 import { Calculator } from './components/Calculator'
 import { Login } from './components/Login'
+import { Signup } from './components/Signup'
 
 export const ThemeContext = createContext<{
   theme: 'light' | 'dark'
@@ -13,6 +14,7 @@ export const ThemeContext = createContext<{
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [view, setView] = useState<'login' | 'signup'>('login')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('calculator-theme')
     return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light'
@@ -35,7 +37,11 @@ export default function App() {
     return (
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <div className="app" data-theme={theme}>
-          <Login onLogin={handleLogin} />
+          {view === 'login' ? (
+            <Login onLogin={handleLogin} onGoToSignup={() => setView('signup')} />
+          ) : (
+            <Signup onSignup={handleLogin} onGoToLogin={() => setView('login')} />
+          )}
         </div>
       </ThemeContext.Provider>
     )
