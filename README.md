@@ -1,4 +1,4 @@
-# Mini Calculator
+# Chris Min Calc
 
 A React calculator application built with Vite and TypeScript.
 
