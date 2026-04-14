@@ -5,16 +5,31 @@
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Rename app title from 'Chris Min Calculator' to 'Chris Min Calc'",
-      "description": "1. WHAT: Rename the calculator app title from 'Chris Min Calculator' to 'Chris Min Calc' across all files where the app name appears.\n2. READ FIRST: Read index.html (line 7 has the <title> tag) and README.md (line 1 has the project heading). Also search the full codebase with grep for 'Chris Min Calculator' to catch any other occurrences.\n3. FILES: Modify index.html — change <title>Chris Min Calculator</title> to <title>Chris Min Calc</title>. Modify README.md — change '# Chris Min Calculator' to '# Chris Min Calc'. If the current title is 'Mini Calculator' rather than 'Chris Min Calculator', update all occurrences of 'Mini Calculator' to 'Chris Min Calc' in both files.\n4. APPROACH: Simple text substitution. No logic changes. Check index.html title tag and README.md heading. Run grep for both 'Chris Min Calculator' and 'Mini Calculator' to find all occurrences.\n5. PATTERNS: No existing pattern to follow — this is a cosmetic text change only.",
+      "title": "Fix h1 heading text to display 'Chris Min Calc'",
+      "description": "1. WHAT: Update the visible h1 heading in App.tsx from 'Mini Calculator' to 'Chris Min Calc', and update the corresponding test assertions in App.test.tsx.\n2. READ FIRST: Read src/App.tsx (line 31 has the <h1> tag currently set to 'Mini Calculator') and src/App.test.tsx (lines 14, 38, 52, 72, 92 use screen.getByText('Mini Calculator') to find the app element).\n3. FILES: Modify src/App.tsx — change <h1>Mini Calculator</h1> to <h1>Chris Min Calc</h1>. Modify src/App.test.tsx — replace all occurrences of 'Mini Calculator' with 'Chris Min Calc' in the getByText() calls (lines 14, 38, 52, 72, 92).\n4. APPROACH: Simple text substitution only. No logic changes. The index.html <title> already correctly reads 'Chris Min Calc' — do not change it. Only change the h1 text in App.tsx and the matching test strings in App.test.tsx.\n5. PATTERNS: No new pattern needed — this is a cosmetic text change.",
       "dependencies": [],
       "acceptance_criteria": [
-        "index.html <title> tag contains 'Chris Min Calc' and not 'Chris Min Calculator' or 'Mini Calculator'",
-        "README.md first heading reads '# Chris Min Calc'",
-        "grep for 'Chris Min Calculator' returns no matches across the entire project"
+        "src/App.tsx line 31 contains <h1>Chris Min Calc</h1>",
+        "src/App.test.tsx contains no occurrences of the string 'Mini Calculator'",
+        "TypeScript compiles without errors: npx tsc --noEmit"
       ],
-      "filename": "index.html",
-      "language": "html"
+      "filename": "src/App.tsx",
+      "language": "typescript"
+    },
+    {
+      "task_id": "QA-001",
+      "task_type": "qa_validation",
+      "recommended_model": "haiku",
+      "title": "Validate heading rename and run full test suite",
+      "description": "Run the full Vitest test suite to confirm all tests pass after the h1 heading change. Execute: npx vitest run src/App.test.tsx src/components/Calculator.test.tsx src/components/Button.test.tsx src/components/Display.test.tsx. Verify that no test references 'Mini Calculator' and that the App tests assert 'Chris Min Calc' as the heading text.",
+      "dependencies": ["REQ-001"],
+      "acceptance_criteria": [
+        "npx vitest run exits with code 0 for src/App.test.tsx",
+        "npx vitest run exits with code 0 for all test files (App, Calculator, Button, Display)",
+        "No test file contains the string 'Mini Calculator'"
+      ],
+      "filename": "src/App.test.tsx",
+      "language": "typescript"
     }
   ]
 }

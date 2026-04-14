@@ -28,7 +28,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
-        <h1>Mini Calculator</h1>
+        <h1>Chris Min Calc</h1>
         <Calculator />
       </div>
     </ThemeContext.Provider>
