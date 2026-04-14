@@ -55,7 +55,7 @@ describe('App Theme Functionality', () => {
   it('theme toggle button shows correct icon for light mode', async () => {
     await renderAndLogin()
     const toggleButton = screen.getByRole('button', { name: /toggle theme/i })
-    expect(toggleButton.textContent).toBe('🌙')
+    expect(toggleButton.querySelector('svg.lucide-moon')).toBeInTheDocument()
   })
 
   it('switches to dark theme when toggle button is clicked', async () => {
@@ -64,10 +64,10 @@ describe('App Theme Functionality', () => {
     const toggleButton = screen.getByRole('button', { name: /toggle theme/i })
     await user.click(toggleButton)
 
-    const appElement = screen.getByText('Mini Calculator').closest('.app')
+    const appElement = screen.getByText('Chris Min Calc').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
-    expect(toggleButton.textContent).toBe('☀️')
+    expect(toggleButton.querySelector('svg.lucide-sun')).toBeInTheDocument()
   })
 
   it('switches back to light theme when toggle button is clicked again', async () => {
@@ -77,10 +77,10 @@ describe('App Theme Functionality', () => {
     await user.click(toggleButton)
     await user.click(toggleButton)
 
-    const appElement = screen.getByText('Mini Calculator').closest('.app')
+    const appElement = screen.getByText('Chris Min Calc').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
-    expect(toggleButton.textContent).toBe('🌙')
+    expect(toggleButton.querySelector('svg.lucide-moon')).toBeInTheDocument()
   })
 
   it('persists theme preference in localStorage', async () => {
@@ -96,7 +96,7 @@ describe('App Theme Functionality', () => {
     localStorage.setItem('calculator-theme', 'dark')
     await renderAndLogin()
 
-    const appElement = screen.getByText('Mini Calculator').closest('.app')
+    const appElement = screen.getByText('Chris Min Calc').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
   })
@@ -115,7 +115,7 @@ describe('App Theme Functionality', () => {
     localStorage.setItem('calculator-theme', 'invalid')
     await renderAndLogin()
 
-    const appElement = screen.getByText('Mini Calculator').closest('.app')
+    const appElement = screen.getByText('Chris Min Calc').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
   })
 
