@@ -5,33 +5,30 @@
       "task_id": "REQ-001",
       "task_type": "bugfix",
       "recommended_model": "sonnet",
-      "title": "Fix signup routing: remove URL-based view init and use pure conditional rendering",
-      "description": "1. WHAT: The QA agent could not find the 'Sign up' button on the login page because App.tsx initialises the `view` state using `window.location.pathname`, which can resolve to an unexpected value in test/hosted environments, causing the Signup view to render instead of Login on first load. The fix is to remove all URL-dependency from the routing and use pure React state-based conditional rendering.\n\n2. READ FIRST: Read src/App.tsx (full file — focus on the `view` useState initialiser and the two `window.history.pushState` calls inside the JSX click handlers). Read src/components/Login.tsx and src/components/Signup.tsx to confirm prop interfaces are unchanged. Read src/App.test.tsx and src/components/Login.test.tsx to understand existing test coverage.\n\n3. FILES:\n   - MODIFY src/App.tsx — change the `view` useState initialiser from `() => window.location.pathname === '/signup' ? 'signup' : 'login'` to simply `'login'` (no lazy init needed). Remove the two `window.history.pushState(...)` calls inside the `onGoToSignup` and `onGoToLogin` click handler arrow functions — keep only the `setView(...)` call in each. No other changes to this file.\n   - MODIFY src/App.test.tsx — audit existing tests; if any test asserts on URL pathname or relies on `window.location`, update or remove those assertions so tests reflect pure state-based routing.\n\n4. APPROACH: The Login and Signup components are already correctly implemented with the 'Sign up' and 'Back to login' buttons present. Only App.tsx needs updating. Do NOT add react-router-dom or any external routing library. The fix is a one-line change to the useState default plus removal of the two pushState side-effects.\n\n5. PATTERNS: The resulting App.tsx view logic should mirror simple conditional rendering: `useState<'login' | 'signup'>('login')` with `setView('signup')` / `setView('login')` as the only navigation mechanism — no URL side-effects.",
+      "title": "Fix Login component prop contract and App.tsx view initialisation",
+      "description": "1. WHAT: Fix two bugs that break the test suite — (a) `onGoToSignup` is a required prop on `Login` but every test renders `<Login onLogin={…} />` without it, causing `tsc --noEmit` to fail; (b) `App.tsx` initialises the `view` state from `window.location.pathname`, which can resolve to an unexpected value in jsdom and in the browser. 2. READ FIRST: `src/components/Login.tsx` (LoginProps interface, button that uses onGoToSignup), `src/components/Login.test.tsx` (all six render calls missing the prop), `src/App.tsx` (view useState initialiser on line 17–19). 3. FILES: Modify `src/components/Login.tsx` — change `onGoToSignup: () => void` to `onGoToSignup?: () => void` in the `LoginProps` interface, and update the button's onClick to `onClick={onGoToSignup ?? (() => {})}` so it remains safe. Modify `src/App.tsx` — replace the lazy initialiser `() => window.location.pathname === '/signup' ? 'signup' : 'login'` with the simple default `'login'`; the existing `onGoToSignup` handler in App already calls `window.history.pushState` when navigating, so URL-based initialisation is not needed. No new files needed. 4. APPROACH: Making the prop optional is the minimal, non-breaking fix — existing callers in App.tsx already pass the prop so nothing regresses there. The App.tsx change removes the sole source of environment-dependent initialisation. 5. PATTERNS: Follow the existing optional-prop pattern already used for `className` in `Button.tsx` (`className?: string`). After making both changes, also write or update the test in `src/components/Login.test.tsx` to add `onGoToSignup={vi.fn()}` to all six `render(<Login …>)` calls as belt-and-suspenders, matching the style of `Signup.test.tsx` which already passes both required props.",
       "dependencies": [],
       "acceptance_criteria": [
-        "When the app first loads, the Sign In form is visible with email and password fields",
-        "A 'Sign up' button or link is visible below the Login submit button on the Sign In form",
-        "Clicking the 'Sign up' link replaces the Sign In form with the Sign Up form (email, password, confirm-password fields visible)",
-        "Clicking 'Back to login' on the Sign Up form returns to the Sign In form"
+        "The Login form is visible and contains Email and Password input fields when the app loads",
+        "Entering wrong credentials and clicking Login shows an 'Invalid email or password' error on screen",
+        "Entering correct credentials (test@gmail.com / test123) and clicking Login navigates away from the login form",
+        "A 'Sign up' link or button is present on the login form"
       ],
-      "filename": "src/App.tsx",
+      "filename": "src/components/Login.tsx",
       "language": "typescript"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to validate signup routing fix",
-      "description": "Run the complete Vitest test suite to confirm all existing tests pass after the App.tsx routing fix. Execute the following commands in order:\n1. npx vitest run src/App.test.tsx\n2. npx vitest run src/components/Login.test.tsx\n3. npx vitest run src/components/Signup.test.tsx\n4. npx vitest run src/auth/credentialStore.test.ts\n5. npx tsc --noEmit\nAll commands must exit with code 0. Report any failures with the exact error output.",
+      "title": "Run full test suite and TypeScript check",
+      "description": "Run the complete Vitest test suite and TypeScript compiler check to confirm all tests pass after the Login bugfix. Execute in order: 1. `npx vitest run` — all test files must pass with zero failures. 2. `npx tsc --noEmit` — must exit 0 with no type errors. Report the full output of any failing test or type error.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run src/App.test.tsx exits code 0 with all tests passing",
-        "npx vitest run src/components/Login.test.tsx exits code 0 with all tests passing",
-        "npx vitest run src/components/Signup.test.tsx exits code 0 with all tests passing",
-        "npx vitest run src/auth/credentialStore.test.ts exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run exits with code 0 and all tests pass",
+        "npx tsc --noEmit exits with code 0 and reports no type errors"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Login.test.tsx",
       "language": "typescript"
     }
   ]
