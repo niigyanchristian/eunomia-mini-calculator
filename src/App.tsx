@@ -38,9 +38,9 @@ export default function App() {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <div className="app" data-theme={theme}>
           {view === 'login' ? (
-            <Login onLogin={handleLogin} onGoToSignup={() => { setView('signup'); window.history.pushState(null, '', '/signup') }} />
+            <Login onLogin={handleLogin} onGoToSignup={() => { setView('signup') }} />
           ) : (
-            <Signup onSignup={handleLogin} onGoToLogin={() => { setView('login'); window.history.pushState(null, '', '/') }} />
+            <Signup onSignup={handleLogin} onGoToLogin={() => { setView('login') }} />
           )}
         </div>
       </ThemeContext.Provider>
@@ -50,7 +50,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
-        <h1>Mini Calculator</h1>
+        <h1>Chris Min Calc</h1>
         <Calculator />
       </div>
     </ThemeContext.Provider>

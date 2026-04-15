@@ -1,6 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
 import { Calculator } from './Calculator'
+import { ThemeContext } from '../App'
 
 function getButton(label: string) {
   return screen.getByRole('button', { name: label })
@@ -289,6 +291,13 @@ describe('Calculator', () => {
       // So equals: calculate(5, 5, '+') = 10
       expect(getDisplay()).toHaveTextContent('10')
     })
+
+    it('pressing equals twice does not repeat the last operation', async () => {
+      await clickButtons(user, ['5', '+', '3', '='])
+      expect(getDisplay()).toHaveTextContent('8')
+      await clickButtons(user, ['='])
+      expect(getDisplay()).toHaveTextContent('8')
+    })
   })
 
   describe('realistic user interactions', () => {
@@ -317,6 +326,14 @@ describe('Calculator', () => {
       expect(getDisplay()).toHaveTextContent('8')
       await clickButtons(user, ['+', '2', '='])
       expect(getDisplay()).toHaveTextContent('10')
+    })
+
+    it('uses negative result as first operand in chained calculation', async () => {
+      // 3 - 8 = -5, then -5 + 3 = -2
+      await clickButtons(user, ['3', '-', '8', '='])
+      expect(getDisplay()).toHaveTextContent('-5')
+      await clickButtons(user, ['+', '3', '='])
+      expect(getDisplay()).toHaveTextContent('-2')
     })
   })
 

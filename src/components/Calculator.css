@@ -49,6 +49,10 @@
   border-radius: 4px;
 }
 
+[data-theme='dark'] .theme-toggle {
+  filter: brightness(0) invert(1);
+}
+
 .button-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -56,7 +60,7 @@
 }
 
 .button-grid .wide {
-  grid-column: span 2;
+  grid-column: span 4;
 }
 
 /* Tablet responsive styles (481px - 768px) */
