@@ -4,7 +4,7 @@ import { validateCredentials } from '../auth/credentialStore'
 
 interface LoginProps {
   onLogin: () => void
-  onGoToSignup: () => void
+  onGoToSignup?: () => void
 }
 
 export function Login({ onLogin, onGoToSignup }: LoginProps) {
@@ -53,7 +53,7 @@ export function Login({ onLogin, onGoToSignup }: LoginProps) {
           </div>
           {error && <p className="login-error" role="alert">{error}</p>}
           <button type="submit" className="login-submit">Login</button>
-          <button type="button" className="login-link" onClick={onGoToSignup}>Sign up</button>
+          <button type="button" className="login-link" onClick={onGoToSignup ?? (() => {})}>Sign up</button>
         </form>
       </div>
     </div>

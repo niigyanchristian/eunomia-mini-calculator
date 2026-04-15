@@ -6,7 +6,7 @@ import { Login } from './Login'
 describe('Login', () => {
   it('renders email and password fields and a submit button', () => {
     const mockOnLogin = vi.fn()
-    render(<Login onLogin={mockOnLogin} />)
+    render(<Login onLogin={mockOnLogin} onGoToSignup={vi.fn()} />)
 
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
@@ -16,7 +16,7 @@ describe('Login', () => {
   it('shows an error message on invalid credentials', async () => {
     const user = userEvent.setup()
     const mockOnLogin = vi.fn()
-    render(<Login onLogin={mockOnLogin} />)
+    render(<Login onLogin={mockOnLogin} onGoToSignup={vi.fn()} />)
 
     await user.type(screen.getByLabelText(/email/i), 'wrong@example.com')
     await user.type(screen.getByLabelText(/password/i), 'wrongpassword')
@@ -30,7 +30,7 @@ describe('Login', () => {
   it('calls onLogin when valid credentials are submitted', async () => {
     const user = userEvent.setup()
     const mockOnLogin = vi.fn()
-    render(<Login onLogin={mockOnLogin} />)
+    render(<Login onLogin={mockOnLogin} onGoToSignup={vi.fn()} />)
 
     await user.type(screen.getByLabelText(/email/i), 'test@gmail.com')
     await user.type(screen.getByLabelText(/password/i), 'test123')
@@ -43,7 +43,7 @@ describe('Login', () => {
   it('does not call onLogin when only the email is correct', async () => {
     const user = userEvent.setup()
     const mockOnLogin = vi.fn()
-    render(<Login onLogin={mockOnLogin} />)
+    render(<Login onLogin={mockOnLogin} onGoToSignup={vi.fn()} />)
 
     await user.type(screen.getByLabelText(/email/i), 'test@gmail.com')
     await user.type(screen.getByLabelText(/password/i), 'wrongpassword')
@@ -56,7 +56,7 @@ describe('Login', () => {
   it('does not call onLogin when only the password is correct', async () => {
     const user = userEvent.setup()
     const mockOnLogin = vi.fn()
-    render(<Login onLogin={mockOnLogin} />)
+    render(<Login onLogin={mockOnLogin} onGoToSignup={vi.fn()} />)
 
     await user.type(screen.getByLabelText(/email/i), 'wrong@example.com')
     await user.type(screen.getByLabelText(/password/i), 'test123')
@@ -69,7 +69,7 @@ describe('Login', () => {
   it('clears error message on successful login after a failed attempt', async () => {
     const user = userEvent.setup()
     const mockOnLogin = vi.fn()
-    render(<Login onLogin={mockOnLogin} />)
+    render(<Login onLogin={mockOnLogin} onGoToSignup={vi.fn()} />)
 
     await user.type(screen.getByLabelText(/email/i), 'wrong@example.com')
     await user.type(screen.getByLabelText(/password/i), 'wrongpassword')

@@ -14,9 +14,7 @@ export const ThemeContext = createContext<{
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [view, setView] = useState<'login' | 'signup'>(() =>
-    window.location.pathname === '/signup' ? 'signup' : 'login'
-  )
+  const [view, setView] = useState<'login' | 'signup'>('login')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('calculator-theme')
     return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light'
