@@ -6,7 +6,7 @@
       "task_type": "qa_validation",
       "recommended_model": "haiku",
       "title": "Run full test suite and verify all tests pass",
-      "description": "Run all existing tests in the project to verify they pass. The test files are: src/App.test.tsx, src/components/Button.test.tsx, src/components/Calculator.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts. Run the full suite with `npx vitest run` from the project root. Also run `npx tsc --noEmit` to verify TypeScript compiles without errors. Report any failing tests or type errors.",
+      "description": "Run the complete Vitest test suite to verify all existing tests pass. READ FIRST: package.json for test script. Run: npx vitest run from the project root. Also run npx tsc --noEmit to check for TypeScript errors.",
       "dependencies": [],
       "acceptance_criteria": [
         "npx vitest run exits code 0 with all tests passing",
