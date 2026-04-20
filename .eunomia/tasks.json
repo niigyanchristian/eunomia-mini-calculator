@@ -2,17 +2,31 @@
   "project_name": "eunomia-mini-calculator",
   "tasks": [
     {
+      "task_id": "REQ-001",
+      "task_type": "modify",
+      "recommended_model": "haiku",
+      "title": "Rename app title to \"Christian's Calculator\" in index.html, App.tsx, and App.test.tsx",
+      "description": "1. WHAT: Update all title/heading text to \"Christian's Calculator\" to satisfy the PRD rename requirement.\n2. READ FIRST: Read `index.html` (browser tab title), `src/App.tsx` (h1 heading on line 55), and `src/App.test.tsx` (test assertions referencing the old title text).\n3. FILES:\n   - `index.html`: Change `<title>Chris Min Calc</title>` to `<title>Christian's Calculator</title>`.\n   - `src/App.tsx`: Change `<h1>Christian's Calcs</h1>` on line 55 to `<h1>Christian's Calculator</h1>`.\n   - `src/App.test.tsx`: Replace every occurrence of the string `'Mini Calculator'` with `\"Christian's Calculator\"`. There are multiple occurrences across lines 24, 29, 39, 44, 68, 99, 119 — update all of them.\n4. APPROACH: Simple find-and-replace for each string literal. Do not change any logic, styling, or other content.\n5. PATTERNS: No new files needed. Follow the existing string literal style in each file.",
+      "dependencies": [],
+      "acceptance_criteria": [
+        "The browser tab title reads \"Christian's Calculator\" when the app is loaded",
+        "The visible heading on the calculator page reads \"Christian's Calculator\" after logging in"
+      ],
+      "filename": "index.html",
+      "language": "typescript"
+    },
+    {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite and verify all tests pass",
-      "description": "Run all existing tests in the project to verify they pass. The test files are: src/App.test.tsx, src/components/Button.test.tsx, src/components/Calculator.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts. Run the full suite with `npx vitest run` from the project root. Also run `npx tsc --noEmit` to verify TypeScript compiles without errors. Report any failing tests or type errors.",
-      "dependencies": [],
+      "title": "Run full test suite to verify rename did not break anything",
+      "description": "Run all project tests to confirm that the title rename in REQ-001 did not break any existing tests. The updated test file is `src/App.test.tsx`. Also run the full suite to catch any regressions.\n\nCommands to run:\n1. `npx vitest run` — all tests must pass\n2. `npx tsc --noEmit` — no TypeScript errors",
+      "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no TypeScript errors"
+        "npx vitest run exits with code 0 and all tests pass",
+        "npx tsc --noEmit exits with code 0"
       ],
-      "filename": "src",
+      "filename": "src/App.test.tsx",
       "language": "typescript"
     }
   ]
