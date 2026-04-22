@@ -11,7 +11,7 @@ describe('App Theme Functionality', () => {
 
   it('renders with light theme by default', () => {
     render(<App />)
-    const appElement = screen.getByText("Chris's Calculator").closest('.app')
+    const appElement = screen.getByText("ChriZ Cal").closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
   })
@@ -35,7 +35,7 @@ describe('App Theme Functionality', () => {
     const toggleButton = screen.getByRole('button', { name: /toggle theme/i })
     await user.click(toggleButton)
 
-    const appElement = screen.getByText("Chris's Calculator").closest('.app')
+    const appElement = screen.getByText("ChriZ Cal").closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     expect(toggleButton.querySelector('svg.lucide-sun')).toBeInTheDocument()
@@ -49,7 +49,7 @@ describe('App Theme Functionality', () => {
     await user.click(toggleButton)
     await user.click(toggleButton)
 
-    const appElement = screen.getByText("Chris's Calculator").closest('.app')
+    const appElement = screen.getByText("ChriZ Cal").closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
     expect(toggleButton.querySelector('svg.lucide-moon')).toBeInTheDocument()
@@ -69,7 +69,7 @@ describe('App Theme Functionality', () => {
     localStorage.setItem('calculator-theme', 'dark')
     render(<App />)
 
-    const appElement = screen.getByText("Chris's Calculator").closest('.app')
+    const appElement = screen.getByText("ChriZ Cal").closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
   })
@@ -89,7 +89,7 @@ describe('App Theme Functionality', () => {
     localStorage.setItem('calculator-theme', 'invalid')
     render(<App />)
 
-    const appElement = screen.getByText("Chris's Calculator").closest('.app')
+    const appElement = screen.getByText("ChriZ Cal").closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
   })
 
