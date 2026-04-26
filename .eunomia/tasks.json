@@ -4,31 +4,29 @@
     {
       "task_id": "REQ-001",
       "task_type": "modify",
-      "recommended_model": "sonnet",
-      "title": "Change calculator button colors by type",
-      "description": "1. WHAT: Add distinct background colors for operator buttons (+, -, ×, ÷), the clear button (C), the equals button (=), and keep digit buttons with their default style, so the calculator is visually easier to use.\n2. READ FIRST: src/components/Button.css (existing button styles and CSS variable usage), src/components/Calculator.tsx (how buttons are rendered and className is passed), src/App.css (CSS variable definitions for :root and dark theme).\n3. FILES: Modify src/components/Button.css to add new variant classes (.operator-button, .clear-button, .equals-button). Modify src/components/Calculator.tsx to assign the correct variant className based on the button label: operators (÷, ×, -, +) get 'operator-button', 'C' gets 'clear-button', '=' gets 'equals-button'. Pass these alongside the existing wide class logic.\n4. APPROACH: In Calculator.tsx, create a helper function getButtonClass(label: string) that returns the appropriate extra class. Combine it with the existing wide-class logic: e.g., className={[label === '0' ? 'wide' : '', getButtonClass(label)].filter(Boolean).join(' ')}. In Button.css, add three new CSS rule blocks — .calculator-button.operator-button, .calculator-button.clear-button, .calculator-button.equals-button — each overriding background, border, and text color with concrete hex values (not CSS variables) so colors are visible in both themes. Suggested: operators = orange (#e67e22 to #d35400), clear = red (#e74c3c to #c0392b), equals = green (#27ae60 to #1e8449). Keep hover/active state rules consistent by also adding :hover overrides for each variant.\n5. PATTERNS: Follow the existing .calculator-button style structure in Button.css. Follow the existing button map and className pattern in Calculator.tsx line 179-185. Write or update src/components/Button.test.tsx and src/components/Calculator.test.tsx to verify that operator buttons receive the 'operator-button' class, the clear button receives 'clear-button', the equals button receives 'equals-button', and digit buttons do not receive any of these classes.",
+      "recommended_model": "haiku",
+      "title": "Change app title to \"Christian's Calc\"",
+      "description": "1. WHAT: Update all title/heading text from the current values to \"Christian's Calc\" across the three files that reference it.\n2. READ FIRST: Read `index.html` (line 7: <title>Chris's Calculator</title>), `src/App.tsx` (line 31: <h1>Mini Calculator</h1>), and `src/App.test.tsx` (multiple lines use screen.getByText(\"Chris's Calculator\") to locate the .app element).\n3. FILES:\n   - Modify `index.html`: change <title>Chris's Calculator</title> to <title>Christian's Calc</title>\n   - Modify `src/App.tsx`: change <h1>Mini Calculator</h1> to <h1>Christian's Calc</h1>\n   - Modify `src/App.test.tsx`: replace every occurrence of \"Chris's Calculator\" with \"Christian's Calc\" (lines 14, 38, 52, 72, 92)\n4. APPROACH: Pure text substitution — no logic changes. The test file uses the h1 text to locate the .app wrapper via .closest('.app'), so the test strings must exactly match the new h1 text.\n5. PATTERNS: All three files already follow the existing conventions; no new files are needed.",
       "dependencies": [],
       "acceptance_criteria": [
-        "npx tsc --noEmit exits with code 0 (no TypeScript errors)",
-        "npm run build exits with code 0",
-        "Operator buttons (÷, ×, -, +) render with class 'operator-button' in the DOM",
-        "Clear button (C) renders with class 'clear-button' and equals button (=) renders with class 'equals-button'"
+        "The page heading displays \"Christian's Calc\" on screen",
+        "The browser tab title shows \"Christian's Calc\""
       ],
-      "filename": "src/components/Button.css",
+      "filename": "src/App.tsx",
       "language": "typescript"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run tests and validate button color changes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the button color changes. Execute: npx vitest run src/components/Button.test.tsx src/components/Calculator.test.tsx src/App.test.tsx. Also run npx tsc --noEmit to confirm no TypeScript errors were introduced.",
+      "title": "Validate title change and run full test suite",
+      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename in REQ-001. Key test file updated is src/App.test.tsx. Also run TypeScript type-check to catch any issues.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
         "npx vitest run exits with code 0 — all tests pass",
-        "npx tsc --noEmit exits with code 0 — no TypeScript errors"
+        "npx tsc --noEmit exits with code 0"
       ],
-      "filename": "src/components/Calculator.test.tsx",
+      "filename": "src/App.test.tsx",
       "language": "typescript"
     }
   ]
