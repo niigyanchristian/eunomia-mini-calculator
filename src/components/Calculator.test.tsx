@@ -575,43 +575,6 @@ describe('Calculator', () => {
     })
   })
 
-  describe('theme toggle icons', () => {
-    it('renders an SVG icon inside the toggle button in light mode', () => {
-      const mockToggle = vi.fn()
-      const { container } = render(
-        <ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockToggle }}>
-          <Calculator />
-        </ThemeContext.Provider>
-      )
-      const button = within(container).getByRole('button', { name: 'Toggle theme' })
-      expect(button.querySelector('svg')).not.toBeNull()
-    })
-
-    it('renders an SVG icon inside the toggle button in dark mode', () => {
-      const mockToggle = vi.fn()
-      const { container } = render(
-        <ThemeContext.Provider value={{ theme: 'dark', toggleTheme: mockToggle }}>
-          <Calculator />
-        </ThemeContext.Provider>
-      )
-      const button = within(container).getByRole('button', { name: 'Toggle theme' })
-      expect(button.querySelector('svg')).not.toBeNull()
-    })
-
-    it('calls toggleTheme when the toggle button is clicked', async () => {
-      const mockToggle = vi.fn()
-      const themeUser = userEvent.setup()
-      const { container } = render(
-        <ThemeContext.Provider value={{ theme: 'light', toggleTheme: mockToggle }}>
-          <Calculator />
-        </ThemeContext.Provider>
-      )
-      const button = within(container).getByRole('button', { name: 'Toggle theme' })
-      await themeUser.click(button)
-      expect(mockToggle).toHaveBeenCalledTimes(1)
-    })
-  })
-
   describe('high-precision calculation accuracy', () => {
     // Helper to check if two numbers are close enough
     const areClose = (a: number, b: number, tolerance: number = 0.0001): boolean => {

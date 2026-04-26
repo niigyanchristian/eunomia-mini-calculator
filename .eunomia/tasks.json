@@ -3,30 +3,32 @@
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Change app title to \"Christian's Calc\"",
-      "description": "1. WHAT: Update all title/heading text from the current values to \"Christian's Calc\" across the three files that reference it.\n2. READ FIRST: Read `index.html` (line 7: <title>Chris's Calculator</title>), `src/App.tsx` (line 31: <h1>Mini Calculator</h1>), and `src/App.test.tsx` (multiple lines use screen.getByText(\"Chris's Calculator\") to locate the .app element).\n3. FILES:\n   - Modify `index.html`: change <title>Chris's Calculator</title> to <title>Christian's Calc</title>\n   - Modify `src/App.tsx`: change <h1>Mini Calculator</h1> to <h1>Christian's Calc</h1>\n   - Modify `src/App.test.tsx`: replace every occurrence of \"Chris's Calculator\" with \"Christian's Calc\" (lines 14, 38, 52, 72, 92)\n4. APPROACH: Pure text substitution — no logic changes. The test file uses the h1 text to locate the .app wrapper via .closest('.app'), so the test strings must exactly match the new h1 text.\n5. PATTERNS: All three files already follow the existing conventions; no new files are needed.",
+      "task_type": "bugfix",
+      "recommended_model": "sonnet",
+      "title": "Fix Login component prop contract and App.tsx view initialisation",
+      "description": "1. WHAT: Fix two bugs that break the test suite — (a) `onGoToSignup` is a required prop on `Login` but every test renders `<Login onLogin={…} />` without it, causing `tsc --noEmit` to fail; (b) `App.tsx` initialises the `view` state from `window.location.pathname`, which can resolve to an unexpected value in jsdom and in the browser. 2. READ FIRST: `src/components/Login.tsx` (LoginProps interface, button that uses onGoToSignup), `src/components/Login.test.tsx` (all six render calls missing the prop), `src/App.tsx` (view useState initialiser on line 17–19). 3. FILES: Modify `src/components/Login.tsx` — change `onGoToSignup: () => void` to `onGoToSignup?: () => void` in the `LoginProps` interface, and update the button's onClick to `onClick={onGoToSignup ?? (() => {})}` so it remains safe. Modify `src/App.tsx` — replace the lazy initialiser `() => window.location.pathname === '/signup' ? 'signup' : 'login'` with the simple default `'login'`; the existing `onGoToSignup` handler in App already calls `window.history.pushState` when navigating, so URL-based initialisation is not needed. No new files needed. 4. APPROACH: Making the prop optional is the minimal, non-breaking fix — existing callers in App.tsx already pass the prop so nothing regresses there. The App.tsx change removes the sole source of environment-dependent initialisation. 5. PATTERNS: Follow the existing optional-prop pattern already used for `className` in `Button.tsx` (`className?: string`). After making both changes, also write or update the test in `src/components/Login.test.tsx` to add `onGoToSignup={vi.fn()}` to all six `render(<Login …>)` calls as belt-and-suspenders, matching the style of `Signup.test.tsx` which already passes both required props.",
       "dependencies": [],
       "acceptance_criteria": [
-        "The page heading displays \"Christian's Calc\" on screen",
-        "The browser tab title shows \"Christian's Calc\""
+        "The Login form is visible and contains Email and Password input fields when the app loads",
+        "Entering wrong credentials and clicking Login shows an 'Invalid email or password' error on screen",
+        "Entering correct credentials (test@gmail.com / test123) and clicking Login navigates away from the login form",
+        "A 'Sign up' link or button is present on the login form"
       ],
-      "filename": "src/App.tsx",
+      "filename": "src/components/Login.tsx",
       "language": "typescript"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Validate title change and run full test suite",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename in REQ-001. Key test file updated is src/App.test.tsx. Also run TypeScript type-check to catch any issues.",
+      "title": "Run full test suite and TypeScript check",
+      "description": "Run the complete Vitest test suite and TypeScript compiler check to confirm all tests pass after the Login bugfix. Execute in order: 1. `npx vitest run` — all test files must pass with zero failures. 2. `npx tsc --noEmit` — must exit 0 with no type errors. Report the full output of any failing test or type error.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits with code 0 — all tests pass",
-        "npx tsc --noEmit exits with code 0"
+        "npx vitest run exits with code 0 and all tests pass",
+        "npx tsc --noEmit exits with code 0 and reports no type errors"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Login.test.tsx",
       "language": "typescript"
     }
   ]

@@ -1,208 +1,345 @@
 {
   "project_name": "eunomia-mini-calculator",
-  "generated_at": "2026-04-17T07:04:39.913242+00:00",
+  "generated_at": "2026-04-12T11:50:57.045729+00:00",
   "framework": "React",
   "tokens": {
     "colors": [
-      { "name": "background-app", "value": "⚠️ VERIFY IN CSS", "usage": "Page background (.app), switches via data-theme attribute" },
-      { "name": "background-calculator", "value": "⚠️ VERIFY IN CSS", "usage": "Calculator container (.calculator)" },
-      { "name": "background-display", "value": "⚠️ VERIFY IN CSS", "usage": "Result display area (.display)" },
-      { "name": "background-button-digit", "value": "⚠️ VERIFY IN CSS", "usage": "Number keys 0-9 and decimal (.calculator-button default variant)" },
-      { "name": "background-button-operator", "value": "⚠️ VERIFY IN CSS", "usage": "Operator keys ÷ × - + (.calculator-button.operator-button)" },
-      { "name": "background-button-clear", "value": "⚠️ VERIFY IN CSS", "usage": "Clear key C (.calculator-button.clear-button)" },
-      { "name": "background-button-equals", "value": "⚠️ VERIFY IN CSS", "usage": "Equals key = (.calculator-button.equals-button)" },
-      { "name": "background-login-card", "value": "⚠️ VERIFY IN CSS", "usage": "Auth card surface (.login-card)" },
-      { "name": "text-primary", "value": "⚠️ VERIFY IN CSS", "usage": "Display value, headings (.display, h1, .login-title)" },
-      { "name": "text-error", "value": "⚠️ VERIFY IN CSS", "usage": "Validation messages (.login-error)" },
-      { "name": "border-input", "value": "⚠️ VERIFY IN CSS", "usage": "Form field borders (.login-input)" }
+      {
+        "name": "theme-light",
+        "value": "⚠️ VERIFY",
+        "usage": "Light theme — applied via [data-theme=\"light\"] on .app div and <html>"
+      },
+      {
+        "name": "theme-dark",
+        "value": "⚠️ VERIFY",
+        "usage": "Dark theme — applied via [data-theme=\"dark\"] on .app div and <html>"
+      },
+      {
+        "name": "app-background-light",
+        "value": "⚠️ VERIFY",
+        "usage": "Full-page background behind calculator in light theme"
+      },
+      {
+        "name": "app-background-dark",
+        "value": "⚠️ VERIFY",
+        "usage": "Full-page background behind calculator in dark theme"
+      },
+      {
+        "name": "calculator-body-surface",
+        "value": "⚠️ VERIFY",
+        "usage": "Calculator container surface (.calculator)"
+      },
+      {
+        "name": "display-surface",
+        "value": "⚠️ VERIFY",
+        "usage": "Display area background (.display)"
+      },
+      {
+        "name": "button-surface-default",
+        "value": "⚠️ VERIFY",
+        "usage": "Default button background (.calculator-button)"
+      },
+      {
+        "name": "button-surface-operator",
+        "value": "⚠️ VERIFY",
+        "usage": "Operator button background (.calculator-button.operator) for ÷, ×, -, +"
+      },
+      {
+        "name": "button-surface-equals",
+        "value": "⚠️ VERIFY",
+        "usage": "Equals button background (.calculator-button.equals)"
+      },
+      {
+        "name": "button-surface-clear",
+        "value": "⚠️ VERIFY",
+        "usage": "Clear button background (.calculator-button.clear)"
+      },
+      {
+        "name": "text-light",
+        "value": "⚠️ VERIFY",
+        "usage": "Text colour in light theme"
+      },
+      {
+        "name": "text-dark",
+        "value": "⚠️ VERIFY",
+        "usage": "Text colour in dark theme"
+      }
     ],
     "typography": {
-      "font_families": [],
+      "font_families": [
+        "⚠️ VERIFY — likely system or monospace for display"
+      ],
       "scale": [
-        { "name": "h1", "size": "⚠️ VERIFY IN CSS", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "h2 / login-title", "size": "⚠️ VERIFY IN CSS", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "display-default", "size": "⚠️ VERIFY IN CSS (CSS default, ≤8 chars)", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "display-medium", "size": "1.5rem", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "display-small", "size": "1.2rem", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "display-minimum", "size": "1rem", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "login-label", "size": "⚠️ VERIFY IN CSS", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "login-error", "size": "⚠️ VERIFY IN CSS", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" },
-        { "name": "button-label", "size": "⚠️ VERIFY IN CSS", "weight": "⚠️ VERIFY IN CSS", "line_height": "⚠️ VERIFY IN CSS", "letter_spacing": "⚠️ VERIFY IN CSS" }
+        {
+          "name": "h1",
+          "size": "⚠️ VERIFY",
+          "weight": "⚠️ VERIFY",
+          "line_height": "⚠️ VERIFY",
+          "letter_spacing": "⚠️ VERIFY"
+        },
+        {
+          "name": "display",
+          "size": "⚠️ VERIFY",
+          "weight": "⚠️ VERIFY",
+          "line_height": "⚠️ VERIFY",
+          "letter_spacing": "⚠️ VERIFY"
+        },
+        {
+          "name": "calculator-button",
+          "size": "⚠️ VERIFY",
+          "weight": "⚠️ VERIFY",
+          "line_height": "⚠️ VERIFY",
+          "letter_spacing": "⚠️ VERIFY"
+        }
       ]
     },
     "spacing": [
-      { "name": "space-xs (recommended)", "value": "4px" },
-      { "name": "space-sm (recommended)", "value": "8px" },
-      { "name": "space-md (recommended)", "value": "16px" },
-      { "name": "space-lg (recommended)", "value": "24px" },
-      { "name": "space-xl (recommended)", "value": "32px" }
+      {
+        "name": "⚠️ VERIFY",
+        "value": "⚠️ VERIFY — inferred 4-column grid layout; exact spacing values require App.css, Calculator.css, Button.css, Display.css"
+      }
     ],
     "radii": [
-      { "name": "radius-button", "value": "⚠️ VERIFY IN Button.css" },
-      { "name": "radius-login-card", "value": "⚠️ VERIFY IN Login.css" },
-      { "name": "radius-login-input", "value": "⚠️ VERIFY IN Login.css" },
-      { "name": "radius-login-submit", "value": "⚠️ VERIFY IN Login.css" }
+      {
+        "name": "button-radius",
+        "value": "⚠️ VERIFY — likely applied to .calculator-button"
+      },
+      {
+        "name": "display-radius",
+        "value": "⚠️ VERIFY — likely applied to .display"
+      },
+      {
+        "name": "calculator-container-radius",
+        "value": "⚠️ VERIFY — likely applied to .calculator container"
+      }
     ],
     "shadows": [
-      { "name": "shadow-login-card", "value": "⚠️ VERIFY IN Login.css" },
-      { "name": "shadow-calculator", "value": "⚠️ VERIFY IN Calculator.css" }
+      {
+        "name": "calculator-elevation",
+        "value": "⚠️ VERIFY — calculator container likely has box-shadow for elevation"
+      }
     ]
   },
   "components": [
     {
       "name": "Button",
-      "description": "Reusable button atom used for all calculator keys with variant styling via className prop.",
-      "category": "molecule",
+      "description": "A single calculator key rendered as a native <button> element, supporting digit, operator, equals, clear, and decimal variants.",
+      "category": "atom",
       "variants": [
-        { "name": "digit", "props": { "bg": "⚠️ VERIFY IN Button.css", "text": "⚠️ VERIFY IN Button.css", "border": "⚠️ VERIFY IN Button.css" } },
-        { "name": "operator", "props": { "bg": "⚠️ VERIFY IN Button.css", "text": "⚠️ VERIFY IN Button.css", "border": "⚠️ VERIFY IN Button.css" } },
-        { "name": "clear", "props": { "bg": "⚠️ VERIFY IN Button.css", "text": "⚠️ VERIFY IN Button.css", "border": "⚠️ VERIFY IN Button.css" } },
-        { "name": "equals", "props": { "bg": "⚠️ VERIFY IN Button.css", "text": "⚠️ VERIFY IN Button.css", "border": "⚠️ VERIFY IN Button.css" } },
-        { "name": "login-submit", "props": { "bg": "⚠️ VERIFY IN Login.css", "text": "⚠️ VERIFY IN Login.css", "border": "⚠️ VERIFY IN Login.css" } },
-        { "name": "login-link", "props": { "bg": "transparent", "text": "⚠️ VERIFY IN Login.css", "border": "none" } },
-        { "name": "theme-toggle", "props": { "bg": "⚠️ VERIFY IN Calculator.css", "text": "⚠️ VERIFY IN Calculator.css", "border": "⚠️ VERIFY IN Calculator.css" } }
+        {
+          "name": "digit",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": ""
+          }
+        },
+        {
+          "name": "operator",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "operator"
+          }
+        },
+        {
+          "name": "equals",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "equals"
+          }
+        },
+        {
+          "name": "clear",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "clear"
+          }
+        },
+        {
+          "name": "decimal",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "className": "⚠️ VERIFY — empty string or \"decimal\""
+          }
+        }
       ],
       "sizes": [
-        { "name": "default", "height": "⚠️ VERIFY IN Button.css", "padding": "⚠️ VERIFY IN Button.css", "font_size": "⚠️ VERIFY IN Button.css" }
+        {
+          "name": "default",
+          "height": "⚠️ VERIFY",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
       ],
-      "states": ["default", "hover", "active"],
-      "code_example": "import './Button.css'\n\ninterface ButtonProps {\n  label: string\n  onClick: () => void\n  className?: string\n}\n\nexport function Button({ label, onClick, className = '' }: ButtonProps) {\n  const buttonClass = `calculator-button${className ? ' ' + className : ''}`\n  return (\n    <button className={buttonClass} onClick={onClick}>\n      {label}\n    </button>\n  )\n}\n\n// Usage — digit\n<Button label=\"7\" onClick={() => handleDigit('7')} />\n\n// Usage — operator\n<Button label=\"+\" onClick={() => handleOperation('+')} className=\"operator-button\" />\n\n// Usage — clear\n<Button label=\"C\" onClick={handleClear} className=\"clear-button\" />\n\n// Usage — equals\n<Button label=\"=\" onClick={handleEquals} className=\"equals-button\" />",
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "focus"
+      ],
+      "code_example": "import './Button.css'\n\ninterface ButtonProps {\n  label: string\n  onClick: () => void\n  className?: string\n}\n\nexport function Button({ label, onClick, className = '' }: ButtonProps) {\n  const buttonClass = `calculator-button${className ? ' ' + className : ''}`\n  return (\n    <button className={buttonClass} onClick={onClick}>\n      {label}\n    </button>\n  )\n}",
       "visual_spec": {
         "base_class": "calculator-button",
-        "operator_class": "operator-button",
-        "clear_class": "clear-button",
-        "equals_class": "equals-button",
-        "login_submit_class": "login-submit",
-        "login_link_class": "login-link",
-        "keyboard_support": "Enter, Space (native <button> behaviour)",
-        "disabled_state": "not implemented",
-        "loading_state": "not implemented",
-        "hover_active_focus_styles": "⚠️ VERIFY IN Button.css"
+        "variant_class_construction": "calculator-button {className}",
+        "disabled": "Not implemented — no disabled prop",
+        "keyboard_accessible": "Enter and Space trigger onClick (native button behaviour)",
+        "zero_button": "May span 2 columns — ⚠️ VERIFY",
+        "no_inline_styles": "All styling via CSS classes only"
       }
     },
     {
       "name": "Display",
-      "description": "Shows the current calculator value with dynamic font sizing based on string length.",
+      "description": "A single div that renders the current calculator value, handling integers, decimals, negatives, Error state, and scientific notation.",
       "category": "atom",
-      "variants": [],
-      "sizes": [
-        { "name": "default (1–8 chars)", "height": "⚠️ VERIFY IN Display.css", "padding": "⚠️ VERIFY IN Display.css", "font_size": "CSS default (⚠️ VERIFY IN Display.css)" },
-        { "name": "medium (9–12 chars)", "height": "⚠️ VERIFY IN Display.css", "padding": "⚠️ VERIFY IN Display.css", "font_size": "1.5rem" },
-        { "name": "small (13–16 chars)", "height": "⚠️ VERIFY IN Display.css", "padding": "⚠️ VERIFY IN Display.css", "font_size": "1.2rem" },
-        { "name": "minimum (17+ chars)", "height": "⚠️ VERIFY IN Display.css", "padding": "⚠️ VERIFY IN Display.css", "font_size": "1rem" }
+      "variants": [
+        {
+          "name": "default",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY"
+          }
+        }
       ],
-      "states": ["default"],
-      "code_example": "import { useMemo } from 'react'\nimport './Display.css'\n\ninterface DisplayProps {\n  value: string | number\n}\n\nexport function Display({ value }: DisplayProps) {\n  const displayValue = String(value)\n\n  const dynamicFontSize = useMemo(() => {\n    const length = displayValue.length\n    if (length <= 8) return undefined\n    if (length <= 12) return '1.5rem'\n    if (length <= 16) return '1.2rem'\n    return '1rem'\n  }, [displayValue])\n\n  return (\n    <div\n      className=\"display\"\n      style={dynamicFontSize ? { fontSize: dynamicFontSize } : undefined}\n    >\n      {displayValue}\n    </div>\n  )\n}",
+      "sizes": [
+        {
+          "name": "default",
+          "height": "⚠️ VERIFY",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "default",
+        "error"
+      ],
+      "code_example": "import './Display.css'\n\ninterface DisplayProps {\n  value: string | number\n}\n\nexport function Display({ value }: DisplayProps) {\n  return (\n    <div className=\"display\">\n      {value}\n    </div>\n  )\n}",
       "visual_spec": {
-        "css_class": "display",
-        "initial_value": "0",
-        "error_value": "Error",
-        "dynamic_font_sizing": "true",
-        "accepts_prop_types": "string | number",
-        "css_file": "Display.css"
-      }
-    },
-    {
-      "name": "Login",
-      "description": "Authentication form organism for signing in with email and password, with inline validation error display.",
-      "category": "organism",
-      "variants": [],
-      "sizes": [],
-      "states": ["default", "error"],
-      "code_example": "import React, { useState } from 'react'\nimport './Login.css'\nimport { validateCredentials } from '../auth/credentialStore'\n\ninterface LoginProps {\n  onLogin: () => void\n  onGoToSignup?: () => void\n}\n\nexport function Login({ onLogin, onGoToSignup }: LoginProps) {\n  const [email, setEmail] = useState('')\n  const [password, setPassword] = useState('')\n  const [error, setError] = useState('')\n\n  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {\n    e.preventDefault()\n    if (validateCredentials(email, password)) {\n      setError('')\n      onLogin()\n    } else {\n      setError('Invalid email or password.')\n    }\n  }\n\n  return (\n    <div className=\"login-container\">\n      <div className=\"login-card\">\n        <h2 className=\"login-title\">Sign In</h2>\n        <form className=\"login-form\" onSubmit={handleSubmit}>\n          <div className=\"login-field\">\n            <label htmlFor=\"email\" className=\"login-label\">Email</label>\n            <input\n              id=\"email\"\n              type=\"email\"\n              className=\"login-input\"\n              value={email}\n              onChange={(e) => setEmail(e.target.value)}\n              placeholder=\"Enter your email\"\n              required\n            />\n          </div>\n          <div className=\"login-field\">\n            <label htmlFor=\"password\" className=\"login-label\">Password</label>\n            <input\n              id=\"password\"\n              type=\"password\"\n              className=\"login-input\"\n              value={password}\n              onChange={(e) => setPassword(e.target.value)}\n              placeholder=\"Enter your password\"\n              required\n            />\n          </div>\n          {error && <p className=\"login-error\" role=\"alert\">{error}</p>}\n          <button type=\"submit\" className=\"login-submit\">Login</button>\n          <button type=\"button\" className=\"login-link\" onClick={onGoToSignup ?? (() => {})}>\n            Sign up\n          </button>\n        </form>\n      </div>\n    </div>\n  )\n}",
-      "visual_spec": {
-        "container_class": "login-container",
-        "card_class": "login-card",
-        "title_class": "login-title",
-        "form_class": "login-form",
-        "field_class": "login-field",
-        "label_class": "login-label",
-        "input_class": "login-input",
-        "error_class": "login-error",
-        "error_role": "alert",
-        "submit_class": "login-submit",
-        "link_class": "login-link",
-        "css_file": "Login.css",
-        "validation_error_message": "Invalid email or password.",
-        "title_text": "Sign In",
-        "submit_label": "Login",
-        "nav_link_label": "Sign up"
-      }
-    },
-    {
-      "name": "Signup",
-      "description": "Authentication form organism for registering a new account with email, password, and confirm-password fields.",
-      "category": "organism",
-      "variants": [],
-      "sizes": [],
-      "states": ["default", "error"],
-      "code_example": "import React, { useState } from 'react'\nimport './Login.css'\nimport { addCredential, emailExists } from '../auth/credentialStore'\n\ninterface SignupProps {\n  onSignup: () => void\n  onGoToLogin: () => void\n}\n\nexport function Signup({ onSignup, onGoToLogin }: SignupProps) {\n  const [email, setEmail] = useState('')\n  const [password, setPassword] = useState('')\n  const [confirmPassword, setConfirmPassword] = useState('')\n  const [error, setError] = useState('')\n\n  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {\n    e.preventDefault()\n    if (password !== confirmPassword) {\n      setError('Passwords do not match.')\n      return\n    }\n    if (emailExists(email)) {\n      setError('An account with this email already exists.')\n      return\n    }\n    addCredential(email, password)\n    setError('')\n    onSignup()\n  }\n\n  return (\n    <div className=\"login-container\">\n      <div className=\"login-card\">\n        <h2 className=\"login-title\">Sign Up</h2>\n        <form className=\"login-form\" onSubmit={handleSubmit}>\n          {/* email field */}\n          {/* password field */}\n          {/* confirm password field */}\n          {error && <p className=\"login-error\" role=\"alert\">{error}</p>}\n          <button type=\"submit\" className=\"login-submit\">Sign Up</button>\n          <button type=\"button\" className=\"login-link\" onClick={onGoToLogin}>\n            Back to login\n          </button>\n        </form>\n      </div>\n    </div>\n  )\n}",
-      "visual_spec": {
-        "container_class": "login-container",
-        "card_class": "login-card",
-        "title_class": "login-title",
-        "form_class": "login-form",
-        "field_class": "login-field",
-        "label_class": "login-label",
-        "input_class": "login-input",
-        "error_class": "login-error",
-        "error_role": "alert",
-        "submit_class": "login-submit",
-        "link_class": "login-link",
-        "css_file": "Login.css (shared with Login)",
-        "validation_error_password_mismatch": "Passwords do not match.",
-        "validation_error_duplicate_email": "An account with this email already exists.",
-        "title_text": "Sign Up",
-        "submit_label": "Sign Up",
-        "nav_link_label": "Back to login",
-        "fields": ["email", "password", "confirm-password"]
+        "selector": ".display",
+        "accepted_values": "string | number — integers, decimals, negative numbers, empty string, 'Error', scientific notation, long strings",
+        "text_alignment": "⚠️ VERIFY — typically right-aligned for calculators",
+        "overflow": "⚠️ VERIFY — likely overflow: hidden or text-overflow: ellipsis or font-size scaling"
       }
     },
     {
       "name": "Calculator",
-      "description": "Primary organism after authentication; contains Display, theme toggle, and full button grid with arithmetic state machine.",
+      "description": "Full calculator organism managing all arithmetic state, theme toggling, and rendering the Display and Button grid in a 4-column layout.",
       "category": "organism",
-      "variants": [],
-      "sizes": [],
-      "states": ["initial", "digit-entry", "decimal", "operator", "equals", "error"],
-      "code_example": "// Calculator structure\n// .calculator\n//   ├─ <Display />          ← .display\n//   ├─ Theme toggle button  ← aria-label=\"Toggle theme\"\n//   └─ Button grid          ← CSS Grid\n//        Row 1: C  ÷  ×  -\n//        Row 2: 7  8  9  +\n//        Row 3: 4  5  6  =\n//        Row 4: 1  2  3  .\n//        Row 5: 0 (spans columns)\n\n// Button order: ['C', '÷', '×', '-', '7', '8', '9', '+', '4', '5', '6', '=', '1', '2', '3', '.', '0']",
+      "variants": [
+        {
+          "name": "light-theme",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "data-theme": "light"
+          }
+        },
+        {
+          "name": "dark-theme",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "⚠️ VERIFY",
+            "data-theme": "dark"
+          }
+        }
+      ],
+      "sizes": [
+        {
+          "name": "default",
+          "height": "⚠️ VERIFY",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "default",
+        "error"
+      ],
+      "code_example": "import { useState, useContext } from 'react'\nimport { Moon, Sun } from 'lucide-react'\nimport { Display } from './Display'\nimport { Button } from './Button'\nimport { ThemeContext } from '../App'\nimport './Calculator.css'\n\nexport function Calculator() {\n  const { theme, toggleTheme } = useContext(ThemeContext)\n  const [currentValue, setCurrentValue] = useState('0')\n  const [previousValue, setPreviousValue] = useState('')\n  const [operation, setOperation] = useState('')\n  const [shouldResetDisplay, setShouldResetDisplay] = useState(false)\n\n  const handleDigit = (digit: string) => {\n    if (currentValue === 'Error') {\n      setCurrentValue(digit)\n      return\n    }\n    if (shouldResetDisplay) {\n      setCurrentValue(digit)\n      setShouldResetDisplay(false)\n      return\n    }\n    if (currentValue === '0' && digit !== '.') {\n      setCurrentValue(digit)\n    } else {\n      setCurrentValue(currentValue + digit)\n    }\n  }\n\n  const handleDecimal = () => {\n    if (currentValue === 'Error') {\n      setCurrentValue('0.')\n      return\n    }\n    if (shouldResetDisplay) {\n      setCurrentValue('0.')\n      setShouldResetDisplay(false)\n      return\n    }\n    if (!currentValue.includes('.')) {\n      setCurrentValue(currentValue + '.')\n    }\n  }\n\n  const calculate = (left: number, right: number, op: string): string => {\n    switch (op) {\n      case '+': return String(left + right)\n      case '-': return String(left - right)\n      case '\\u00d7': return String(left * right)\n      case '\\u00f7':\n        if (right === 0) return 'Error'\n        return String(left / right)\n      default: return String(right)\n    }\n  }\n\n  const handleOperation = (nextOp: string) => {\n    if (currentValue === 'Error') return\n    if (previousValue && operation && !shouldResetDisplay) {\n      const result = calculate(parseFloat(previousValue), parseFloat(currentValue), operation)\n      setPreviousValue(result)\n      setCurrentValue(result)\n    } else {\n      setPreviousValue(currentValue)\n    }\n    setOperation(nextOp)\n    setShouldResetDisplay(true)\n  }\n\n  const handleEquals = () => {\n    if (!previousValue || !operation || currentValue === 'Error') return\n    const result = calculate(parseFloat(previousValue), parseFloat(currentValue), operation)\n    setCurrentValue(result)\n    setPreviousValue('')\n    setOperation('')\n    setShouldResetDisplay(true)\n  }\n\n  const handleClear = () => {\n    setCurrentValue('0')\n    setPreviousValue('')\n    setOperation('')\n    setShouldResetDisplay(false)\n  }\n\n  const buttons = [\n    'C', '\\u00f7', '\\u00d7', '-',\n    '7', '8', '9', '+',\n    '4', '5', '6', '=',\n    '1', '2', '3', '.',\n    '0',\n  ]\n\n  const getButtonProps = (label: string) => {\n    const isOperator = ['+', '-', '\\u00d7', '\\u00f7'].includes(label)\n    const isEquals = label === '='\n    const isClear = label === 'C'\n\n    let className = ''\n    if (isOperator) className = 'operator'\n    else if (isEquals) className = 'equals'\n    else if (isClear) className = 'clear'\n\n    let handler: () => void\n    if (label === 'C') handler = handleClear\n    else if (label === '=') handler = handleEquals\n    else if (label === '.') handler = handleDecimal\n    else if (isOperator) handler = () => handleOperation(label)\n    else handler = () => handleDigit(label)\n\n    return { label, onClick: handler, className }\n  }\n\n  return (\n    <div className=\"calculator\">\n      <button\n        className=\"theme-toggle\"\n        onClick={toggleTheme}\n        aria-label=\"Toggle theme\"\n      >\n        {theme === 'light' ? <Moon /> : <Sun />}\n      </button>\n      <Display value={currentValue} />\n      <div className=\"button-grid\">\n        {buttons.map((label) => (\n          <Button key={label} {...getButtonProps(label)} />\n        ))}\n      </div>\n    </div>\n  )\n}",
       "visual_spec": {
-        "container_class": "calculator",
-        "css_file": "Calculator.css",
-        "layout": "CSS Grid (⚠️ VERIFY IN Calculator.css)",
-        "initial_display": "0",
+        "selector": ".calculator",
+        "grid_columns": "4",
+        "button_count": "17",
+        "button_layout_row_1": "C ÷ × -",
+        "button_layout_row_2": "7 8 9 +",
+        "button_layout_row_3": "4 5 6 =",
+        "button_layout_row_4": "1 2 3 .",
+        "button_layout_row_5": "0 (spans multiple columns — ⚠️ VERIFY)",
+        "theme_toggle_icon_light": "Moon (lucide-react) — shown when theme is light",
+        "theme_toggle_icon_dark": "Sun (lucide-react) — shown when theme is dark",
         "theme_toggle_aria_label": "Toggle theme",
-        "theme_toggle_light_icon": "🌙",
-        "theme_toggle_dark_icon": "☀️",
-        "button_order": ["C", "÷", "×", "-", "7", "8", "9", "+", "4", "5", "6", "=", "1", "2", "3", ".", "0"],
-        "division_by_zero": "Error",
-        "range_check": "Math.abs(num) <= 9999999999, otherwise Error",
-        "precision": "Rounds to 14 significant digits",
-        "error_recovery": "Any digit press after 'Error' resets to that digit",
-        "responsive_viewports": ["375x667 (mobile)", "768x1024 (tablet)"]
+        "theme_toggle_class": "theme-toggle",
+        "state_currentValue_initial": "'0'",
+        "state_previousValue_initial": "''",
+        "state_operation_initial": "''",
+        "state_shouldResetDisplay_initial": "false",
+        "division_by_zero": "Returns 'Error'",
+        "operator_unicode_multiply": "\\u00d7",
+        "operator_unicode_divide": "\\u00f7",
+        "elevation": "⚠️ VERIFY — likely box-shadow on container"
       }
     },
     {
-      "name": "Input / TextField",
-      "description": "Inline text input pattern used in auth forms for email, password, and confirm-password fields; not extracted as a standalone reusable component.",
-      "category": "atom",
+      "name": "App",
+      "description": "Root page shell providing the ThemeContext, page heading, and wrapping the Calculator organism in a centred single-page layout.",
+      "category": "organism",
       "variants": [
-        { "name": "email", "props": { "type": "email", "id": "email", "placeholder": "Enter your email", "bg": "⚠️ VERIFY IN Login.css", "text": "⚠️ VERIFY IN Login.css", "border": "⚠️ VERIFY IN Login.css" } },
-        { "name": "password", "props": { "type": "password", "id": "password", "placeholder": "Enter your password", "bg": "⚠️ VERIFY IN Login.css", "text": "⚠️ VERIFY IN Login.css", "border": "⚠️ VERIFY IN Login.css" } },
-        { "name": "confirm-password", "props": { "type": "password", "id": "confirm-password", "placeholder": "Confirm your password", "bg": "⚠️ VERIFY IN Login.css", "text": "⚠️ VERIFY IN Login.css", "border": "⚠️ VERIFY IN Login.css" } }
+        {
+          "name": "light",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "none",
+            "data-theme": "light"
+          }
+        },
+        {
+          "name": "dark",
+          "props": {
+            "bg": "⚠️ VERIFY",
+            "text": "⚠️ VERIFY",
+            "border": "none",
+            "data-theme": "dark"
+          }
+        }
       ],
-      "sizes": [],
-      "states": ["default", "focused", "error"],
-      "code_example": "<div className=\"login-field\">\n  <label htmlFor=\"email\" className=\"login-label\">Email</label>\n  <input\n    id=\"email\"\n    type=\"email\"\n    className=\"login-input\"\n    value={email}\n    onChange={(e) => setEmail(e.target.value)}\n    placeholder=\"Enter your email\"\n    required\n  />\n</div>",
+      "sizes": [
+        {
+          "name": "full-page",
+          "height": "min-height: 100vh",
+          "padding": "⚠️ VERIFY",
+          "font_size": "⚠️ VERIFY"
+        }
+      ],
+      "states": [
+        "light-theme",
+        "dark-theme"
+      ],
+      "code_example": "<ThemeContext.Provider value={{ theme, toggleTheme }}>\n  <div className=\"app\" data-theme={theme}>\n    <h1>Chris's Calculator</h1>\n    <Calculator />\n  </div>\n</ThemeContext.Provider>",
       "visual_spec": {
-        "wrapper_class": "login-field",
-        "input_class": "login-input",
-        "label_class": "login-label",
-        "focus_style": "⚠️ VERIFY CSS :focus pseudo-class in Login.css",
-        "error_display": "via .login-error paragraph, not on input itself",
-        "required": "true",
-        "disabled_state": "not implemented",
-        "css_file": "Login.css"
+        "selector": ".app",
+        "layout": "⚠️ VERIFY — likely display: flex; justify-content: center; align-items: center; min-height: 100vh",
+        "heading_content": "Chris's Calculator",
+        "theme_context_key": "ThemeContext",
+        "localstorage_key": "calculator-theme",
+        "localstorage_valid_values": "\"light\" | \"dark\"",
+        "localstorage_default": "\"light\"",
+        "theme_attribute_targets": "document.documentElement AND .app div",
+        "routing": "None — single-page application",
+        "responsive_mobile_viewport": "375x667px",
+        "responsive_tablet_viewport": "768x1024px",
+        "css_strategy": "Plain .css file imports per component — no CSS Modules, no CSS-in-JS, no Tailwind"
       }
     }
   ]
