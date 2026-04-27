@@ -105,6 +105,43 @@ h1 {
   transition: color 0.3s ease;
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.logout-button {
+  position: absolute;
+  right: 0;
+  background: linear-gradient(to bottom, var(--button-bg-start), var(--button-bg-end));
+  color: var(--app-text);
+  border: 1px solid var(--button-border);
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.3s ease;
+  box-shadow: 0 1px 3px var(--button-shadow);
+}
+
+.logout-button:hover {
+  background: linear-gradient(to bottom, var(--button-hover-bg-start), var(--button-hover-bg-end));
+  border-color: var(--button-hover-border);
+}
+
+.logout-button:active {
+  background: linear-gradient(to bottom, var(--button-active-bg-start), var(--button-active-bg-end));
+  border-color: var(--button-active-border);
+}
+
+.logout-button:focus-visible {
+  outline: 2px solid var(--button-focus-outline);
+  outline-offset: 2px;
+}
+
 /* Tablet responsive styles (481px - 768px) */
 @media (max-width: 768px) {
   .app {

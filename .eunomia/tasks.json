@@ -4,13 +4,14 @@
     {
       "task_id": "REQ-001",
       "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Change app title to a funny name across all files and tests",
-      "description": "1. WHAT: Change the app title from 'Mini Calculator' to 'Crunchy Number Muncher' (a funny calculator name) in all locations, and update the HTML page title too.\n2. READ FIRST: Read `index.html` (line 7 has <title>Chris Min Calc</title>), `src/App.tsx` (line 55 has <h1>Mini Calculator</h1>), and `src/App.test.tsx` (references 'Mini Calculator' in multiple assertions).\n3. FILES: Modify `index.html` — change <title> to 'Crunchy Number Muncher'. Modify `src/App.tsx` — change the <h1> text to 'Crunchy Number Muncher'. Modify `src/App.test.tsx` — update ALL occurrences of 'Mini Calculator' to 'Crunchy Number Muncher' (there are ~8 references including getByText, queryByText, and .closest calls).\n4. APPROACH: Simple find-and-replace of the title string in all three files. No logic changes needed.\n5. PATTERNS: The test file uses screen.getByText('Mini Calculator') and screen.queryByText('Mini Calculator') — replace all with the new title.",
+      "recommended_model": "sonnet",
+      "title": "Add logout button to authenticated calculator view",
+      "description": "1. WHAT: Add a logout button that sets `isAuthenticated` back to `false`, returning the user to the login screen.\n2. READ FIRST: Read `src/App.tsx` (lines 15-60 — auth state and both render branches), `src/App.css` (for existing styles and theme variables), `src/App.test.tsx` (for existing test patterns and the `renderAndLogin` helper).\n3. FILES: Modify `src/App.tsx` — add a `handleLogout` function that calls `setIsAuthenticated(false)` and render a logout button in the authenticated view (the second return block, around line 52-58). Add a `<button>` with class `logout-button` and text `Logout` near the top of the authenticated layout (e.g., next to the h1). Modify `src/App.css` — add `.logout-button` styles that use the existing theme CSS variables (`--app-text`, `--button-bg-start`, `--button-border`, etc.) for both light and dark themes. Style it as a small, unobtrusive button positioned near the header. Modify `src/App.test.tsx` — add tests: (a) after login, a 'Logout' button is visible, (b) clicking the Logout button returns to the login screen (login form is visible again, calculator title is not).\n4. APPROACH: Add `handleLogout` as a simple state setter `() => setIsAuthenticated(false)`. Place the logout button inside the authenticated `.app` div, above or beside the `<h1>`. Use existing CSS variables for theming consistency.\n5. PATTERNS: Follow the same test patterns in `src/App.test.tsx` — use the existing `renderAndLogin()` helper, then interact with the logout button via `screen.getByRole('button', { name: /logout/i })`.",
       "dependencies": [],
       "acceptance_criteria": [
-        "After logging in, the page heading displays 'Crunchy Number Muncher' instead of 'Mini Calculator'",
-        "The browser tab title shows 'Crunchy Number Muncher'"
+        "After logging in, a 'Logout' button is visible on the calculator page",
+        "Clicking the 'Logout' button returns the user to the login screen",
+        "The logout button is styled consistently in both light and dark themes"
       ],
       "filename": "src/App.tsx",
       "language": "typescript"
@@ -19,12 +20,12 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to verify title rename passes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename. Key files: src/App.test.tsx (theme tests reference the new title), src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts.",
+      "title": "Validate logout functionality and run test suite",
+      "description": "Run the full Vitest test suite to confirm all tests pass after adding the logout button. Key test files: `src/App.test.tsx` (new logout tests plus existing theme/login tests), `src/components/Calculator.test.tsx`, `src/components/Button.test.tsx`, `src/components/Display.test.tsx`, `src/components/Login.test.tsx`, `src/components/Signup.test.tsx`. Also run TypeScript type-check to catch any type errors.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run exits code 0 — all tests pass",
+        "npx tsc --noEmit exits code 0 — no type errors"
       ],
       "filename": "src/App.test.tsx",
       "language": "typescript"

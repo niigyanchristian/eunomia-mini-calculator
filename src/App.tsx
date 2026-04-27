@@ -35,6 +35,10 @@ export default function App() {
     setIsAuthenticated(true)
   }
 
+  const handleLogout = () => {
+    setIsAuthenticated(false)
+  }
+
   if (!isAuthenticated) {
     return (
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -52,7 +56,10 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
-        <h1>Crunchy Number Muncher</h1>
+        <div className="app-header">
+          <h1>Crunchy Number Muncher</h1>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        </div>
         <Calculator />
       </div>
     </ThemeContext.Provider>

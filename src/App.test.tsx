@@ -119,6 +119,18 @@ describe('App Theme Functionality', () => {
     expect(appElement).toHaveAttribute('data-theme', 'light')
   })
 
+  it('shows logout button after login', async () => {
+    await renderAndLogin()
+    expect(screen.getByRole('button', { name: /logout/i })).toBeInTheDocument()
+  })
+
+  it('clicking logout button returns to the login screen', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /logout/i }))
+    expect(screen.getByRole('button', { name: /^login$/i })).toBeInTheDocument()
+    expect(screen.queryByText('Crunchy Number Muncher')).not.toBeInTheDocument()
+  })
+
   it('applies data-theme attribute to document root', async () => {
     const user = await renderAndLogin()
 
