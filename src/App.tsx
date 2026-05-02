@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from 'react'
 import './App.css'
 import { Calculator } from './components/Calculator'
+import { About } from './components/About'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
 
@@ -17,6 +18,7 @@ export default function App() {
   const [view, setView] = useState<'login' | 'signup'>(() =>
     window.location.pathname === '/signup' ? 'signup' : 'login'
   )
+  const [page, setPage] = useState<'calculator' | 'about'>('calculator')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('calculator-theme')
     return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light'
@@ -53,7 +55,21 @@ export default function App() {
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
         <h1>Crunchy Number Muncher</h1>
-        <Calculator />
+        <nav className="app-nav">
+          <button
+            className={`app-nav-link${page === 'calculator' ? ' active' : ''}`}
+            onClick={() => setPage('calculator')}
+          >
+            Calculator
+          </button>
+          <button
+            className={`app-nav-link${page === 'about' ? ' active' : ''}`}
+            onClick={() => setPage('about')}
+          >
+            About
+          </button>
+        </nav>
+        {page === 'calculator' ? <Calculator /> : <About />}
       </div>
     </ThemeContext.Provider>
   )

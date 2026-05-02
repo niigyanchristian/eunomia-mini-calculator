@@ -130,3 +130,46 @@ describe('App Theme Functionality', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark')
   })
 })
+
+describe('App Navigation', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    document.documentElement.removeAttribute('data-theme')
+  })
+
+  it('shows About navigation link after login', async () => {
+    await renderAndLogin()
+    expect(screen.getByRole('button', { name: /about/i })).toBeInTheDocument()
+  })
+
+  it('shows Calculator navigation link after login', async () => {
+    await renderAndLogin()
+    expect(screen.getByRole('button', { name: /^calculator$/i })).toBeInTheDocument()
+  })
+
+  it('clicking About nav link displays About heading', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /about/i }))
+    expect(screen.getByRole('heading', { name: /about/i })).toBeInTheDocument()
+  })
+
+  it('clicking About nav link hides the calculator', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /about/i }))
+    expect(screen.queryByRole('button', { name: /toggle theme/i })).not.toBeInTheDocument()
+  })
+
+  it('clicking Calculator nav link from About page shows the calculator', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /about/i }))
+    await user.click(screen.getByRole('button', { name: /^calculator$/i }))
+    expect(screen.getByRole('button', { name: /toggle theme/i })).toBeInTheDocument()
+  })
+
+  it('clicking Calculator nav link from About page hides the About heading', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /about/i }))
+    await user.click(screen.getByRole('button', { name: /^calculator$/i }))
+    expect(screen.queryByRole('heading', { name: /about/i })).not.toBeInTheDocument()
+  })
+})

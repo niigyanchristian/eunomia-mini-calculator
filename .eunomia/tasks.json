@@ -1,32 +1,43 @@
 {
   "project_name": "eunomia-mini-calculator",
+  "planning_assumptions": [
+    "The About page should be accessible from the authenticated (post-login) view, since the app gates all content behind login.",
+    "No React Router is installed; the app uses state-based routing with window.history.pushState — the About page will follow the same pattern using a 'page' state variable in the authenticated section.",
+    "The Penpot design file was not accessible, so styling will use the existing CSS custom properties (--app-bg, --app-text, etc.) defined in App.css to stay consistent with the design system.",
+    "Navigation between Calculator and About will be done with simple text links/buttons consistent with the existing button component style.",
+    "Previous session tasks were marked done but no files were committed — treating this as a fresh implementation."
+  ],
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Change app title to a funny name across all files and tests",
-      "description": "1. WHAT: Change the app title from 'Mini Calculator' to 'Crunchy Number Muncher' (a funny calculator name) in all locations, and update the HTML page title too.\n2. READ FIRST: Read `index.html` (line 7 has <title>Chris Min Calc</title>), `src/App.tsx` (line 55 has <h1>Mini Calculator</h1>), and `src/App.test.tsx` (references 'Mini Calculator' in multiple assertions).\n3. FILES: Modify `index.html` — change <title> to 'Crunchy Number Muncher'. Modify `src/App.tsx` — change the <h1> text to 'Crunchy Number Muncher'. Modify `src/App.test.tsx` — update ALL occurrences of 'Mini Calculator' to 'Crunchy Number Muncher' (there are ~8 references including getByText, queryByText, and .closest calls).\n4. APPROACH: Simple find-and-replace of the title string in all three files. No logic changes needed.\n5. PATTERNS: The test file uses screen.getByText('Mini Calculator') and screen.queryByText('Mini Calculator') — replace all with the new title.",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Create About page component and integrate into app navigation",
+      "description": "1. WHAT: Create a new About page that shows a heading 'About' and a short descriptive paragraph about the calculator app, accessible from the authenticated (post-login) view via navigation links. 2. READ FIRST: Read src/App.tsx (routing pattern and theme context usage), src/App.css (CSS variables and design tokens), src/components/Calculator.tsx and src/components/Calculator.css (component style patterns), src/App.test.tsx (existing test structure for App-level navigation tests). 3. FILES TO CREATE: src/components/About.tsx — named export 'About' component with an <h2>About</h2> heading and a descriptive paragraph. src/components/About.css — styles using CSS variables (--app-bg, --app-text, --button-bg-start, etc.) matching the existing design system from App.css. src/components/About.test.tsx — tests for the About component rendering the heading and paragraph text. 4. FILES TO MODIFY: src/App.tsx — in the authenticated return block, add a 'page' state ('calculator' | 'about'), render About component when page is 'about' and Calculator when 'calculator', add navigation links to switch between the two pages. src/App.test.tsx — add tests verifying the About navigation link appears after login, clicking it shows the About heading, and clicking back to Calculator shows the calculator. 5. APPROACH: Follow the exact same state+pushState pattern already in App.tsx for login/signup view switching. The About component should accept no props and use ThemeContext via useContext if it needs theme-aware classes. CSS should use the same CSS custom properties (--app-bg, --app-text) as the rest of the app for automatic light/dark theme support. Navigation links should use a <nav> element with simple anchor-style buttons (no full page reload). 6. PATTERNS: Follow src/components/Login.tsx for component structure (named export, TypeScript interfaces for props), src/components/Login.css for CSS variable usage, and src/components/Login.test.tsx for test patterns (vi.mock, render, screen queries).",
       "dependencies": [],
       "acceptance_criteria": [
-        "After logging in, the page heading displays 'Crunchy Number Muncher' instead of 'Mini Calculator'",
-        "The browser tab title shows 'Crunchy Number Muncher'"
+        "After logging in, a navigation link or button labeled 'About' is visible on the screen",
+        "Clicking the 'About' navigation link displays a heading with the text 'About' on the page",
+        "The About page shows a paragraph describing the calculator project",
+        "A navigation link to return to the Calculator view is visible on the About page, and clicking it brings back the calculator"
       ],
-      "filename": "src/App.tsx",
+      "filename": "src/components/About.tsx",
       "language": "typescript"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to verify title rename passes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename. Key files: src/App.test.tsx (theme tests reference the new title), src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts.",
+      "title": "Run full test suite and type-check the About page implementation",
+      "description": "Validate the About page implementation by running all tests and TypeScript compilation. 1. Run the About component tests: npx vitest run src/components/About.test.tsx 2. Run the full App test suite to catch regressions: npx vitest run src/App.test.tsx 3. Run the complete test suite: npx vitest run 4. Type-check the project: npx tsc --noEmit. All steps must exit with code 0.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run src/components/About.test.tsx exits code 0 with all tests passing",
+        "npx vitest run src/App.test.tsx exits code 0 with all tests passing",
+        "npx vitest run exits code 0 — no test failures across the full suite",
+        "npx tsc --noEmit exits code 0 — no TypeScript compilation errors"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/About.test.tsx",
       "language": "typescript"
     }
   ]

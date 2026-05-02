@@ -105,6 +105,45 @@ h1 {
   transition: color 0.3s ease;
 }
 
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.app-nav-link {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--app-text);
+  background: linear-gradient(180deg, var(--button-bg-start) 0%, var(--button-bg-end) 100%);
+  border: 1px solid var(--button-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px var(--button-shadow);
+}
+
+.app-nav-link:hover {
+  background: linear-gradient(180deg, var(--button-hover-bg-start) 0%, var(--button-hover-bg-end) 100%);
+  border-color: var(--button-hover-border);
+  box-shadow: 0 3px 6px var(--button-hover-shadow);
+  transform: translateY(-1px);
+}
+
+.app-nav-link.active {
+  background: linear-gradient(180deg, var(--button-active-bg-start) 0%, var(--button-active-bg-end) 100%);
+  border-color: var(--button-active-border);
+  box-shadow: 0 1px 2px var(--button-shadow) inset;
+  transform: translateY(0);
+}
+
+.app-nav-link:focus {
+  outline: 2px solid var(--button-focus-outline);
+  outline-offset: 2px;
+}
+
 /* Tablet responsive styles (481px - 768px) */
 @media (max-width: 768px) {
   .app {
