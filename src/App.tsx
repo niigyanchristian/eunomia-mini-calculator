@@ -3,6 +3,7 @@ import './App.css'
 import { Calculator } from './components/Calculator'
 import { Login } from './components/Login'
 import { Signup } from './components/Signup'
+import { About } from './components/About'
 
 export const ThemeContext = createContext<{
   theme: 'light' | 'dark'
@@ -17,6 +18,7 @@ export default function App() {
   const [view, setView] = useState<'login' | 'signup'>(() =>
     window.location.pathname === '/signup' ? 'signup' : 'login'
   )
+  const [appView, setAppView] = useState<'calculator' | 'about'>('calculator')
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('calculator-theme')
     return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light'
@@ -49,10 +51,26 @@ export default function App() {
     )
   }
 
+  if (appView === 'about') {
+    return (
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <div className="app" data-theme={theme}>
+          <About onBack={() => setAppView('calculator')} />
+        </div>
+      </ThemeContext.Provider>
+    )
+  }
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
         <h1>Crunchy Number Muncher</h1>
+        <button
+          className="about-nav-link"
+          onClick={() => setAppView('about')}
+        >
+          About
+        </button>
         <Calculator />
       </div>
     </ThemeContext.Provider>

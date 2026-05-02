@@ -1,0 +1,76 @@
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--app-bg);
+  transition: background-color 0.3s ease;
+}
+
+.about-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  background: var(--calculator-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--calculator-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-title {
+  margin: 0 0 1rem 0;
+  text-align: center;
+  color: var(--app-text);
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.about-text {
+  color: var(--app-text);
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.about-back {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(180deg, #5a9fd4 0%, #4a8ac4 100%);
+  border: 1px solid #3a7ab4;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px var(--button-shadow);
+}
+
+.about-back:hover {
+  background: linear-gradient(180deg, #6aafee 0%, #5a9fd4 100%);
+  border-color: #4a8ac4;
+  box-shadow: 0 3px 6px var(--button-hover-shadow);
+  transform: translateY(-1px);
+}
+
+.about-back:active {
+  background: linear-gradient(180deg, #4a8ac4 0%, #3a7ab4 100%);
+  border-color: #2a6aa4;
+  box-shadow: 0 1px 2px var(--button-shadow) inset;
+  transform: translateY(0);
+}
+
+.about-back:focus {
+  outline: 2px solid var(--button-focus-outline);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .about-card {
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}

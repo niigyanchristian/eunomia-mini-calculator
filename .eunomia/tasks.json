@@ -1,32 +1,43 @@
 {
   "project_name": "eunomia-mini-calculator",
+  "planning_assumptions": [
+    "The About page was recorded as 'done' in cross-session memory, but the component files do not exist on disk — the previous session planned but did not execute. This run generates tasks to create the About page from scratch.",
+    "No Penpot file URL was provided in the PRD. Styling will match the existing design system tokens visible in Login.css and App.css (CSS variables: --app-bg, --calculator-bg, --app-text, --calculator-shadow, etc.).",
+    "The About page will be accessible only to authenticated users, reachable via a navigation link on the Calculator view. App.tsx view state will be extended from the current 'login' | 'signup' pattern to add 'about' for the authenticated section.",
+    "The descriptive paragraph will describe this as a mini calculator app named 'Crunchy Number Muncher'."
+  ],
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Change app title to a funny name across all files and tests",
-      "description": "1. WHAT: Change the app title from 'Mini Calculator' to 'Crunchy Number Muncher' (a funny calculator name) in all locations, and update the HTML page title too.\n2. READ FIRST: Read `index.html` (line 7 has <title>Chris Min Calc</title>), `src/App.tsx` (line 55 has <h1>Mini Calculator</h1>), and `src/App.test.tsx` (references 'Mini Calculator' in multiple assertions).\n3. FILES: Modify `index.html` — change <title> to 'Crunchy Number Muncher'. Modify `src/App.tsx` — change the <h1> text to 'Crunchy Number Muncher'. Modify `src/App.test.tsx` — update ALL occurrences of 'Mini Calculator' to 'Crunchy Number Muncher' (there are ~8 references including getByText, queryByText, and .closest calls).\n4. APPROACH: Simple find-and-replace of the title string in all three files. No logic changes needed.\n5. PATTERNS: The test file uses screen.getByText('Mini Calculator') and screen.queryByText('Mini Calculator') — replace all with the new title.",
+      "task_type": "feature",
+      "recommended_model": "sonnet",
+      "title": "Create About page component with navigation and tests",
+      "description": "1. WHAT: Create a new About page component that displays an 'About' heading and a short descriptive paragraph, styled to match the existing design system, and integrate it into the authenticated section of App.tsx with navigation to/from the Calculator view.\n\n2. READ FIRST: Read src/App.tsx (state-based routing pattern — authenticated view currently only shows Calculator, view state for unauthenticated is 'login' | 'signup'), src/components/Login.css (CSS variable usage: --app-bg, --calculator-bg, --app-text, --calculator-shadow, etc.), src/App.css (global styles and CSS variable definitions), src/components/Calculator.tsx (structure of authenticated component), src/App.test.tsx (existing tests to understand what to add), src/components/Login.test.tsx (test pattern to follow).\n\n3. FILES TO CREATE:\n   - src/components/About.tsx — new About page component\n   - src/components/About.css — styles matching design system\n   - src/components/About.test.tsx — tests for About component\n\n4. FILES TO MODIFY:\n   - src/App.tsx — add 'about' to authenticated view state (e.g., `appView: 'calculator' | 'about'`), add an 'About' navigation link in the Calculator view, and render <About /> when appView is 'about'\n   - src/App.test.tsx — add tests for the About navigation link and About page rendering\n\n5. APPROACH:\n   - About.tsx: Export named function `About` that accepts `onBack: () => void` prop. Render a container div with an h1 'About' heading, a descriptive paragraph (e.g. 'Crunchy Number Muncher is a lightweight calculator app built with React and TypeScript. It supports basic arithmetic operations with a clean, accessible interface.'), and a back button that calls onBack.\n   - About.css: Use the same CSS variable tokens as Login.css (--app-bg, --calculator-bg, --app-text, --calculator-shadow). Create an .about-container (centered, min-height 100vh, background --app-bg), .about-card (max-width 480px, padding 2rem, background --calculator-bg, border-radius 12px, box-shadow --calculator-shadow), .about-title (color --app-text, font-size 1.5rem, font-weight 700), .about-text (color --app-text, line-height 1.6), .about-back (same button style as .login-submit but with a secondary/neutral style).\n   - App.tsx: Add `const [appView, setAppView] = useState<'calculator' | 'about'>('calculator')` in the authenticated section. In the authenticated JSX, conditionally render either Calculator with an 'About' link/button or the About component. Pass `onBack={() => setAppView('calculator')}` to About.\n   - About.test.tsx: Follow the pattern in src/components/Login.test.tsx. Test: renders heading 'About', renders descriptive paragraph text, calls onBack when back button is clicked.\n   - App.test.tsx: Add tests that the app renders an 'About' navigation element after login.\n\n6. PATTERNS: Follow the named export pattern (`export function About`) as used by all other components. Follow the CSS variable pattern from Login.css exactly.",
       "dependencies": [],
       "acceptance_criteria": [
-        "After logging in, the page heading displays 'Crunchy Number Muncher' instead of 'Mini Calculator'",
-        "The browser tab title shows 'Crunchy Number Muncher'"
+        "An 'About' navigation link or button is visible on the Calculator page after logging in",
+        "Clicking the About link shows a page with a visible 'About' heading",
+        "The About page shows a descriptive paragraph about the calculator app",
+        "A back button on the About page returns the user to the Calculator view",
+        "The About page background, text color, and card styling visually match the Login and Calculator pages"
       ],
-      "filename": "src/App.tsx",
+      "filename": "src/components/About.tsx",
       "language": "typescript"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to verify title rename passes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename. Key files: src/App.test.tsx (theme tests reference the new title), src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts.",
+      "title": "Validate About page tests and type-check",
+      "description": "Run the full test suite to confirm all new About page tests and existing tests pass, then verify TypeScript compiles without errors.\n\n1. Run: npx vitest run src/components/About.test.tsx\n2. Run: npx vitest run src/App.test.tsx\n3. Run: npx vitest run (full suite)\n4. Run: npx tsc --noEmit",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run src/components/About.test.tsx exits code 0 with all tests passing",
+        "npx vitest run src/App.test.tsx exits code 0 with all tests passing",
+        "npx vitest run exits code 0 — no test failures across the full suite",
+        "npx tsc --noEmit exits code 0 with no TypeScript errors"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/About.test.tsx",
       "language": "typescript"
     }
   ]

@@ -130,3 +130,28 @@ describe('App Theme Functionality', () => {
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark')
   })
 })
+
+describe('App About Navigation', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    document.documentElement.removeAttribute('data-theme')
+  })
+
+  it('renders an About navigation button after login', async () => {
+    await renderAndLogin()
+    expect(screen.getByRole('button', { name: /about/i })).toBeInTheDocument()
+  })
+
+  it('shows About page heading when About button is clicked', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /about/i }))
+    expect(screen.getByRole('heading', { name: /about/i })).toBeInTheDocument()
+  })
+
+  it('returns to Calculator view when Back button is clicked on About page', async () => {
+    const user = await renderAndLogin()
+    await user.click(screen.getByRole('button', { name: /about/i }))
+    await user.click(screen.getByRole('button', { name: /back/i }))
+    expect(screen.getByText('Crunchy Number Muncher')).toBeInTheDocument()
+  })
+})
