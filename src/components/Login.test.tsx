@@ -4,6 +4,14 @@ import userEvent from '@testing-library/user-event'
 import { Login } from './Login'
 
 describe('Login', () => {
+  it('renders the branded header', () => {
+    const mockOnLogin = vi.fn()
+    render(<Login onLogin={mockOnLogin} />)
+
+    expect(screen.getByText(/crunchy number muncher/i)).toBeInTheDocument()
+    expect(screen.getByText(/welcome back/i)).toBeInTheDocument()
+  })
+
   it('renders email and password fields and a submit button', () => {
     const mockOnLogin = vi.fn()
     render(<Login onLogin={mockOnLogin} />)

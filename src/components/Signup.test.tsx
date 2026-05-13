@@ -16,6 +16,15 @@ describe('Signup', () => {
     vi.mocked(addCredential).mockReset()
   })
 
+  it('renders the branded header', () => {
+    const mockOnSignup = vi.fn()
+    const mockOnGoToLogin = vi.fn()
+    render(<Signup onSignup={mockOnSignup} onGoToLogin={mockOnGoToLogin} />)
+
+    expect(screen.getByText(/crunchy number muncher/i)).toBeInTheDocument()
+    expect(screen.getByText(/create an account/i)).toBeInTheDocument()
+  })
+
   it('renders email, password, confirm-password fields and a submit button', () => {
     const mockOnSignup = vi.fn()
     const mockOnGoToLogin = vi.fn()

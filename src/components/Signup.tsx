@@ -31,6 +31,10 @@ export function Signup({ onSignup, onGoToLogin }: SignupProps) {
   return (
     <div className="login-container">
       <div className="login-card">
+        <div className="login-header">
+          <p className="login-brand">Crunchy Number Muncher</p>
+          <p className="login-welcome">Create an account to start munching numbers.</p>
+        </div>
         <h2 className="login-title">Sign Up</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-field">

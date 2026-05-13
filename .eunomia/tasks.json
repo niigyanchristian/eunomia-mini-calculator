@@ -1,32 +1,41 @@
 {
   "project_name": "eunomia-mini-calculator",
+  "planning_assumptions": [
+    "PRD says 'revamp the login screen' — interpreted as a modern visual redesign of both login and signup screens with improved styling, a branded header with the app name, better card layout, and polished form elements",
+    "Both Login.tsx and Signup.tsx share Login.css — changes to the CSS will affect both screens",
+    "The existing component structure (Login.tsx, Signup.tsx) and logic will be preserved; this is primarily a CSS/styling revamp with minor structural additions to the JSX",
+    "Previous attempts at this task failed — keeping scope focused on achievable CSS and minor JSX changes without introducing new dependencies"
+  ],
   "tasks": [
     {
       "task_id": "REQ-001",
-      "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Change app title to a funny name across all files and tests",
-      "description": "1. WHAT: Change the app title from 'Mini Calculator' to 'Crunchy Number Muncher' (a funny calculator name) in all locations, and update the HTML page title too.\n2. READ FIRST: Read `index.html` (line 7 has <title>Chris Min Calc</title>), `src/App.tsx` (line 55 has <h1>Mini Calculator</h1>), and `src/App.test.tsx` (references 'Mini Calculator' in multiple assertions).\n3. FILES: Modify `index.html` — change <title> to 'Crunchy Number Muncher'. Modify `src/App.tsx` — change the <h1> text to 'Crunchy Number Muncher'. Modify `src/App.test.tsx` — update ALL occurrences of 'Mini Calculator' to 'Crunchy Number Muncher' (there are ~8 references including getByText, queryByText, and .closest calls).\n4. APPROACH: Simple find-and-replace of the title string in all three files. No logic changes needed.\n5. PATTERNS: The test file uses screen.getByText('Mini Calculator') and screen.queryByText('Mini Calculator') — replace all with the new title.",
+      "task_type": "enhancement",
+      "recommended_model": "sonnet",
+      "title": "Revamp login and signup screen UI",
+      "description": "1. WHAT: Redesign the login and signup screens with a modern, polished look — add a branded header area with the app name ('Crunchy Number Muncher') and a welcome message, improve card styling with better shadows and spacing, modernize form inputs with icons or refined styling, and add a gradient or colored accent to make the screens visually appealing. Both light and dark themes must be supported.\n\n2. READ FIRST: Read these files before making changes:\n   - src/components/Login.tsx (current login component)\n   - src/components/Login.css (shared styles for login and signup)\n   - src/components/Signup.tsx (signup component reuses Login.css classes)\n   - src/components/Login.test.tsx (existing tests — do NOT break these)\n   - src/components/Signup.test.tsx (existing tests — do NOT break these)\n   - src/App.tsx (to understand app name and theme context)\n   - src/App.css (for CSS variable definitions used in Login.css)\n\n3. FILES TO MODIFY:\n   - src/components/Login.css — Major restyle: modernize card with larger max-width (380-400px), add a branded header section above the form with gradient background and app name, improve input styling with better padding/border-radius, add subtle animations on focus, improve button styling with hover effects, ensure responsive design works on mobile.\n   - src/components/Login.tsx — Add a branded header section above the form showing the app name ('Crunchy Number Muncher') and a short welcome message. Keep all existing form fields, error handling, and callback props intact. Do NOT change the component's public interface (props).\n   - src/components/Signup.tsx — Add the same branded header section for visual consistency. Keep all existing form fields, error handling, and callback props intact.\n   - src/components/Login.test.tsx — Update tests if any text content changes (e.g., if button labels change). Add a test verifying the branded header text is rendered.\n   - src/components/Signup.test.tsx — Update tests similarly, add test for branded header.\n\n4. APPROACH:\n   - Use pure CSS only — no new dependencies.\n   - Use the existing CSS custom properties (--app-bg, --calculator-bg, --display-bg, etc.) from App.css for theme compatibility.\n   - Add a .login-header section with a gradient background using theme-aware colors.\n   - Increase card max-width to ~400px for a more spacious feel.\n   - Add subtle box-shadow transitions and input focus animations.\n   - Ensure the 'Sign up' / 'Back to login' navigation links remain functional.\n   - Keep all existing class names that tests rely on (login-input, login-submit, login-error, etc.).\n\n5. PATTERNS: Follow the existing CSS variable pattern in App.css and Login.css. Match the border-radius (8-12px) and transition patterns already used.",
       "dependencies": [],
       "acceptance_criteria": [
-        "After logging in, the page heading displays 'Crunchy Number Muncher' instead of 'Mini Calculator'",
-        "The browser tab title shows 'Crunchy Number Muncher'"
+        "Login page displays the app name 'Crunchy Number Muncher' in a branded header section above the sign-in form",
+        "Login form still shows email field, password field, Login button, and Sign up link",
+        "Entering invalid credentials and clicking Login shows an error message on screen",
+        "Clicking 'Sign up' navigates to the signup screen which also shows the branded header"
       ],
-      "filename": "src/App.tsx",
-      "language": "typescript"
+      "filename": "src/components/Login.css",
+      "language": "css"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to verify title rename passes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename. Key files: src/App.test.tsx (theme tests reference the new title), src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts.",
+      "title": "Run full test suite and verify all tests pass",
+      "description": "1. WHAT: Run the full Vitest test suite to verify that the login screen revamp has not broken any existing functionality and that new tests pass.\n\n2. READ FIRST: package.json for test script configuration.\n\n3. Run: npx vitest run from the project root /home/eunomia/.eunomia/workspace/eunomia-mini-calculator\n\n4. Verify all test files pass:\n   - src/components/Login.test.tsx\n   - src/components/Signup.test.tsx\n   - src/components/Calculator.test.tsx\n   - src/components/Button.test.tsx\n   - src/components/Display.test.tsx\n   - src/App.test.tsx\n   - src/auth/credentialStore.test.ts\n\n5. Also run: npx tsc --noEmit to verify TypeScript compilation.\n\n6. If any tests fail, report the exact failure messages so the developer can fix them.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run exits with code 0 — all tests pass including new branded header tests",
+        "npx tsc --noEmit exits with code 0 — no TypeScript errors",
+        "No test regressions in existing Login, Signup, Calculator, Button, or Display tests"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Login.test.tsx",
       "language": "typescript"
     }
   ]
