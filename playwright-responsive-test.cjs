@@ -22,7 +22,7 @@ if (!fs.existsSync(screenshotDir)) {
 async function startDevServer() {
   return new Promise((resolve, reject) => {
     console.log('Starting dev server...');
-    const serverProcess = spawn('/opt/homebrew/bin/npm', ['run', 'dev'], {
+    const serverProcess = spawn('/usr/bin/npm', ['run', 'dev'], {
       cwd: process.cwd(),
       stdio: 'pipe',
     });
@@ -83,6 +83,11 @@ async function captureScreenshots(url) {
       try {
         // Navigate to the app
         await page.goto(url, { waitUntil: 'networkidle' });
+
+        // Sign in so the calculator view is available for responsive screenshots.
+        await page.fill('#email', 'test@gmail.com');
+        await page.fill('#password', 'test123');
+        await page.click('button:has-text("Login")');
 
         // Wait for calculator to be visible
         await page.waitForSelector('.calculator', { timeout: 5000 });

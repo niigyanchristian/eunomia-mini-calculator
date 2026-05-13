@@ -24,6 +24,11 @@ async function runVisualTests() {
     // Navigate to the app
     await page.goto('http://localhost:5173');
 
+    // Sign in so the calculator view is available for visual validation.
+    await page.fill('#email', 'test@gmail.com');
+    await page.fill('#password', 'test123');
+    await page.click('button:has-text("Login")');
+
     // Wait for calculator to be visible
     await page.waitForSelector('.calculator');
 

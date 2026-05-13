@@ -1,6 +1,7 @@
 import { chromium } from 'playwright';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { mkdir } from 'fs/promises';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,6 +14,9 @@ const viewports = [
 
 (async () => {
   const browser = await chromium.launch();
+  const screenshotDir = path.join(__dirname, '.eunomia/screenshots/qa');
+
+  await mkdir(screenshotDir, { recursive: true });
   
   for (const viewport of viewports) {
     const page = await browser.newPage({
@@ -20,10 +24,13 @@ const viewports = [
     });
     
     await page.goto('http://localhost:5173/');
+    await page.fill('#email', 'test@gmail.com');
+    await page.fill('#password', 'test123');
+    await page.click('button:has-text("Login")');
+    await page.waitForSelector('.calculator');
     
     const screenshotPath = path.join(
-      __dirname,
-      '.eunomia/screenshots/qa',
+      screenshotDir,
       `${viewport.name}-${viewport.width}x${viewport.height}.png`
     );
     

@@ -56,7 +56,15 @@
 }
 
 .button-grid .wide {
-  grid-column: span 2;
+  grid-column: span 3;
+}
+
+.button-grid .equals-button {
+  grid-row: span 2;
+}
+
+.button-grid .decimal-button {
+  grid-column: 4;
 }
 
 /* Tablet responsive styles (481px - 768px) */

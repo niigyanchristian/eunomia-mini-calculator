@@ -147,8 +147,8 @@ export function Calculator() {
     'C', '\u00f7', '\u00d7', '-',
     '7', '8', '9', '+',
     '4', '5', '6', '=',
-    '1', '2', '3', '.',
-    '0',
+    '1', '2', '3',
+    '0', '.',
   ]
 
   const getButtonClass = (label: string): string => {
@@ -160,6 +160,9 @@ export function Calculator() {
     }
     if (label === '=') {
       return 'equals-button'
+    }
+    if (label === '.') {
+      return 'decimal-button'
     }
     return ''
   }
