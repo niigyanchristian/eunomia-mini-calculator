@@ -59,9 +59,10 @@ export function Login({ onLogin, onGoToSignup }: LoginProps) {
                 type="button"
                 className="password-toggle"
                 onClick={() => setShowPassword((current) => !current)}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
-                {showPassword ? 'Hide' : 'Show'}
+                <span>{showPassword ? 'Hide' : 'Show'}</span>
+                {' '}
+                <span className="visually-hidden">password</span>
               </button>
             </div>
           </div>
