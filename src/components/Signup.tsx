@@ -31,7 +31,9 @@ export function Signup({ onSignup, onGoToLogin }: SignupProps) {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title">Sign Up</h2>
+        <div className="login-header">
+          <h2 className="login-title">Sign Up</h2>
+        </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-field">
             <label htmlFor="email" className="login-label">Email</label>

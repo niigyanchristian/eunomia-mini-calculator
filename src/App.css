@@ -26,6 +26,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   width: 100%;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background-color: var(--app-bg);
   transition: background-color 0.3s ease;
 }
@@ -91,13 +92,19 @@ body {
 }
 
 .app {
+  --app-padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--app-padding);
   text-align: center;
   background-color: var(--app-bg);
   min-height: 100vh;
   transition: background-color 0.3s ease;
+}
+
+.app:has(.login-container) {
+  max-width: none;
+  padding: 0;
 }
 
 h1 {
@@ -108,7 +115,7 @@ h1 {
 /* Tablet responsive styles (481px - 768px) */
 @media (max-width: 768px) {
   .app {
-    padding: 1.5rem; /* Moderate padding for tablets */
+    --app-padding: 1.5rem; /* Moderate padding for tablets */
   }
 
   h1 {
@@ -119,7 +126,7 @@ h1 {
 /* Mobile responsive styles (320px - 480px) */
 @media (max-width: 480px) {
   .app {
-    padding: 1rem; /* Compact padding for mobile */
+    --app-padding: 1rem; /* Compact padding for mobile */
   }
 
   h1 {
@@ -130,7 +137,7 @@ h1 {
 /* Extra small mobile devices (<320px) */
 @media (max-width: 320px) {
   .app {
-    padding: 0.75rem; /* Minimal padding for very small screens */
+    --app-padding: 0.75rem; /* Minimal padding for very small screens */
   }
 
   h1 {
@@ -140,16 +147,20 @@ h1 {
 
 /* Safe area insets for notched/rounded-corner devices */
 .app {
-  padding-left: max(env(safe-area-inset-left), 0px);
-  padding-right: max(env(safe-area-inset-right), 0px);
-  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+  padding-left: max(var(--app-padding), env(safe-area-inset-left));
+  padding-right: max(var(--app-padding), env(safe-area-inset-right));
+  padding-bottom: max(var(--app-padding), env(safe-area-inset-bottom));
+}
+
+.app:has(.login-container) {
+  padding: 0;
 }
 
 /* Landscape orientation on mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .app {
+    --app-padding: 0.5rem;
     min-height: auto;
-    padding: 0.5rem;
   }
 
   h1 {
