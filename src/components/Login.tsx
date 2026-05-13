@@ -11,6 +11,7 @@ export function Login({ onLogin, onGoToSignup }: LoginProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -25,7 +26,10 @@ export function Login({ onLogin, onGoToSignup }: LoginProps) {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title">Sign In</h2>
+        <div className="login-header">
+          <h2 className="login-title">Sign In</h2>
+          <p className="login-subtitle">Welcome back! Sign in to continue.</p>
+        </div>
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="login-field">
             <label htmlFor="email" className="login-label">Email</label>
@@ -41,15 +45,25 @@ export function Login({ onLogin, onGoToSignup }: LoginProps) {
           </div>
           <div className="login-field">
             <label htmlFor="password" className="login-label">Password</label>
-            <input
-              id="password"
-              type="password"
-              className="login-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
+            <div className="password-input-wrap">
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                className="login-input login-input-with-toggle"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? 'Hide' : 'Show'}
+              </button>
+            </div>
           </div>
           {error && <p className="login-error" role="alert">{error}</p>}
           <button type="submit" className="login-submit">Login</button>

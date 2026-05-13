@@ -1,32 +1,42 @@
 {
   "project_name": "eunomia-mini-calculator",
+  "planning_assumptions": [
+    "Interpreting 'revamp the login screen' as a significant visual redesign: modern card layout with gradient background, improved typography, better spacing, a welcome/branding header, password show/hide toggle, and polished form controls.",
+    "The Signup component (Signup.tsx) reuses Login.css class names, so CSS changes must preserve or update those shared classes to keep both screens consistent.",
+    "No changes to authentication logic (credentialStore.ts) — this is a visual/UX revamp only.",
+    "Tests will be updated to reflect any new UI elements (e.g., password toggle button, updated headings) while preserving existing behavioral coverage."
+  ],
   "tasks": [
     {
       "task_id": "REQ-001",
       "task_type": "modify",
-      "recommended_model": "haiku",
-      "title": "Change app title to a funny name across all files and tests",
-      "description": "1. WHAT: Change the app title from 'Mini Calculator' to 'Crunchy Number Muncher' (a funny calculator name) in all locations, and update the HTML page title too.\n2. READ FIRST: Read `index.html` (line 7 has <title>Chris Min Calc</title>), `src/App.tsx` (line 55 has <h1>Mini Calculator</h1>), and `src/App.test.tsx` (references 'Mini Calculator' in multiple assertions).\n3. FILES: Modify `index.html` — change <title> to 'Crunchy Number Muncher'. Modify `src/App.tsx` — change the <h1> text to 'Crunchy Number Muncher'. Modify `src/App.test.tsx` — update ALL occurrences of 'Mini Calculator' to 'Crunchy Number Muncher' (there are ~8 references including getByText, queryByText, and .closest calls).\n4. APPROACH: Simple find-and-replace of the title string in all three files. No logic changes needed.\n5. PATTERNS: The test file uses screen.getByText('Mini Calculator') and screen.queryByText('Mini Calculator') — replace all with the new title.",
+      "recommended_model": "sonnet",
+      "title": "Revamp login screen with modern visual design",
+      "description": "1. WHAT: Revamp the login screen with a modern, polished visual design — new gradient background, improved card styling, better typography hierarchy, a password show/hide toggle, a branded welcome header, and refined spacing and transitions. This is a visual/UX overhaul; authentication logic stays unchanged.\n\n2. READ FIRST:\n   - src/components/Login.tsx (current login form structure and props)\n   - src/components/Login.css (all current styles — shared with Signup.tsx)\n   - src/components/Signup.tsx (reuses Login.css classes — must remain consistent)\n   - src/App.css (theme variables: --app-bg, --calculator-bg, --display-bg, etc.)\n   - src/components/Login.test.tsx (existing tests to understand what queries are used)\n\n3. FILES TO MODIFY:\n   - src/components/Login.css — Complete style revamp: add a gradient or pattern background to .login-container, redesign .login-card with larger max-width (~380px), more padding, subtle backdrop-filter/blur if desired, refined border-radius (16px), enhanced shadow. Improve .login-title with larger font size and add a welcome subtitle. Style .login-input with larger padding, rounded corners, and smooth focus ring. Make .login-submit a full-width gradient button with hover/press animations. Add a divider line above .login-link. Add styles for a .password-toggle button. Ensure all styles use existing CSS custom properties from App.css for theme compatibility.\n   - src/components/Login.tsx — Add a password visibility toggle (eye icon using unicode \\u{1F441} or simple text Show/Hide). Add a welcome subtitle below the title (e.g., 'Welcome back! Sign in to continue.'). Keep all existing props, state, and credential validation unchanged. The form must still have the same email/password fields, submit button, and signup link.\n   - src/components/Login.test.tsx — Update tests to account for new elements: verify the welcome subtitle renders, verify the password toggle button exists and toggles password field type between 'password' and 'text'. Keep all existing behavioral tests (valid/invalid credentials, error messages). Follow existing test patterns using @testing-library/react and userEvent.\n\n4. APPROACH: Pure CSS visual changes plus a small password-toggle enhancement. No new dependencies. Use CSS custom properties already defined in App.css for theme support. The password toggle should be a <button type='button'> inside the password .login-field div, positioned absolutely or inline after the input.\n\n5. PATTERNS: Follow the component structure in Login.tsx and test patterns in Login.test.tsx. The Signup.tsx component reuses Login.css classes, so verify the revamped styles still look correct for both Login and Signup screens.",
       "dependencies": [],
       "acceptance_criteria": [
-        "After logging in, the page heading displays 'Crunchy Number Muncher' instead of 'Mini Calculator'",
-        "The browser tab title shows 'Crunchy Number Muncher'"
+        "Login page displays a prominent 'Sign In' heading with a welcome subtitle message below it",
+        "A password visibility toggle button is present next to the password field that shows and hides the password when clicked",
+        "Login form has email field, password field, a submit button, and a link to the signup page",
+        "Submitting invalid credentials displays an error message on the login screen"
       ],
-      "filename": "src/App.tsx",
-      "language": "typescript"
+      "filename": "src/components/Login.css",
+      "language": "css"
     },
     {
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to verify title rename passes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename. Key files: src/App.test.tsx (theme tests reference the new title), src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts.",
+      "title": "Validate login revamp tests and type-check",
+      "description": "Run the Login component tests and full test suite to validate the revamped login screen. Also run TypeScript type-checking to ensure no type errors were introduced.\n\n1. Run Login-specific tests: npx vitest run src/components/Login.test.tsx\n2. Run Signup tests to confirm shared CSS changes don't break Signup: npx vitest run src/components/Signup.test.tsx\n3. Run full test suite: npx vitest run\n4. Run TypeScript type-check: npx tsc --noEmit\n5. Run ESLint: npx eslint src/components/Login.tsx src/components/Login.css",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run src/components/Login.test.tsx exits code 0 — all login tests pass",
+        "npx vitest run src/components/Signup.test.tsx exits code 0 — signup tests still pass",
+        "npx vitest run exits code 0 — full test suite passes",
+        "npx tsc --noEmit exits code 0 — no TypeScript errors"
       ],
-      "filename": "src/App.test.tsx",
+      "filename": "src/components/Login.test.tsx",
       "language": "typescript"
     }
   ]
