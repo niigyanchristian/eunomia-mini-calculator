@@ -26,7 +26,7 @@ export function Login({ onLogin, onGoToSignup }: LoginProps) {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <p className="login-brand">Crunchy Number Muncher</p>
+          <p className="login-brand">Crunchy Number Muncher Login</p>
           <p className="login-welcome">Welcome back. Sign in to keep calculating.</p>
         </div>
         <h2 className="login-title">Sign In</h2>
