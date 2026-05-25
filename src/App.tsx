@@ -52,7 +52,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="app" data-theme={theme}>
-        <h1>Crunchy Number Muncher</h1>
+        <h1>Digital Math Genius</h1>
         <Calculator />
       </div>
     </ThemeContext.Provider>

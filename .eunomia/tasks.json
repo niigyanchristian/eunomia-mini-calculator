@@ -1,16 +1,19 @@
 {
   "project_name": "eunomia-mini-calculator",
+  "planning_assumptions": [
+    "PRD says 'Change title to anything' — developer will pick a new creative title to replace 'Crunchy Number Muncher'."
+  ],
   "tasks": [
     {
       "task_id": "REQ-001",
       "task_type": "modify",
       "recommended_model": "haiku",
-      "title": "Change app title to a funny name across all files and tests",
-      "description": "1. WHAT: Change the app title from 'Mini Calculator' to 'Crunchy Number Muncher' (a funny calculator name) in all locations, and update the HTML page title too.\n2. READ FIRST: Read `index.html` (line 7 has <title>Chris Min Calc</title>), `src/App.tsx` (line 55 has <h1>Mini Calculator</h1>), and `src/App.test.tsx` (references 'Mini Calculator' in multiple assertions).\n3. FILES: Modify `index.html` — change <title> to 'Crunchy Number Muncher'. Modify `src/App.tsx` — change the <h1> text to 'Crunchy Number Muncher'. Modify `src/App.test.tsx` — update ALL occurrences of 'Mini Calculator' to 'Crunchy Number Muncher' (there are ~8 references including getByText, queryByText, and .closest calls).\n4. APPROACH: Simple find-and-replace of the title string in all three files. No logic changes needed.\n5. PATTERNS: The test file uses screen.getByText('Mini Calculator') and screen.queryByText('Mini Calculator') — replace all with the new title.",
+      "title": "Change app title to a new name",
+      "description": "1. WHAT: Change the app title from 'Crunchy Number Muncher' to any new creative title of your choosing across all files and tests.\n2. READ FIRST: Read index.html, src/App.tsx, and src/App.test.tsx to see all occurrences of the current title 'Crunchy Number Muncher'.\n3. FILES: Modify index.html (line 7, <title> tag), src/App.tsx (line 55, <h1> tag), and src/App.test.tsx (all occurrences of 'Crunchy Number Muncher' in test assertions — lines 24, 29, 39, 44, 67, 80, 99, 119).\n4. APPROACH: Do a simple string replacement of 'Crunchy Number Muncher' with the new title in all three files. Make sure every occurrence is updated so tests still pass. No new files needed.\n5. PATTERNS: This is a straightforward find-and-replace. The test file uses the title string in queryByText, getByText, and closest calls — all must match the new title exactly.",
       "dependencies": [],
       "acceptance_criteria": [
-        "After logging in, the page heading displays 'Crunchy Number Muncher' instead of 'Mini Calculator'",
-        "The browser tab title shows 'Crunchy Number Muncher'"
+        "The page heading after login displays the new title instead of 'Crunchy Number Muncher'",
+        "The browser tab title shows the new name instead of 'Crunchy Number Muncher'"
       ],
       "filename": "src/App.tsx",
       "language": "typescript"
@@ -19,12 +22,12 @@
       "task_id": "QA-001",
       "task_type": "qa_validation",
       "recommended_model": "haiku",
-      "title": "Run full test suite to verify title rename passes",
-      "description": "Run the full Vitest test suite to confirm all tests pass after the title rename. Key files: src/App.test.tsx (theme tests reference the new title), src/components/Calculator.test.tsx, src/components/Button.test.tsx, src/components/Display.test.tsx, src/components/Login.test.tsx, src/components/Signup.test.tsx, src/auth/credentialStore.test.ts.",
+      "title": "Validate title change and run test suite",
+      "description": "1. WHAT: Run the full Vitest test suite to confirm the title rename did not break any tests.\n2. READ FIRST: Read package.json to confirm the test command.\n3. FILES: Run tests against src/App.test.tsx and all other test files.\n4. APPROACH: Run npx vitest run to execute the full test suite. All tests should pass with the new title.\n5. PATTERNS: Previous QA tasks ran npx vitest run from the project root.",
       "dependencies": ["REQ-001"],
       "acceptance_criteria": [
-        "npx vitest run exits code 0 with all tests passing",
-        "npx tsc --noEmit exits code 0 with no type errors"
+        "npx vitest run exits with code 0 — all tests pass",
+        "npx tsc --noEmit exits with code 0 — no type errors"
       ],
       "filename": "src/App.test.tsx",
       "language": "typescript"
