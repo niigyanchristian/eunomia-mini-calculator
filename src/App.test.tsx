@@ -21,12 +21,12 @@ describe('App Theme Functionality', () => {
   it('renders login page by default', () => {
     render(<App />)
     expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument()
-    expect(screen.queryByText('Crunchy Number Muncher')).not.toBeInTheDocument()
+    expect(screen.queryByText('Digital Math Genius')).not.toBeInTheDocument()
   })
 
   it('shows calculator after successful login', async () => {
     await renderAndLogin()
-    expect(screen.getByText('Crunchy Number Muncher')).toBeInTheDocument()
+    expect(screen.getByText('Digital Math Genius')).toBeInTheDocument()
   })
 
   it('shows error message on invalid credentials', async () => {
@@ -36,12 +36,12 @@ describe('App Theme Functionality', () => {
     await user.type(screen.getByLabelText(/password/i), 'wrongpass')
     await user.click(screen.getByRole('button', { name: /login/i }))
     expect(screen.getByRole('alert')).toBeInTheDocument()
-    expect(screen.queryByText('Crunchy Number Muncher')).not.toBeInTheDocument()
+    expect(screen.queryByText('Digital Math Genius')).not.toBeInTheDocument()
   })
 
   it('renders with light theme by default', async () => {
     await renderAndLogin()
-    const appElement = screen.getByText('Crunchy Number Muncher').closest('.app')
+    const appElement = screen.getByText('Digital Math Genius').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
   })
@@ -64,7 +64,7 @@ describe('App Theme Functionality', () => {
     const toggleButton = screen.getByRole('button', { name: /toggle theme/i })
     await user.click(toggleButton)
 
-    const appElement = screen.getByText('Crunchy Number Muncher').closest('.app')
+    const appElement = screen.getByText('Digital Math Genius').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
     expect(toggleButton.textContent).toBe('☀️')
@@ -77,7 +77,7 @@ describe('App Theme Functionality', () => {
     await user.click(toggleButton)
     await user.click(toggleButton)
 
-    const appElement = screen.getByText('Crunchy Number Muncher').closest('.app')
+    const appElement = screen.getByText('Digital Math Genius').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
     expect(document.documentElement).toHaveAttribute('data-theme', 'light')
     expect(toggleButton.textContent).toBe('🌙')
@@ -96,7 +96,7 @@ describe('App Theme Functionality', () => {
     localStorage.setItem('calculator-theme', 'dark')
     await renderAndLogin()
 
-    const appElement = screen.getByText('Crunchy Number Muncher').closest('.app')
+    const appElement = screen.getByText('Digital Math Genius').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'dark')
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark')
   })
@@ -115,7 +115,7 @@ describe('App Theme Functionality', () => {
     localStorage.setItem('calculator-theme', 'invalid')
     await renderAndLogin()
 
-    const appElement = screen.getByText('Crunchy Number Muncher').closest('.app')
+    const appElement = screen.getByText('Digital Math Genius').closest('.app')
     expect(appElement).toHaveAttribute('data-theme', 'light')
   })
 
